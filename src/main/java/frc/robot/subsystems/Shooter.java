@@ -16,12 +16,26 @@ import frc.robot.Constants;
 
 public class Shooter extends SubsystemBase {
   WPI_TalonFX shooterMotor = new WPI_TalonFX(Constants.shooterMotor);
+  
   public Shooter() {
     shooterMotor.configFactoryDefault();
     shooterMotor.setNeutralMode(NeutralMode.Coast);
     shooterMotor.setInverted(false);
-  }
+   
+    shooterMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+    
+    shooterMotor.setSensorPhase(true);
+    
+    shooterMotor.configNominalOutputForward(0, Constants.kTimeoutMs);
+		shooterMotor.configNominalOutputReverse(0, Constants.kTimeoutMs);
+		shooterMotor.configPeakOutputForward(1, Constants.kTimeoutMs);
+		shooterMotor.configPeakOutputReverse(-1, Constants.kTimeoutMs);
 
+		shooterMotor.config_kF(Constants.kPIDLoopIdx, Constants.kGains_Velocit.kF, Constants.kTimeoutMs);
+		shooterMotor.config_kP(Constants.kPIDLoopIdx, Constants.kGains_Velocit.kP, Constants.kTimeoutMs);
+		shooterMotor.config_kI(Constants.kPIDLoopIdx, Constants.kGains_Velocit.kI, Constants.kTimeoutMs);
+		shooterMotor.config_kD(Constants.kPIDLoopIdx, Constants.kGains_Velocit.kD, Constants.kTimeoutMs);
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
