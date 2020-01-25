@@ -46,11 +46,15 @@ public final class Constants {
 
     //---------------------SHOOTER--------------------//
     public static final int shooterMotor = 0;//TODO Change to correct ID
-    public static final int shooterEncoder = 0;//TODO Change to correct ID
+    public static final int kPIDLoopIdx = 0;
+    public static final int kTimeoutMs = 30;
+    public final static Gains kGains_Velocit = new Gains( 0.25, 0.001, 20, 1023.0/7200.0,  300,  1.00);
     //-------------------COLOR WHEEL------------------//
-    public static final int colorWheelMotor = 0;//TODO Change to correct ID
+    public static final int colorWheelMotorID = 0;//TODO Change to correct ID
     public static final int quadrativeEncoderRoation = 36864;
 	public static final double colorWheelMotorSpeed = 0;
     //----------------------HANG----------------------//
+	
+	
 
 }

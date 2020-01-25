@@ -14,10 +14,11 @@ import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 
 public class ColorWheel extends SubsystemBase {
-  public static WPI_TalonSRX colorWheelMotor = new WPI_TalonSRX(0);
+  public static WPI_TalonSRX colorWheelMotor = new WPI_TalonSRX(Constants.colorWheelMotorID);
   private final I2C.Port i2cPort = I2C.Port.kOnboard;
   ColorSensorV3 colorSensor = new ColorSensorV3(i2cPort);
   public ColorWheel() {
