@@ -49,7 +49,7 @@ public final class Constants {
     public static final int shooterEncoder = 0;//TODO Change to correct ID
     //-------------------COLOR WHEEL------------------//
     public static final int colorWheelMotor = 0;//TODO Change to correct ID
-    public static final int quadrativeEncoderRoation = 1024;
+    public static final int quadrativeEncoderRoation = 36864;
 	public static final double colorWheelMotorSpeed = 0;
     //----------------------HANG----------------------//
 

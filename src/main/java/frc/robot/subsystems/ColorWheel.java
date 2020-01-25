@@ -9,13 +9,17 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.revrobotics.ColorSensorV3;
+import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+
 public class ColorWheel extends SubsystemBase {
-
-  WPI_TalonFX colorWheelMotor = new WPI_TalonFX(0);
-
+  public static WPI_TalonSRX colorWheelMotor = new WPI_TalonSRX(0);
+  private final I2C.Port i2cPort = I2C.Port.kOnboard;
+  ColorSensorV3 colorSensor = new ColorSensorV3(i2cPort);
   public ColorWheel() {
 
     colorWheelMotor.configFactoryDefault();
@@ -23,7 +27,6 @@ public class ColorWheel extends SubsystemBase {
     colorWheelMotor.setNeutralMode(NeutralMode.Brake);
 
     colorWheelMotor.setInverted(false);
-
   }
 
   public void spinColorWheel(double speed) {
