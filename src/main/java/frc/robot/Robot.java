@@ -7,15 +7,17 @@
 
 package frc.robot;
 
-import java.util.Currency;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.hal.sim.PDPSim;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.ShootCommand;
 import frc.robot.subsystems.ColorWheel;
+import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Shooter;
 
 /**
@@ -25,13 +27,20 @@ import frc.robot.subsystems.Shooter;
  * project.
  */
 public class Robot extends TimedRobot {
-  //public static DriveTrain m_DriveTrain;
+  public static DriveTrain m_DriveTrain;
   private RobotContainer m_robotContainer;
   private ShootCommand m_ShootCommand;
   double current;
   double current0;
   PowerDistributionPanel pdp = new PowerDistributionPanel(20);
   int rpm;
+  private Command m_autonomousCommand;
+  WPI_TalonSRX rightFront = new WPI_TalonSRX(Constants.rightFrontDrive);
+  WPI_TalonSRX leftFront = new WPI_TalonSRX(Constants.leftFrontDrive);
+ // private JoyDriveCommand m_JoyDriveCommand;
+  /*double current;
+  double current0;
+  PowerDistributionPanel pdp = new PowerDistributionPanel(20);*/
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -70,7 +79,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
-    ColorWheel.colorWheelMotor.setSelectedSensorPosition(0);
+    //ColorWheel.colorWheelMotor.setSelectedSensorPosition(0);
   }
 
   @Override
@@ -91,6 +100,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    if(m_autonomousCommand != null){
+      m_autonomousCommand.schedule();
+      
+    }
   }
 
   @Override
@@ -109,6 +123,21 @@ public class Robot extends TimedRobot {
   public void testInit() {
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
+    leftFront.setSelectedSensorPosition(0);
+    rightFront.setSelectedSensorPosition(0);
+    
+    
+    rightFront.configFactoryDefault();
+    leftFront.configFactoryDefault();
+
+    rightFront.setNeutralMode(NeutralMode.Brake);
+    leftFront.setNeutralMode(NeutralMode.Brake);
+
+    rightFront.setInverted(false);
+    leftFront.setInverted(false);
+
+    rightFront.setSensorPhase(false);
+    leftFront.setSensorPhase(true);
   }
 
   /**
@@ -116,5 +145,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+
+    System.out.println(rightFront.getSelectedSensorPosition() + "right");
+    System.out.println(leftFront.getSelectedSensorPosition() + "left");
   }
 }
