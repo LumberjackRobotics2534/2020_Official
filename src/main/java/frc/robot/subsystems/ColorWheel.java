@@ -30,9 +30,9 @@ public class ColorWheel extends SubsystemBase {
     colorWheelMotor.setInverted(false);
   }
 
-  public void spinColorWheel(double speed) {
+  public void spinColorWheel(double _speed) {
 
-    colorWheelMotor.set(speed);
+    colorWheelMotor.set(_speed);
 
   }
 

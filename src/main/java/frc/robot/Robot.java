@@ -14,7 +14,9 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.ShootCommand;
 import frc.robot.subsystems.ColorWheel;
+import frc.robot.subsystems.Shooter;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -25,10 +27,11 @@ import frc.robot.subsystems.ColorWheel;
 public class Robot extends TimedRobot {
   //public static DriveTrain m_DriveTrain;
   private RobotContainer m_robotContainer;
- // private JoyDriveCommand m_JoyDriveCommand;
+  private ShootCommand m_ShootCommand;
   double current;
   double current0;
   PowerDistributionPanel pdp = new PowerDistributionPanel(20);
+  int rpm;
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -54,10 +57,12 @@ public class Robot extends TimedRobot {
     // commands, running already-scheduled commands, removing finished or interrupted commands,
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
+    CommandScheduler.getInstance().run();
     current = pdp.getTotalCurrent();
     current0 = pdp.getCurrent(0);
-    CommandScheduler.getInstance().run();
     SmartDashboard.putNumber("Current", current0);
+    rpm = Math.abs(Shooter.shooterMotor.getSelectedSensorVelocity()*600/2048);
+    SmartDashboard.putNumber("RPMs", rpm);
   }
 
   /**
