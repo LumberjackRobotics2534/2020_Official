@@ -27,10 +27,10 @@ public final class Constants {
 	public static final int leftFrontDrive = 1;
     public static final int leftBackDrive = 3;
     //----- -----------MOTION PROFILING----------------//
-    public static final double ksVolts = 1.75;
+    public static final double ksVolts = 1.75; //was 1.75 
     public static final double kvVoltSecondsPerMeter = 2.59;
     public static final double kaVoltSecondsSquaredPerMeter = 0.437;
-    public static final double kPDriveVel = 15.3;
+    public static final double kPDriveVel = 15.3; //was 15.3
     public static final double kTrackwidthMeters = 0.61;
     public static final double kMaxSpeedMetersPerSecond = 3;
     public static final double kMaxAccelerationMetersPerSecondSquared = 3;
@@ -61,9 +61,9 @@ public final class Constants {
 
     //---------------------SHOOTER--------------------//
     public static final int shooterMotor = 0;//TODO Change to correct ID
-    public static final int kPIDLoopIdx = 0;
+    /*public static final int kPIDLoopIdx = 0;
     public static final int kTimeoutMs = 30;
-    public final static Gains kGains_Velocit = new Gains( 0.25, 0.001, 20, 1023.0/7200.0,  300,  1.00);
+    public final static Gains kGains_Velocit = new Gains( 0.25, 0.001, 20, 1023.0/7200.0,  300,  1.00);*/
     //-------------------COLOR WHEEL------------------//
     public static final int colorWheelMotorID = 0;//TODO Change to correct ID
     public static final int quadrativeEncoderRoation = 36864;

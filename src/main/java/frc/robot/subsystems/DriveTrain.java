@@ -27,14 +27,14 @@ public class DriveTrain extends SubsystemBase {
   private WPI_TalonSRX rightBack = new WPI_TalonSRX(Constants.rightBackDrive);
   private WPI_TalonSRX leftFront = new WPI_TalonSRX(Constants.leftFrontDrive);
   private WPI_TalonSRX leftBack = new WPI_TalonSRX(Constants.leftBackDrive);
-  private AHRS navx = new AHRS(SerialPort.Port.kMXP);
-
-  
   private MecanumDrive mecanumDriveTrain = new MecanumDrive(leftFront, leftBack, rightFront, rightBack);
-  private SpeedControllerGroup left = new SpeedControllerGroup(leftFront, leftBack);
-  private SpeedControllerGroup right = new SpeedControllerGroup(rightFront, rightBack);
-  private DifferentialDrive differentialDriveTrain = new DifferentialDrive(left, right);
+  
+  private SpeedControllerGroup leftSide = new SpeedControllerGroup(leftFront, leftBack);
+  private SpeedControllerGroup rightSide = new SpeedControllerGroup(rightFront, rightBack);
+  private DifferentialDrive differentialDriveTrain = new DifferentialDrive(leftSide, rightSide);
+
   private DifferentialDriveOdometry m_odometry;
+  private AHRS navx = new AHRS(SerialPort.Port.kMXP);
 
   public DriveTrain() {
     rightFront.configFactoryDefault();
@@ -51,28 +51,52 @@ public class DriveTrain extends SubsystemBase {
     rightBack.setInverted(false);
     leftFront.setInverted(false);
     leftBack.setInverted(false);
+
+    rightFront.setSensorPhase(false);
+    leftFront.setSensorPhase(true);
+
+
+
+    leftFront.setSelectedSensorPosition(0);
+    rightBack.setSelectedSensorPosition(0);
+    m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading()));
+    
   }
   public double getHeading() {
     return Math.IEEEremainder(navx.getAngle(), 360) * (1.0);
+    
   }
   public void drive(double _ySpeed, double _xSpeed, double _rot){
     mecanumDriveTrain.driveCartesian(_ySpeed, _xSpeed, _rot);
   }
   public void tankDriveVolts(double leftVolts, double rightVolts){
-    left.setVoltage(leftVolts);
-    right.setVoltage(rightVolts);
+    leftSide.setVoltage(leftVolts);
+    rightSide.setVoltage(-rightVolts);
     differentialDriveTrain.feed();
   }
   @Override
   public void periodic() {
-    
-    m_odometry.update(Rotation2d.fromDegrees(getHeading()), leftFront.getSelectedSensorPosition(), rightFront.getSelectedSensorPosition());
+    m_odometry.update(
+      Rotation2d.fromDegrees(getHeading()), 
+      (leftFront.getSelectedSensorPosition()/241889.76378), 
+      (rightFront.getSelectedSensorPosition())/241889.76378);
+      /*System.out.println(getHeading());
+      System.out.println((leftFront.getSelectedSensorVelocity() * (10/38497.9515889)) + " left Velocity");
+      System.out.println((rightFront.getSelectedSensorVelocity() * (10/38497.9515889)) + " right Velocity");*/
   }
   public Pose2d getPose() {
     return m_odometry.getPoseMeters();
     
   }
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
-    return new DifferentialDriveWheelSpeeds(leftFront.getSelectedSensorVelocity(), rightFront.getSelectedSensorVelocity());
+    return new DifferentialDriveWheelSpeeds(
+      (leftFront.getSelectedSensorVelocity() * (10/38497.9515889)), 
+      (rightFront.getSelectedSensorVelocity() * (10/38497.9515889)));
+     
+  }
+  public void resetOdometry(Pose2d pose) {
+    leftFront.setSelectedSensorPosition(0);
+    rightFront.setSelectedSensorPosition(0);
+    m_odometry.resetPosition(pose, Rotation2d.fromDegrees(getHeading()));
   }
 }
