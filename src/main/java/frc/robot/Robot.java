@@ -7,7 +7,6 @@
 
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
@@ -15,8 +14,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.ShootCommand;
-import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Shooter;
 
@@ -29,7 +26,6 @@ import frc.robot.subsystems.Shooter;
 public class Robot extends TimedRobot {
   public static DriveTrain m_DriveTrain;
   private RobotContainer m_robotContainer;
-  private ShootCommand m_ShootCommand;
   double current;
   double current0;
   PowerDistributionPanel pdp = new PowerDistributionPanel(20);
@@ -123,21 +119,6 @@ public class Robot extends TimedRobot {
   public void testInit() {
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
-    leftFront.setSelectedSensorPosition(0);
-    rightFront.setSelectedSensorPosition(0);
-    
-    
-    rightFront.configFactoryDefault();
-    leftFront.configFactoryDefault();
-
-    rightFront.setNeutralMode(NeutralMode.Brake);
-    leftFront.setNeutralMode(NeutralMode.Brake);
-
-    rightFront.setInverted(false);
-    leftFront.setInverted(false);
-
-    rightFront.setSensorPhase(false);
-    leftFront.setSensorPhase(true);
   }
 
   /**
@@ -145,8 +126,5 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
-
-    System.out.println(rightFront.getSelectedSensorPosition() + "right");
-    System.out.println(leftFront.getSelectedSensorPosition() + "left");
   }
 }

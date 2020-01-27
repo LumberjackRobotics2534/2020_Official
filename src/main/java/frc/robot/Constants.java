@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
+import frc.robot.Other.Gains;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
@@ -30,6 +31,7 @@ public final class Constants {
     public static final double ksVolts = 1.75; //was 1.75 
     public static final double kvVoltSecondsPerMeter = 2.59;
     public static final double kaVoltSecondsSquaredPerMeter = 0.437;
+    public static final double kMaxVoltage = 10;
     public static final double kPDriveVel = 15.3; //was 15.3
     public static final double kTrackwidthMeters = 0.61;
     public static final double kMaxSpeedMetersPerSecond = 3;

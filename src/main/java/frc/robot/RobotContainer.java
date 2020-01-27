@@ -78,35 +78,45 @@ public class RobotContainer {
                                  Constants.kvVoltSecondsPerMeter,
                                  Constants.kaVoltSecondsSquaredPerMeter),
       Constants.kDriveKinematics,
-      10);
+      Constants.kMaxVoltage); //This is the max voltage
+    //Create a trajectory configuration
     TrajectoryConfig config = new TrajectoryConfig(Constants.kMaxSpeedMetersPerSecond, Constants.kMaxAccelerationMetersPerSecondSquared)
-    // Add kinematics to ensure max speed is actually obeyed
-    .setKinematics(Constants.kDriveKinematics)
-    // Apply the voltage constraint
-    .addConstraint(autoVoltageConstraint);
-    Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(
-      // Start at the origin facing the +X direction
+      // Add kinematics to ensure max speed is actually obeyed
+      .setKinematics(Constants.kDriveKinematics)
+      // Apply the voltage constraint
+      .addConstraint(autoVoltageConstraint);
+    //Create a Trajectory to follow. UNITS ARE IN METERS from starting position.
+    Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
+      //Start at the origin facing the positive X direction
       new Pose2d(0, 0, new Rotation2d(0)),
-      // Pass through these two interior waypoints, making an 's' curve path
+      //Pass through these interior points
       List.of(/*new Translation2d(1, 1), new Translation2d(2, -1)*/),
-      // End 3 meters straight ahead of where we started, facing forward
+      //End position
       new Pose2d(3, 0, new Rotation2d(0)),
-      // Pass config
-      config
-    );
+      //Pass config
+      config);
+    //Create RamseteCommand that follows the generated Trajectory
     RamseteCommand ramseteCommand = new RamseteCommand(
-      exampleTrajectory,
+      //Pass in Trajectory
+      trajectory,
+      //Get position
       m_DriveTrain::getPose,
+      //Create RamseteController, pass in B and Zeta values
       new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
+      //Create a FeedForward, pass in Position, Velocity, and Acceleration volts
       new SimpleMotorFeedforward(Constants.ksVolts, Constants.kvVoltSecondsPerMeter, Constants.kaVoltSecondsSquaredPerMeter),
+      //Pass in DriveKinematics
       Constants.kDriveKinematics,
+      //Pass in wheel speeds in METERS/SECOND
       m_DriveTrain::getWheelSpeeds,
+      //Create two PID controllers (for wheels?)
       new PIDController(Constants.kPDriveVel, 0, 0),
       new PIDController(Constants.kPDriveVel, 0, 0),
-      // RamseteCommand passes volts to the callback
+      //Allows RamseteCommand to access tankDriveVolts method, allows RamseteCommand to move wheels
       m_DriveTrain::tankDriveVolts,
-      m_DriveTrain
-    );
+      //Tells RamseteCommand the name of the DriveTrain we created
+      m_DriveTrain);
+    //Run RamseteCommand, then stop turning the wheels.
     return ramseteCommand.andThen(() -> m_DriveTrain.tankDriveVolts(0, 0));
   }
 }

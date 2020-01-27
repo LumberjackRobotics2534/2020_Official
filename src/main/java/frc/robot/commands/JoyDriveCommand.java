@@ -14,12 +14,14 @@ import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrain;
 
 public class JoyDriveCommand extends CommandBase {
+  //Create varraibles for drive commands
   DoubleSupplier m_leftY;
   DoubleSupplier  m_leftX;
   DoubleSupplier m_rightX;
   DriveTrain m_DriveTrain;
 
   public JoyDriveCommand(DoubleSupplier leftY, DoubleSupplier leftX, DoubleSupplier rightX, DriveTrain dTrain) {
+    //Save inputs to DoubleSuppliers so we can use them later and add requirements
     m_leftY = leftY;
     m_leftX = leftX;
     m_rightX = rightX;
@@ -35,7 +37,7 @@ public class JoyDriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //System.out.println(m_rightX);
+    //Deadzone Code
     /*if (Math.abs(m_leftY) < Constants.deadzone){
       m_leftY = 0.0;
     }
@@ -45,6 +47,7 @@ public class JoyDriveCommand extends CommandBase {
     if (Math.abs(m_rightX) < Constants.deadzone){
       m_rightX = 0.0;
     }*/
+    //Drive the robot by canging the DoubleSupplier values to Doubles
     RobotContainer.m_DriveTrain.drive(m_leftY.getAsDouble(), -m_leftX.getAsDouble(), m_rightX.getAsDouble());
   }
 
