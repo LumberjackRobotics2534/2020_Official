@@ -42,6 +42,7 @@ public final class Constants {
     //-------------------CONTROLLER-------------------//
     //Controller IDs
     public static final int driverControllerPort = 0;
+    public static final int manipControllerPort = 1;
     //Controller Joystick IDs
     public static final int joyLeftX = 0;
     public static final int joyLeftY = 1;
@@ -62,16 +63,17 @@ public final class Constants {
     //---------------------TURRET---------------------//
 
     //---------------------SHOOTER--------------------//
-    public static final int shooterMotor = 5;//TODO Change to correct ID
+    public static final int shooterMotor = 5;
     public static final int kPIDLoopIdx = 0;
     public static final int kTimeoutMs = 30;
     public final static Gains kGains_Velocit = new Gains( 0.24, 0.001, 20, 950.0/7200.0,  300,  1.00);
     //-------------------COLOR WHEEL------------------//
-    public static final int colorWheelMotorID = 6;//TODO Change to correct ID
+    public static final int colorWheelMotorID = 6;
     public static final int quadrativeEncoderRoation = 36864;
     public static final double completedRotationNumber = 0;
 	public static final double colorWheelMotorSpeed = 0;
     //----------------------HANG----------------------//
+	
 	
 	
 

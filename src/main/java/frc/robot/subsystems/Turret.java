@@ -7,15 +7,24 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Turret extends SubsystemBase {
-  /**
-   * Creates a new Turret.
-   */
+  WPI_TalonSRX turretMotor = new WPI_TalonSRX(7);
   public Turret() {
+    turretMotor.configFactoryDefault();
+    
+    turretMotor.setNeutralMode(NeutralMode.Brake);
 
+    turretMotor.setInverted(false);
   }
+
+public void spinTurret(double _speed){
+  turretMotor.set(_speed);
+}
 
   @Override
   public void periodic() {

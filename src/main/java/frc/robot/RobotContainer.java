@@ -20,8 +20,10 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Turret;
 import frc.robot.commands.JoyDriveCommand;
 import frc.robot.commands.ShootCommand;
+import frc.robot.commands.TurretCommand;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -33,9 +35,11 @@ import frc.robot.commands.ShootCommand;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public static XboxController driverController = new XboxController(Constants.driverControllerPort);
+  public static XboxController manipController = new XboxController(Constants.manipControllerPort);
   public static final DriveTrain m_DriveTrain = new DriveTrain();
   public static final ColorWheel m_ColorWheel = new ColorWheel();
   public static final Shooter m_Shooter = new Shooter();
+  public static final Turret m_Turret = new Turret();
   JoystickButton buttonA = new JoystickButton(driverController, Constants.buttonA);
   JoystickButton buttonB = new JoystickButton(driverController, Constants.buttonB);
   JoystickButton buttonX = new JoystickButton(driverController, Constants.buttonX);
@@ -53,6 +57,8 @@ public class RobotContainer {
         () -> driverController.getX(Hand.kLeft),
         () -> driverController.getY(Hand.kLeft), 
         () -> driverController.getX(Hand.kRight), m_DriveTrain));
+    m_Turret.setDefaultCommand(new TurretCommand(
+        () -> manipController.getX(Hand.kLeft),m_Turret));
   }
 
   /**

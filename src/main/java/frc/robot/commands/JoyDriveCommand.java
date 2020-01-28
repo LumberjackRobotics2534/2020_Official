@@ -24,20 +24,11 @@ public class JoyDriveCommand extends CommandBase {
   double rightX;
   DriveTrain m_DriveTrain;
 
-<<<<<<< HEAD
-  public JoyDriveCommand(DoubleSupplier leftY, DoubleSupplier leftX, DoubleSupplier rightX, DriveTrain dTrain) {
-    //Save inputs to DoubleSuppliers so we can use them later and add requirements
-    m_leftY = leftY;
-    m_leftX = leftX;
-    m_rightX = rightX;
-    m_DriveTrain = dTrain;
-=======
   public JoyDriveCommand(DoubleSupplier _leftY, DoubleSupplier _leftX, DoubleSupplier _rightX, DriveTrain _dTrain) {
     m_leftY = _leftY;
     m_leftX = _leftX;
     m_rightX = _rightX;
     m_DriveTrain = _dTrain;
->>>>>>> e98c72725f272031119e2442397d04192e52ec14
     addRequirements(m_DriveTrain);
   }
 
@@ -49,31 +40,18 @@ public class JoyDriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-<<<<<<< HEAD
-    //Deadzone Code
-    /*if (Math.abs(m_leftY) < Constants.deadzone){
-      m_leftY = 0.0;
-=======
     leftY = m_leftY.getAsDouble();
     leftX = m_leftX.getAsDouble();
     rightX = m_rightX.getAsDouble();
     if (Math.abs(leftY) < Constants.deadzone){ 
       leftY = 0.0;
->>>>>>> e98c72725f272031119e2442397d04192e52ec14
     }
     if (Math.abs(leftX) < Constants.deadzone){
       leftX = 0.0;
     }
-<<<<<<< HEAD
-    if (Math.abs(m_rightX) < Constants.deadzone){
-      m_rightX = 0.0;
-    }*/
-    //Drive the robot by canging the DoubleSupplier values to Doubles
-=======
     if (Math.abs(rightX) < Constants.deadzone){
       rightX = 0.0;
     } 
->>>>>>> e98c72725f272031119e2442397d04192e52ec14
     RobotContainer.m_DriveTrain.drive(m_leftY.getAsDouble(), -m_leftX.getAsDouble(), m_rightX.getAsDouble());
   }
 

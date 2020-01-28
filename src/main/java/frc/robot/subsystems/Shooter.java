@@ -8,6 +8,8 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -18,6 +20,7 @@ public class Shooter extends SubsystemBase {
   public static WPI_TalonFX shooterMotor = new WPI_TalonFX(Constants.shooterMotor);
   double rpm;
   public Shooter() {
+    //
     shooterMotor.configFactoryDefault();
     shooterMotor.setNeutralMode(NeutralMode.Coast);
     shooterMotor.setInverted(false);
@@ -38,7 +41,7 @@ public class Shooter extends SubsystemBase {
   }
   public void shoot(JoystickButton button) {
     if (button.get()) {
-			double targetVelocity_UnitsPer100ms =  -2375 * 2048 / 600;
+			double targetVelocity_UnitsPer100ms =  -3387.5 * 2048 / 600;
       shooterMotor.set(ControlMode.Velocity, targetVelocity_UnitsPer100ms);   
     }
   }
