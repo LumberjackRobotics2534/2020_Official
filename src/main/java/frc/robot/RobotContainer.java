@@ -57,16 +57,13 @@ public class RobotContainer {
         () -> driverController.getX(Hand.kLeft),
         () -> driverController.getY(Hand.kLeft), 
         () -> driverController.getX(Hand.kRight), m_DriveTrain));
-    m_Turret.setDefaultCommand(new TurretCommand(
+        //Sets TurretCommand as Default Command for the Turret Subsystem
+     m_Turret.setDefaultCommand(new TurretCommand(
+        //Passes in the Left Joysick X value
         () -> manipController.getX(Hand.kLeft),m_Turret));
   }
 
-  /**
-   * Use this method to define your button->command mappings. Buttons can be
-   * created by instantiating a {@link GenericHID} or one of its subclasses
-   * ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then
-   * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-   */
+   
   private void configureButtonBindings() {
     buttonA.whenHeld(new ShootCommand(m_Shooter, buttonA));
   }

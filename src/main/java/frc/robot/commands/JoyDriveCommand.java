@@ -52,7 +52,7 @@ public class JoyDriveCommand extends CommandBase {
     if (Math.abs(rightX) < Constants.deadzone){
       rightX = 0.0;
     } 
-    RobotContainer.m_DriveTrain.drive(m_leftY.getAsDouble(), -m_leftX.getAsDouble(), m_rightX.getAsDouble());
+    RobotContainer.m_DriveTrain.drive(leftY, -leftX, rightX);
   }
 
   // Called once the command ends or is interrupted.

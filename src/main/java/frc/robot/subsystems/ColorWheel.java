@@ -14,7 +14,7 @@ import frc.robot.Constants;
 
 
 public class ColorWheel extends SubsystemBase {
-  public static WPI_TalonSRX colorWheelMotor = new WPI_TalonSRX(Constants.colorWheelMotorID);
+  public static WPI_TalonSRX colorWheelMotor = new WPI_TalonSRX(Constants.colorWheelMotor);
   /*private final I2C.Port i2cPort = I2C.Port.kOnboard;
   ColorSensorV3 colorSensor = new ColorSensorV3(i2cPort);*/
   public ColorWheel() {
