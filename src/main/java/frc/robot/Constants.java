@@ -57,9 +57,11 @@ public final class Constants {
     //Deadzone
     public static final double deadzone = 0.0;
     //---------------------INTAKE---------------------//
-
+    public static final int intakeMotorDrive = 8;
+    public static final double SpinSpeed = 0.8;
     //--------------------ELEVATOR--------------------//
-
+    public static final int elevatorMotorDrive = 9;
+    public static final double LiftSpeed = 0.0;
     //---------------------TURRET---------------------//
 
     //---------------------SHOOTER--------------------//
@@ -73,6 +75,8 @@ public final class Constants {
     public static final double completedRotationNumber = 0;
 	public static final double colorWheelMotorSpeed = 0;
     //----------------------HANG----------------------//
+	
+	
 	
 	
 	

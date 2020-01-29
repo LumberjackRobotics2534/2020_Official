@@ -19,8 +19,12 @@ import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Turret;
+import frc.robot.commands.ElevatorCommand;
+import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.JoyDriveCommand;
 import frc.robot.commands.ShootCommand;
 import frc.robot.commands.TurretCommand;
@@ -40,6 +44,8 @@ public class RobotContainer {
   public static final ColorWheel m_ColorWheel = new ColorWheel();
   public static final Shooter m_Shooter = new Shooter();
   public static final Turret m_Turret = new Turret();
+  public static final Intake m_Intake = new Intake();
+  public static final Elevator m_Elevator = new Elevator();
   JoystickButton buttonA = new JoystickButton(driverController, Constants.buttonA);
   JoystickButton buttonB = new JoystickButton(driverController, Constants.buttonB);
   JoystickButton buttonX = new JoystickButton(driverController, Constants.buttonX);
@@ -59,6 +65,7 @@ public class RobotContainer {
         () -> driverController.getX(Hand.kRight), m_DriveTrain));
     m_Turret.setDefaultCommand(new TurretCommand(
         () -> manipController.getX(Hand.kLeft),m_Turret));
+        
   }
 
   /**
@@ -69,6 +76,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     buttonA.whenHeld(new ShootCommand(m_Shooter, buttonA));
+    buttonB.whenHeld(new IntakeCommand(m_Intake));
   }
 
 
