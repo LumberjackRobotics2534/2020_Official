@@ -47,9 +47,11 @@ public final class Constants {
     //Deadzone
     public static final double deadzone = 0.15;
     //---------------------INTAKE---------------------//
-
+    public static final int intakeMotorDrive = 8;
+    public static final double SpinSpeed = 0.8;
     //--------------------ELEVATOR--------------------//
-
+    public static final int elevatorMotorDrive = 9;
+    public static final double LiftSpeed = 0.0;
     //---------------------TURRET---------------------//
     public static final int turretMotor = 7;
     //---------------------SHOOTER--------------------//
@@ -68,6 +70,8 @@ public final class Constants {
 	//-------------------Pneumatics-------------------//
 	public static final int pcm = 19;
 
+	
+	
 	
 	
 	

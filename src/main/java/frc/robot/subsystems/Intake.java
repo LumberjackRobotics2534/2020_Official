@@ -7,12 +7,21 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
-  
+  private WPI_TalonSRX intakeMotor = new WPI_TalonSRX(Constants.intakeMotorDrive);
+
   public Intake() {
 
+  }
+
+public void intake(double spinSpeed) {
+  intakeMotor.set(spinSpeed);
   }
 
   @Override
