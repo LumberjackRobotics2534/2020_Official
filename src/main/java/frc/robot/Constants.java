@@ -10,16 +10,6 @@ package frc.robot;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import frc.robot.Other.Gains;
 
-/**
- * The Constants class provides a convenient place for teams to hold robot-wide
- * numerical or boolean constants. This class should not be used for any other
- * purpose. All constants should be declared globally (i.e. public static). Do
- * not put anything functional in this class.
- *
- * <p>
- * It is advised to statically import this class (or one of its inner classes)
- * wherever the constants are needed, to reduce verbosity.
- */
 public final class Constants {
 
     //-------------------DRIVE TRAIN-------------------//
@@ -55,7 +45,7 @@ public final class Constants {
     public static final int buttonLeft = 5;
     public static final int buttonRight = 6;
     //Deadzone
-    public static final double deadzone = 0.0;
+    public static final double deadzone = 0.15;
     //---------------------INTAKE---------------------//
     public static final int intakeMotorDrive = 8;
     public static final double SpinSpeed = 0.8;
@@ -66,6 +56,8 @@ public final class Constants {
     public static final int turretMotor = 7;
     //---------------------SHOOTER--------------------//
     public static final int shooterMotor = 5;
+    public static final int upHood = 0;
+    public static final int downHood = 1;
     public static final int kPIDLoopIdx = 0;
     public static final int kTimeoutMs = 30;
     public final static Gains kGains_Velocit = new Gains( 0.24, 0.001, 20, 950.0/7200.0,  300,  1.00);
@@ -75,6 +67,8 @@ public final class Constants {
     public static final double completedRotationNumber = 0;
 	public static final double colorWheelMotorSpeed = 0;
     //----------------------HANG----------------------//
+	//-------------------Pneumatics-------------------//
+	public static final int pcm = 19;
 
 	
 	

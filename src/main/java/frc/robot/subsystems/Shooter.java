@@ -12,12 +12,15 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants;
 
 public class Shooter extends SubsystemBase {
   public static WPI_TalonFX shooterMotor = new WPI_TalonFX(Constants.shooterMotor);
+  public static DoubleSolenoid hoodSolenoid = new DoubleSolenoid(Constants.pcm,Constants.upHood, Constants.downHood);
   double rpm;
   public Shooter() {
     //
@@ -47,6 +50,13 @@ public class Shooter extends SubsystemBase {
   }
   public void shooterOff(){
     shooterMotor.set(0);
+  }
+  public void hoodUp(boolean status){
+    if (status) {
+      hoodSolenoid.set(Value.kForward);
+    } else {
+      hoodSolenoid.set(Value.kReverse);
+    }
   }
   @Override
   public void periodic() {

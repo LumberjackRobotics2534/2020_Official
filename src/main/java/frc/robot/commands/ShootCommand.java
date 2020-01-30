@@ -14,6 +14,7 @@ import frc.robot.subsystems.Shooter;
 public class ShootCommand extends CommandBase {
   Shooter m_shooter;
   JoystickButton button;
+
   public ShootCommand(Shooter _shooter, JoystickButton _button) {
     m_shooter = _shooter;
     button = _button;
@@ -29,6 +30,7 @@ public class ShootCommand extends CommandBase {
   @Override
   public void execute() {
     m_shooter.shoot(button);
+    m_shooter.hoodUp(button.get());
   }
 
   // Called once the command ends or is interrupted.
