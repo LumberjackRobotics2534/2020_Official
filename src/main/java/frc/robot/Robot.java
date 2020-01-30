@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
@@ -119,6 +120,21 @@ public class Robot extends TimedRobot {
   public void testInit() {
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
+    leftFront.setSelectedSensorPosition(0);
+    rightFront.setSelectedSensorPosition(0);
+
+
+    rightFront.configFactoryDefault();
+    leftFront.configFactoryDefault();
+
+    rightFront.setNeutralMode(NeutralMode.Brake);
+    leftFront.setNeutralMode(NeutralMode.Brake);
+
+    rightFront.setInverted(false);
+    leftFront.setInverted(false);
+
+    rightFront.setSensorPhase(false);
+    leftFront.setSensorPhase(false);
   }
 
   /**
@@ -126,5 +142,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+    System.out.println(rightFront.getSelectedSensorPosition() + "right");
+    System.out.println(leftFront.getSelectedSensorPosition() + "left");
   }
 }
