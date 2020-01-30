@@ -48,10 +48,10 @@ public class DriveTrain extends SubsystemBase {
     rightBack.setNeutralMode(NeutralMode.Brake);
     leftFront.setNeutralMode(NeutralMode.Brake);
     leftBack.setNeutralMode(NeutralMode.Brake);
-    rightFront.setInverted(false);
-    rightBack.setInverted(false);
-    leftFront.setInverted(false);
-    leftBack.setInverted(false);
+    rightFront.setInverted(true);
+     rightBack.setInverted(true);
+     leftFront.setInverted(true);
+      leftBack.setInverted(true);
     //Tells the robot if the encoders are reversed
     rightFront.setSensorPhase(false);
     leftFront.setSensorPhase(true);
@@ -97,6 +97,5 @@ public class DriveTrain extends SubsystemBase {
       //Get velocity in TICKS/100MS, convert to METERS/SECOND
       leftFront.getSelectedSensorVelocity() * (10/38497.9515889), //TODO re-calculate division
       rightFront.getSelectedSensorVelocity() * (10/38497.9515889));
-     
   }
 }

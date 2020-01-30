@@ -2,14 +2,14 @@ package frc.robot;
 
 import java.util.List;
 
-import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.RamseteController;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.geometry.Translation2d;
 import edu.wpi.first.wpilibj.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
@@ -17,21 +17,14 @@ import edu.wpi.first.wpilibj.trajectory.constraint.DifferentialDriveVoltageConst
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.JoyDriveCommand;
+import frc.robot.commands.ShootCommand;
+import frc.robot.commands.TurretCommand;
 import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Turret;
-import frc.robot.commands.JoyDriveCommand;
-import frc.robot.commands.ShootCommand;
-import frc.robot.commands.TurretCommand;
 
-/**
- * This class is where the bulk of the robot should be declared. Since
- * Command-based is a "declarative" paradigm, very little robot logic should
- * actually be handled in the {@link Robot} periodic methods (other than the
- * scheduler calls). Instead, the structure of the robot (including subsystems,
- * commands, and button mappings) should be declared here.
- */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public static XboxController driverController = new XboxController(Constants.driverControllerPort);
@@ -47,9 +40,6 @@ public class RobotContainer {
   JoystickButton buttonLeft = new JoystickButton(driverController, Constants.buttonLeft);
   JoystickButton buttonRight = new JoystickButton(driverController, Constants.buttonRight);
 
-  /**
-   * The container for the robot. Contains subsystems, OI devices, and commands.
-   */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
@@ -62,18 +52,11 @@ public class RobotContainer {
         //Passes in the Left Joysick X value
         () -> manipController.getX(Hand.kLeft),m_Turret));
   }
-
-   
+ 
   private void configureButtonBindings() {
     buttonA.whenHeld(new ShootCommand(m_Shooter, buttonA));
   }
 
-
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
   public Command getAutonomousCommand() {
     // Create a voltage constraint to ensure we don't accelerate too fast
     var autoVoltageConstraint = new DifferentialDriveVoltageConstraint(
@@ -93,7 +76,7 @@ public class RobotContainer {
       //Start at the origin facing the positive X direction
       new Pose2d(0, 0, new Rotation2d(0)),
       //Pass through these interior points
-      List.of(/*new Translation2d(1, 1), new Translation2d(2, -1)*/),
+      List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
       //End position
       new Pose2d(3, 0, new Rotation2d(0)),
       //Pass config
@@ -121,5 +104,6 @@ public class RobotContainer {
       m_DriveTrain);
     //Run RamseteCommand, then stop turning the wheels.
     return ramseteCommand.andThen(() -> m_DriveTrain.tankDriveVolts(0, 0));
+  
   }
 }

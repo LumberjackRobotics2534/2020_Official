@@ -30,7 +30,7 @@ public class Robot extends TimedRobot {
   double current0;
   PowerDistributionPanel pdp = new PowerDistributionPanel(20);
   int rpm;
-  private Command m_autonomousCommand;
+  //private Command m_autonomousCommand;
   WPI_TalonSRX rightFront = new WPI_TalonSRX(Constants.rightFrontDrive);
   WPI_TalonSRX leftFront = new WPI_TalonSRX(Constants.leftFrontDrive);
  // private JoyDriveCommand m_JoyDriveCommand;
@@ -96,11 +96,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-    if(m_autonomousCommand != null){
+    //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    /*if(m_autonomousCommand != null){
       m_autonomousCommand.schedule();
       
-    }
+    }*/
   }
 
   @Override
