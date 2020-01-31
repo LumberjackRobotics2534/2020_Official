@@ -114,7 +114,8 @@ public class RobotContainer {
       //Tells RamseteCommand the name of the DriveTrain we created
       m_DriveTrain);
     //Run RamseteCommand, then stop turning the wheels.
-    return ramseteCommand.andThen(() -> m_DriveTrain.tankDriveVolts(0, 0));
+    //return ramseteCommand.andThen(() -> m_DriveTrain.tankDriveVolts(0, 0));
+    return null;
   
   }
 }
