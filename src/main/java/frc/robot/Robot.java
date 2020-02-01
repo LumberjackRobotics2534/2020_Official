@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
@@ -26,18 +27,11 @@ import frc.robot.subsystems.Shooter;
  */
 public class Robot extends TimedRobot {
   public static DriveTrain m_DriveTrain;
-  private RobotContainer m_robotContainer;
+  private RobotContainer m_robotContainer; //DO NOT DELETE
   double current;
   double current0;
   PowerDistributionPanel pdp = new PowerDistributionPanel(20);
   int rpm;
-  //private Command m_autonomousCommand;
-  WPI_TalonSRX rightFront = new WPI_TalonSRX(Constants.rightFrontDrive);
-  WPI_TalonSRX leftFront = new WPI_TalonSRX(Constants.leftFrontDrive);
- // private JoyDriveCommand m_JoyDriveCommand;
-  /*double current;
-  double current0;
-  PowerDistributionPanel pdp = new PowerDistributionPanel(20);*/
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -106,7 +100,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-  
+    CommandScheduler.getInstance().cancelAll();
   }
 
   /**
@@ -120,21 +114,6 @@ public class Robot extends TimedRobot {
   public void testInit() {
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
-    leftFront.setSelectedSensorPosition(0);
-    rightFront.setSelectedSensorPosition(0);
-
-
-    rightFront.configFactoryDefault();
-    leftFront.configFactoryDefault();
-
-    rightFront.setNeutralMode(NeutralMode.Brake);
-    leftFront.setNeutralMode(NeutralMode.Brake);
-
-    rightFront.setInverted(false);
-    leftFront.setInverted(false);
-
-    rightFront.setSensorPhase(false);
-    leftFront.setSensorPhase(false);
   }
 
   /**
@@ -142,7 +121,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
-    System.out.println(rightFront.getSelectedSensorPosition() + "right");
-    System.out.println(leftFront.getSelectedSensorPosition() + "left");
+    
   }
 }
