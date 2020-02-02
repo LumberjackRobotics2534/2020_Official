@@ -17,6 +17,7 @@ public final class Constants {
 	public static final int rightBackDrive = 4;
 	public static final int leftFrontDrive = 1;
     public static final int leftBackDrive = 3;
+    public static final int integratedEncoderTicksPerRot = 2048*(105/26);
     //----- -----------MOTION PROFILING----------------//
     public static final double ksVolts = 1.75; //was 1.75 
     public static final double kvVoltSecondsPerMeter = 2.59;
@@ -63,7 +64,7 @@ public final class Constants {
     public final static Gains kGains_Velocit = new Gains( 0.24, 0.001, 20, 950.0/7200.0,  300,  1.00);
     //-------------------COLOR WHEEL------------------//
     public static final int colorWheelMotor = 6;
-    public static final int quadrativeEncoderRoation = 36864;
+    public static final int quadrativeEncoderRotation = 36864;
     public static final double completedRotationNumber = 0;
 	public static final double colorWheelMotorSpeed = 0;
     //----------------------HANG----------------------//
