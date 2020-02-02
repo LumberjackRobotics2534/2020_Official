@@ -7,10 +7,6 @@
 
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -28,6 +24,7 @@ import frc.robot.subsystems.Shooter;
 public class Robot extends TimedRobot {
   public static DriveTrain m_DriveTrain;
   private RobotContainer m_robotContainer; //DO NOT DELETE
+  private Command m_autonomousCommand;
   double current;
   double current0;
   PowerDistributionPanel pdp = new PowerDistributionPanel(20);
@@ -91,11 +88,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-    /*if(m_autonomousCommand != null){
+    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    if(m_autonomousCommand != null){
       m_autonomousCommand.schedule();
       
-    }*/
+    }
   }
 
   @Override

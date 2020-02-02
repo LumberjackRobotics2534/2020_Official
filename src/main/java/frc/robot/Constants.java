@@ -19,14 +19,17 @@ public final class Constants {
     public static final int leftBackDrive = 3;
     public static final int integratedEncoderTicksPerRot = 2048*(105/26);
     //----- -----------MOTION PROFILING----------------//
-    public static final double ksVolts = 1.75; //was 1.75 
-    public static final double kvVoltSecondsPerMeter = 2.59;
-    public static final double kaVoltSecondsSquaredPerMeter = 0.437;
+    public static final double ksVolts = 0.111;
+    public static final double kvVoltSecondsPerMeter = 1.62;
+    public static final double kaVoltSecondsSquaredPerMeter = 0.179;
     public static final double kMaxVoltage = 10;
-    public static final double kPDriveVel = 15.3; //was 15.3
-    public static final double kTrackwidthMeters = 0.61;
-    public static final double kMaxSpeedMetersPerSecond = 3;
-    public static final double kMaxAccelerationMetersPerSecondSquared = 3;
+    public static final double kPDriveVel = 7.6; //was 7.6
+    public static final double kTrackwidthMeters = 0.5588; //was 1.1541452808922656
+    public static final double kMaxSpeedMetersPerSecond = 3; //was 3
+    public static final double kMaxAccelerationMetersPerSecondSquared = 3; //was 3
+    public static final double kTicksToMetersConversion = ((1/14703.6897/*Rot per Tick*/)*(6*Math.PI/*In per Rot*/)*(1/39.3701/*M per In*/));
+    public static final double kHundredMSToSecondsConversion = 10;
+
     public static final double kRamseteB = 2;
     public static final double kRamseteZeta = 0.7;
     public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackwidthMeters);
