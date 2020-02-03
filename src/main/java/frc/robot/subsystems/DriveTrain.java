@@ -58,7 +58,7 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public double getHeading() {
-    return Math.IEEEremainder(navx.getAngle(), 360);
+    return (-1)*Math.IEEEremainder(navx.getAngle(), 360);
   }
 
   public void tankDriveVolts(double leftVolts, double rightVolts){
