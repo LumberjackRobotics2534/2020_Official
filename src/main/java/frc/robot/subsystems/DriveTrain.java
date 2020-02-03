@@ -46,9 +46,6 @@ public class DriveTrain extends SubsystemBase {
     rightBack.setInverted(true);
     leftFront.setInverted(true);
     leftBack.setInverted(true);
-    //Tells the robot if the encoders are reversed
-    rightFront.setSensorPhase(true);
-    leftFront.setSensorPhase(true);   
     //Reset encoders before finishing creation of odometry
     leftBack.setSelectedSensorPosition(0);
     rightBack.setSelectedSensorPosition(0);
@@ -61,7 +58,7 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public double getHeading() {
-    return (-1)*Math.IEEEremainder(navx.getAngle(), 360);
+    return Math.IEEEremainder(navx.getAngle(), 360);
   }
 
   public void tankDriveVolts(double leftVolts, double rightVolts){
@@ -75,7 +72,9 @@ public class DriveTrain extends SubsystemBase {
   
   public Pose2d getPose() {
     //Get position in METERS
+    System.out.println("pose\t" + m_odometry.getPoseMeters());
     return m_odometry.getPoseMeters();
+
   }
 
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {

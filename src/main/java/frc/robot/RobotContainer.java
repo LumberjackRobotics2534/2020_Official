@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.geometry.Translation2d;
-import edu.wpi.first.wpilibj.spline.Spline;
 import edu.wpi.first.wpilibj.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
@@ -81,24 +80,24 @@ public class RobotContainer {
       config.addConstraint(autoVoltageConstraint);
     //Create a Trajectory to follow. UNITS ARE IN METERS from starting position.
 
-    Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
+/*  Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
       List.of(
         new Pose2d(0, 0, new Rotation2d(0)), //Start Point
         //Interior Waypoints
         new Pose2d(3, 0, new Rotation2d(0))), //End Point
-      config); //Pass Config
+      config); //Pass Config */
 
     
-/*  Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
+    Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
       //Start at the origin facing the positive X direction
       new Pose2d(0, 0, new Rotation2d(0)),
       //Pass through these interior points
-      List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
+      List.of(/*new Translation2d(1, 1), new Translation2d(2, -1)*/),
       //End position
       new Pose2d(3, 0, new Rotation2d(0)),
       //Pass config
       config);
-*/
+
     //Create RamseteCommand that follows the generated Trajectory
     RamseteCommand ramseteCommand = new RamseteCommand(
       //Pass in Trajectory
