@@ -92,7 +92,7 @@ public class RobotContainer {
       //Start at the origin facing the positive X direction
       new Pose2d(0, 0, new Rotation2d(0)),
       //Pass through these interior points
-      List.of(/*new Translation2d(1, 1), new Translation2d(2, -1)*/),
+      List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
       //End position
       new Pose2d(3, 0, new Rotation2d(0)),
       //Pass config

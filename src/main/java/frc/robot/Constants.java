@@ -11,25 +11,23 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import frc.robot.Other.Gains;
 
 public final class Constants {
-
     //-------------------DRIVE TRAIN-------------------//
+    //Talons
 	public static final int rightFrontDrive = 2;
 	public static final int rightBackDrive = 4;
 	public static final int leftFrontDrive = 1;
     public static final int leftBackDrive = 3;
-    public static final int integratedEncoderTicksPerRot = 2048*(105/26);
     //----- -----------MOTION PROFILING----------------//
-    public static final double ksVolts = 0.111;
+    public static final double ksVolts = 0.124;
     public static final double kvVoltSecondsPerMeter = 1.62;
-    public static final double kaVoltSecondsSquaredPerMeter = 0.179;
+    public static final double kaVoltSecondsSquaredPerMeter = 0.272;
     public static final double kMaxVoltage = 10;
-    public static final double kPDriveVel = 7.6; //was 7.6
-    public static final double kTrackwidthMeters = 0.5588; //was 1.1541452808922656
-    public static final double kMaxSpeedMetersPerSecond = 3; //was 3
-    public static final double kMaxAccelerationMetersPerSecondSquared = 3; //was 3
+    public static final double kPDriveVel = 0.1; //was 11.1
+    public static final double kTrackwidthMeters = 0.5588; //Calculated:1.244222932233876 Actual:0.5588
+    public static final double kMaxSpeedMetersPerSecond = 3;
+    public static final double kMaxAccelerationMetersPerSecondSquared = 3;
     public static final double kTicksToMetersConversion = ((1/14703.6897/*Rot per Tick*/)*(6*Math.PI/*In per Rot*/)*(1/39.3701/*M per In*/));
     public static final double kHundredMSToSecondsConversion = 10;
-
     public static final double kRamseteB = 2;
     public static final double kRamseteZeta = 0.7;
     public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackwidthMeters);
@@ -73,11 +71,4 @@ public final class Constants {
     //----------------------HANG----------------------//
 	//-------------------Pneumatics-------------------//
 	public static final int pcm = 19;
-
-	
-	
-	
-	
-	
-
 }
