@@ -41,8 +41,8 @@ public class DriveTrain extends SubsystemBase {
     rightBack.setNeutralMode(NeutralMode.Brake);
     leftFront.setNeutralMode(NeutralMode.Brake);
     leftBack.setNeutralMode(NeutralMode.Brake);
-    rightFront.setInverted(true);
-    rightBack.setInverted(true);
+    rightFront.setInverted(false);
+    rightBack.setInverted(false);
     leftFront.setInverted(true);
     leftBack.setInverted(true);
     //Reset encoders before finishing creation of odometry
@@ -62,10 +62,9 @@ public class DriveTrain extends SubsystemBase {
 
   public void tankDriveVolts(double leftVolts, double rightVolts){
     leftSide.setVoltage(leftVolts);
-    rightSide.setVoltage(-rightVolts);
+    rightSide.setVoltage(/*-*/rightVolts);
     System.out.println("left\t"+leftVolts);
-    System.out.println("right\t"+(-rightVolts));
-    System.out.println("angle\t" + getHeading());
+    System.out.println("right\t"+rightVolts);
     mecanumDriveTrain.feed();
   }
   
@@ -91,7 +90,7 @@ public class DriveTrain extends SubsystemBase {
       Rotation2d.fromDegrees(getHeading()), 
       //Get distance travelled in TICKS, convert to METERS
       leftFront.getSelectedSensorPosition()*Constants.kTicksToMetersConversion,
-      rightFront.getSelectedSensorPosition()*Constants.kTicksToMetersConversion * (-1));
+      rightFront.getSelectedSensorPosition()*Constants.kTicksToMetersConversion/* * (-1)*/);
     
   }
 }
