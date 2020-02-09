@@ -35,7 +35,7 @@ public class ElevatorCommand extends CommandBase {
   public void execute() {
     double topSpeed = SmartDashboard.getNumber("TopSpeed", 0);
     double bottomSpeed = SmartDashboard.getNumber("BottomSpeed", 0);
-    RobotContainer.m_Elevator.liftBalls(topSpeed, bottomSpeed);
+    RobotContainer.m_Elevator.liftBalls(.6, .5);
   }
 
   // Called once the command ends or is interrupted.

@@ -41,7 +41,7 @@ public class Shooter extends SubsystemBase {
   }
   public void shoot(JoystickButton button) {
     if (button.get()) {
-			double targetVelocity_UnitsPer100ms =  -2500 * 2048 / 600;//was -3387.5
+			double targetVelocity_UnitsPer100ms =  -4500 * 2048 / 600;//was -3387.5
       shooterMotor.set(ControlMode.Velocity, targetVelocity_UnitsPer100ms);   
     } else{
       shooterMotor.set(0);

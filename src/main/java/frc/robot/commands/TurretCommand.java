@@ -10,6 +10,7 @@ package frc.robot.commands;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Turret;
 
@@ -30,8 +31,11 @@ public class TurretCommand extends CommandBase {
   
   @Override
   public void execute() {
-    
-    RobotContainer.m_Turret.spinTurret(m_Speed.getAsDouble());
+  double speed = m_Speed.getAsDouble();
+    if (Math.abs(speed) < Constants.turretDeadzone) {
+      speed = 0.0;
+    }
+    RobotContainer.m_Turret.spinTurret(speed*.3);
   }
 
   // Called once the command ends or is interrupted.

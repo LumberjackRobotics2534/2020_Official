@@ -64,6 +64,7 @@ public final class Constants {
     public static final double turretMinimumInput = 0;
     public static final double turretMaximumInput = 0;
     public static final double turretTargetAngle = 0;
+    public static final double turretDeadzone = 0;
     //---------------------SHOOTER--------------------//
     public static final int shooterMotor = 5;
     public static final int upHood = 0;
@@ -77,7 +78,7 @@ public final class Constants {
     public static final double completedRotationNumber = 0;
 	public static final double colorWheelMotorSpeed = 0;
     //----------------------HANG----------------------//
-	//-------------------Pneumatics-------------------//
+	//-------------------PNEUMATICS-------------------//
 	public static final int pcm = 19;
 	
 	

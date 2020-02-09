@@ -66,7 +66,7 @@ public class RobotContainer {
         () -> driverController.getY(Hand.kLeft), 
         () -> driverController.getX(Hand.kRight), m_DriveTrain));
         //Sets TurretCommand as Default Command for the Turret Subsystem
-     m_Turret.setDefaultCommand(new TurretCommand(
+    m_Turret.setDefaultCommand(new TurretCommand(
         //Passes in the Left Joysick X value
         () -> manipController.getX(Hand.kLeft),m_Turret));
         
