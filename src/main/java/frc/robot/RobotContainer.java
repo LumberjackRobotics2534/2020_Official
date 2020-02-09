@@ -3,6 +3,9 @@ package frc.robot;
 import java.util.List;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.RamseteController;
@@ -17,10 +20,12 @@ import edu.wpi.first.wpilibj.trajectory.constraint.DifferentialDriveVoltageConst
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.ElevatorCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.JoyDriveCommand;
 import frc.robot.commands.ShootCommand;
 import frc.robot.commands.TurretCommand;
+import frc.robot.commands.TurretPID;
 import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
@@ -38,12 +43,20 @@ public class RobotContainer {
   public static final Turret m_Turret = new Turret();
   public static final Intake m_Intake = new Intake();
   public static final Elevator m_Elevator = new Elevator();
-  JoystickButton buttonA = new JoystickButton(driverController, Constants.buttonA);
-  JoystickButton buttonB = new JoystickButton(driverController, Constants.buttonB);
-  JoystickButton buttonX = new JoystickButton(driverController, Constants.buttonX);
-  JoystickButton buttonY = new JoystickButton(driverController, Constants.buttonY);
-  JoystickButton buttonLeft = new JoystickButton(driverController, Constants.buttonLeft);
-  JoystickButton buttonRight = new JoystickButton(driverController, Constants.buttonRight);
+  JoystickButton driverButtonA = new JoystickButton(driverController, Constants.buttonA);
+  JoystickButton driverButtonB = new JoystickButton(driverController, Constants.buttonB);
+  JoystickButton driverButtonX = new JoystickButton(driverController, Constants.buttonX);
+  JoystickButton driverButtonY = new JoystickButton(driverController, Constants.buttonY);
+  JoystickButton driverButtonLeft = new JoystickButton(driverController, Constants.buttonLeft);
+  JoystickButton driverButtonRight = new JoystickButton(driverController, Constants.buttonRight);
+  JoystickButton manipButtonA = new JoystickButton(manipController, Constants.buttonA);
+  JoystickButton manipButtonB = new JoystickButton(manipController, Constants.buttonB);
+  JoystickButton manipButtonX = new JoystickButton(manipController, Constants.buttonX);
+  JoystickButton manipButtonY = new JoystickButton(manipController, Constants.buttonY);
+  JoystickButton manipButtonLeft = new JoystickButton(manipController, Constants.buttonLeft);
+  JoystickButton manipButtonRight = new JoystickButton(manipController, Constants.buttonRight);
+  NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+  NetworkTableEntry ts = table.getEntry("ts");
 
   public RobotContainer() {
     // Configure the button bindings
@@ -60,8 +73,10 @@ public class RobotContainer {
   }
  
   private void configureButtonBindings() {
-    buttonA.whenHeld(new ShootCommand(m_Shooter, buttonA));
-    buttonB.whenHeld(new IntakeCommand(m_Intake));
+    manipButtonA.whileHeld(new ShootCommand(m_Shooter, manipButtonA));
+    manipButtonB.whileHeld(new TurretPID(ts.getDouble(0.0),Constants.turretTargetAngle,m_Turret));
+    manipButtonX.whileHeld(new ElevatorCommand(manipButtonX, m_Elevator));
+    manipButtonY.whileHeld(new IntakeCommand(m_Intake));
   }
 
   public Command getAutonomousCommand() {

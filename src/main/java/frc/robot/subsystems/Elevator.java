@@ -14,20 +14,33 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Elevator extends SubsystemBase {
-  private WPI_TalonSRX elevatorMotor = new WPI_TalonSRX(Constants.elevatorMotorDrive);
+  private WPI_TalonSRX topElevatorMotor = new WPI_TalonSRX(Constants.topElevatorMotor);
+  private WPI_TalonSRX bottomElevatorMotor = new WPI_TalonSRX(Constants.bottomElevatorMotor);
   public Elevator() {
-    elevatorMotor.configFactoryDefault();
+    topElevatorMotor.configFactoryDefault();
     
-    elevatorMotor.setNeutralMode(NeutralMode.Brake);
+    topElevatorMotor.setNeutralMode(NeutralMode.Brake);
 
-    elevatorMotor.setInverted(false);
+    topElevatorMotor.setInverted(true);
+    
+    bottomElevatorMotor.configFactoryDefault();
+  
+    bottomElevatorMotor.setNeutralMode(NeutralMode.Brake);
+
+    bottomElevatorMotor.setInverted(true);
   }
-  public void liftBalls(double _liftSpeed){
-    elevatorMotor.set(_liftSpeed);
+  public void liftBalls(double _topLiftSpeed, double _btmLiftSpeed){
+    topElevatorMotor.set(_topLiftSpeed);
+    bottomElevatorMotor.set(_btmLiftSpeed);
+}
+  public void stopElevator(){
+    topElevatorMotor.set(0);
+    bottomElevatorMotor.set(0);
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
   }
+
 }

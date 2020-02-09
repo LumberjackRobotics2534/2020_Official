@@ -30,6 +30,7 @@ public class TurretCommand extends CommandBase {
   
   @Override
   public void execute() {
+    
     RobotContainer.m_Turret.spinTurret(m_Speed.getAsDouble());
   }
 

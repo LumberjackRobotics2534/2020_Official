@@ -7,14 +7,9 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
-
 import edu.wpi.first.wpilibj.controller.PIDController;
-
 import edu.wpi.first.wpilibj2.command.PIDCommand;
-
+import frc.robot.Constants;
 import frc.robot.subsystems.Turret;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -22,20 +17,22 @@ import frc.robot.subsystems.Turret;
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class TurretPID extends PIDCommand {
   
-  public TurretPID(double skew ,Turret _Turret) {
+  public TurretPID(double _skew,double _targetAngle,Turret _Turret) {
     super(
         // The controller that the command will use
         new PIDController(0, 0, 0),
         // This should return the measurement
-        () -> 0,
+        () -> _skew,
         // This should return the setpoint (can also be a constant)
-        () -> 0,
+        () -> _targetAngle,
         // This uses the output
         output -> {
-          // Use the output here
-        });
-      addRequirements(_Turret);
+          _Turret.spinTurret(output);
+        },_Turret);
+     
     // Configure additional PID options by calling `getController` here.
+    getController().enableContinuousInput(Constants.turretMinimumInput, Constants.turretMaximumInput);
+    getController().setTolerance(Constants.turretPositionTolerance, Constants.turretVelocityTolerance);
   }
 
   // Returns true when the command should end.

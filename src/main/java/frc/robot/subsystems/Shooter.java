@@ -23,14 +23,11 @@ public class Shooter extends SubsystemBase {
   public static DoubleSolenoid hoodSolenoid = new DoubleSolenoid(Constants.pcm,Constants.upHood, Constants.downHood);
   double rpm;
   public Shooter() {
-    //
     shooterMotor.configFactoryDefault();
     shooterMotor.setNeutralMode(NeutralMode.Coast);
     shooterMotor.setInverted(false);
    
     shooterMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
-    
-    shooterMotor.setSensorPhase(true);
     
     shooterMotor.configNominalOutputForward(0, Constants.kTimeoutMs);
 		shooterMotor.configNominalOutputReverse(0, Constants.kTimeoutMs);
@@ -44,8 +41,10 @@ public class Shooter extends SubsystemBase {
   }
   public void shoot(JoystickButton button) {
     if (button.get()) {
-			double targetVelocity_UnitsPer100ms =  -3387.5 * 2048 / 600;
+			double targetVelocity_UnitsPer100ms =  -2500 * 2048 / 600;//was -3387.5
       shooterMotor.set(ControlMode.Velocity, targetVelocity_UnitsPer100ms);   
+    } else{
+      shooterMotor.set(0);
     }
   }
   public void shooterOff(){

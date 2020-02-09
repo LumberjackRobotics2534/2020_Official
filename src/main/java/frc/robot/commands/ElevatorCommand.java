@@ -7,14 +7,18 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Elevator;
 
 public class ElevatorCommand extends CommandBase {
   Elevator m_Elevator;
-  public ElevatorCommand(Elevator _Elevator) {
+  JoystickButton button;
+  
+  public ElevatorCommand(JoystickButton _button, Elevator _Elevator) {
+    button = _button;
     m_Elevator = _Elevator;
     addRequirements(m_Elevator);
   }
@@ -22,22 +26,31 @@ public class ElevatorCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    SmartDashboard.putNumber("TopSpeed", 0);
+    SmartDashboard.putNumber("BottomSpeed", 0);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.m_Elevator.liftBalls(Constants.LiftSpeed);
+    double topSpeed = SmartDashboard.getNumber("TopSpeed", 0);
+    double bottomSpeed = SmartDashboard.getNumber("BottomSpeed", 0);
+    RobotContainer.m_Elevator.liftBalls(topSpeed, bottomSpeed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    RobotContainer.m_Elevator.stopElevator();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if(button.get() == false){
+    return true;
+    } else{
     return false;
+    }
   }
 }
