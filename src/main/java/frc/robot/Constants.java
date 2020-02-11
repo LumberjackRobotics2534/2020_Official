@@ -59,10 +59,10 @@ public final class Constants {
     public static final double LiftSpeed = 0.6;
     //---------------------TURRET---------------------//
     public static final int turretMotor = 7;
-    public static final double turretPositionTolerance = 0;
+    public static final double turretPositionTolerance = 1;
     public static final double turretVelocityTolerance = 0;
-    public static final double turretMinimumInput = 0;
-    public static final double turretMaximumInput = 0;
+    public static final double turretMinimumInput = -29.8;
+    public static final double turretMaximumInput = 29.8;
     public static final double turretTargetAngle = 0;
     public static final double turretDeadzone = 0;
     //---------------------SHOOTER--------------------//
@@ -72,6 +72,7 @@ public final class Constants {
     public static final int kPIDLoopIdx = 0;
     public static final int kTimeoutMs = 30;
     public final static Gains kGains_Velocit = new Gains( 0.24, 0.001, 20, /*was 1023*/950.0/7200.0,  300,  1.00);
+    public static final int shooterSpeed = -4500;
     //-------------------COLOR WHEEL------------------//
     public static final int colorWheelMotor = 6;
     public static final int quadrativeEncoderRotation = 36864;
@@ -81,6 +82,7 @@ public final class Constants {
 	//-------------------PNEUMATICS-------------------//
 	public static final int pcm = 19;
 	
+
 	
 
 	

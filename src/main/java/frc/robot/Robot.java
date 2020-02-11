@@ -10,6 +10,9 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -32,7 +35,10 @@ public class Robot extends TimedRobot {
   double current;
   double current0;
   PowerDistributionPanel pdp = new PowerDistributionPanel(20);
-  int rpm;
+  static int rpm;
+  NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+  NetworkTableEntry tx = table.getEntry("tx");
+  static double skew;
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -64,6 +70,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Current", current0);
     rpm = Math.abs(Shooter.shooterMotor.getSelectedSensorVelocity()*600/2048);
     SmartDashboard.putNumber("RPMs", rpm);
+    skew = tx.getDouble(0.0);
+    SmartDashboard.putNumber("RobotSkew", skew);
   }
 
   /**

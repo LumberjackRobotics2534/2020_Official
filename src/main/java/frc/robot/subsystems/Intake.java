@@ -22,6 +22,9 @@ public class Intake extends SubsystemBase {
 public void intake(double spinSpeed) {
   intakeMotor.set(spinSpeed);
   }
+public void stopIntake(){
+  intakeMotor.set(0);
+}
 
   @Override
   public void periodic() {

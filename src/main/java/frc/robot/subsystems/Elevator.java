@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Elevator extends SubsystemBase {
+  public static int ballNumber;
   private WPI_TalonSRX topElevatorMotor = new WPI_TalonSRX(Constants.topElevatorMotor);
   private WPI_TalonFX bottomElevatorMotor = new WPI_TalonFX(Constants.bottomElevatorMotor);
   
@@ -22,13 +23,13 @@ public class Elevator extends SubsystemBase {
     
     topElevatorMotor.setNeutralMode(NeutralMode.Brake);
 
-    topElevatorMotor.setInverted(true);
+    topElevatorMotor.setInverted(false);
     
     bottomElevatorMotor.configFactoryDefault();
   
     bottomElevatorMotor.setNeutralMode(NeutralMode.Brake);
 
-    bottomElevatorMotor.setInverted(false);
+    bottomElevatorMotor.setInverted(true);
   }
   public void liftBalls(double _topLiftSpeed, double _btmLiftSpeed){
     topElevatorMotor.set(_topLiftSpeed);

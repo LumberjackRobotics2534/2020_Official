@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.geometry.Translation2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
@@ -56,10 +57,14 @@ public class RobotContainer {
   JoystickButton manipButtonLeft = new JoystickButton(manipController, Constants.buttonLeft);
   JoystickButton manipButtonRight = new JoystickButton(manipController, Constants.buttonRight);
   NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-  NetworkTableEntry ts = table.getEntry("ts");
+  NetworkTableEntry tx;
+  double x;
 
   public RobotContainer() {
     // Configure the button bindings
+    tx = table.getEntry("tx");
+    x = tx.getDouble(0.0);
+    SmartDashboard.putNumber("ContrainerSkew", x);
     configureButtonBindings();
     m_DriveTrain.setDefaultCommand(new JoyDriveCommand(
         () -> driverController.getX(Hand.kLeft),
@@ -69,14 +74,22 @@ public class RobotContainer {
     m_Turret.setDefaultCommand(new TurretCommand(
         //Passes in the Left Joysick X value
         () -> manipController.getX(Hand.kLeft),m_Turret));
+      if(Robot.rpm == Constants.shooterSpeed){
+        new ElevatorCommand(manipButtonX, m_Elevator);
+      }
+      if(Elevator.ballNumber != 5){
+        new IntakeCommand(m_Intake);
+      } else{
+        m_Intake.stopIntake();
+      }
         
   }
  
   private void configureButtonBindings() {
+    manipButtonA.whileHeld(new TurretPID(Constants.turretTargetAngle,m_Turret));
     manipButtonA.whileHeld(new ShootCommand(m_Shooter, manipButtonA));
-    manipButtonB.whileHeld(new TurretPID(ts.getDouble(0.0),Constants.turretTargetAngle,m_Turret));
-    manipButtonX.whileHeld(new ElevatorCommand(manipButtonX, m_Elevator));
-    manipButtonY.whileHeld(new IntakeCommand(m_Intake));
+    manipButtonB.whileHeld(new ElevatorCommand(manipButtonB, m_Elevator));
+    manipButtonX.whileHeld(new IntakeCommand(m_Intake));
   }
 
   public Command getAutonomousCommand() {
