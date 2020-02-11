@@ -19,9 +19,8 @@ import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-
 public class ColorWheel extends SubsystemBase {
-  private static WPI_TalonSRX colorWheelMotor = new WPI_TalonSRX(Constants.colorWheelMotor);
+  public static WPI_TalonSRX colorWheelMotor = new WPI_TalonSRX(Constants.colorWheelMotor);
   private final I2C.Port i2cPort = I2C.Port.kOnboard;
   private final ColorSensorV3 colorSensor = new ColorSensorV3(i2cPort);
   private final ColorMatch m_colorMatcher = new ColorMatch();
@@ -33,6 +32,9 @@ public class ColorWheel extends SubsystemBase {
   private String colorString;
   private ColorMatchResult match;
   public ColorWheel() {
+    /*------------------------------------------------------------------------*/
+    /* Color Wheel WILL NOT WORK if you do not re-deploy code on robot startup*/
+    /*------------------------------------------------------------------------*/
 
     colorWheelMotor.configFactoryDefault();
     
@@ -47,9 +49,7 @@ public class ColorWheel extends SubsystemBase {
   }
 
   public void spinColorWheel(double _speed) {
-
     colorWheelMotor.set(_speed);
-
   }
 
   @Override
@@ -66,7 +66,7 @@ public class ColorWheel extends SubsystemBase {
     } else if (match.color == kYellowTarget) {
       colorString = "Yellow";
     } else {
-      colorString = "Unknown";
+      colorString = "Unknown???????";
     }
     SmartDashboard.putNumber("Confidence", match.confidence);
     SmartDashboard.putString("Detected Color", colorString);
