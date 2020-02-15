@@ -24,6 +24,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ElevatorCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.JoyDriveCommand;
+import frc.robot.commands.LEDCommand;
 import frc.robot.commands.ShootCommand;
 import frc.robot.commands.TurretCommand;
 import frc.robot.commands.TurretPID;
@@ -31,6 +32,7 @@ import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.RGBstrip;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Turret;
 
@@ -44,6 +46,7 @@ public class RobotContainer {
   public static final Turret m_Turret = new Turret();
   public static final Intake m_Intake = new Intake();
   public static final Elevator m_Elevator = new Elevator();
+  public static final RGBstrip m_LEDStrip = new RGBstrip();
   JoystickButton driverButtonA = new JoystickButton(driverController, Constants.buttonA);
   JoystickButton driverButtonB = new JoystickButton(driverController, Constants.buttonB);
   JoystickButton driverButtonX = new JoystickButton(driverController, Constants.buttonX);
@@ -83,8 +86,10 @@ public class RobotContainer {
         m_Intake.stopIntake();
       }
         
+    m_LEDStrip.setDefaultCommand(new LEDCommand(m_LEDStrip));
   }
- 
+    
+
   private void configureButtonBindings() {
     manipButtonA.whileHeld(new TurretPID(Constants.turretTargetAngle,m_Turret));
     manipButtonA.whileHeld(new ShootCommand(m_Shooter, manipButtonA));

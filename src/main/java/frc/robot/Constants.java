@@ -80,7 +80,9 @@ public final class Constants {
 	public static final double colorWheelMotorSpeed = 0;
     //----------------------HANG----------------------//
 	//-------------------PNEUMATICS-------------------//
-	public static final int pcm = 19;
+    public static final int pcm = 19;
+    //----------------------LEDS----------------------//
+	public static final int ledPort = 9;
 	
 
 	
