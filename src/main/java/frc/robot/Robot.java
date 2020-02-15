@@ -38,7 +38,7 @@ public class Robot extends TimedRobot {
   static int rpm;
   NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
   NetworkTableEntry tx = table.getEntry("tx");
-  static double skew;
+  public static double x;
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -70,8 +70,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Current", current0);
     rpm = Math.abs(Shooter.shooterMotor.getSelectedSensorVelocity()*600/2048);
     SmartDashboard.putNumber("RPMs", rpm);
-    skew = tx.getDouble(0.0);
-    SmartDashboard.putNumber("RobotSkew", skew);
+    x = tx.getDouble(0.0);
+    SmartDashboard.putNumber("RobotSkew", x);
   }
 
   /**

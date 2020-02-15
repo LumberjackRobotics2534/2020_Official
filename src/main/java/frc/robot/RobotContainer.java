@@ -53,7 +53,7 @@ public class RobotContainer {
   JoystickButton driverButtonY = new JoystickButton(driverController, Constants.buttonY);
   JoystickButton driverButtonLeft = new JoystickButton(driverController, Constants.buttonLeft);
   JoystickButton driverButtonRight = new JoystickButton(driverController, Constants.buttonRight);
-  JoystickButton manipButtonA = new JoystickButton(manipController, Constants.buttonA);
+  public static JoystickButton manipButtonA = new JoystickButton(manipController, Constants.buttonA);
   JoystickButton manipButtonB = new JoystickButton(manipController, Constants.buttonB);
   JoystickButton manipButtonX = new JoystickButton(manipController, Constants.buttonX);
   JoystickButton manipButtonY = new JoystickButton(manipController, Constants.buttonY);
