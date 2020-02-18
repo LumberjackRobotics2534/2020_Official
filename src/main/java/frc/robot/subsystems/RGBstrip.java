@@ -7,11 +7,10 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
-import frc.robot.commands.LEDCommand;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 
 public class RGBstrip extends SubsystemBase {
@@ -33,7 +32,6 @@ public RGBstrip() {
 
   public void rainbow(){
     for (var i = 0;  i < m_LedBuffer.getLength(); i++){
-
       final var hue = (m_rainbowFirstPixelHue + (i * 180 / m_LedBuffer.getLength())) % 180;
       m_LedBuffer.setHSV (i, hue, 225, 128);
     }

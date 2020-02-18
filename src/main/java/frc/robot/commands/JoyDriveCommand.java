@@ -31,8 +31,7 @@ public class JoyDriveCommand extends CommandBase {
     m_DriveTrain = _dTrain;
     addRequirements(m_DriveTrain);
   }
-
-  // Called when the command is initially scheduled.
+// Called when the command is initially scheduled.
   @Override
   public void initialize() {
   }

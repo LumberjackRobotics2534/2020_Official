@@ -62,7 +62,6 @@ public class RobotContainer {
   NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
   NetworkTableEntry tx;
   double x;
-
   public RobotContainer() {
     // Configure the button bindings
     tx = table.getEntry("tx");
@@ -74,9 +73,9 @@ public class RobotContainer {
         () -> driverController.getY(Hand.kLeft), 
         () -> driverController.getX(Hand.kRight), m_DriveTrain));
         //Sets TurretCommand as Default Command for the Turret Subsystem
-    m_Turret.setDefaultCommand(new TurretCommand(
-        //Passes in the Left Joysick X value
+        m_Turret.setDefaultCommand(new TurretCommand(
         () -> manipController.getX(Hand.kLeft),m_Turret));
+
       if(Robot.rpm == Constants.shooterSpeed){
         new ElevatorCommand(manipButtonX, m_Elevator);
       }
@@ -91,10 +90,17 @@ public class RobotContainer {
     
 
   private void configureButtonBindings() {
-    manipButtonA.whileHeld(new TurretPID(Constants.turretTargetAngle,m_Turret));
-    manipButtonA.whileHeld(new ShootCommand(m_Shooter, manipButtonA));
+    if(m_Turret.getPosition() == Constants.maxRightTurretPosition && m_Turret.turretMotor.get() > 0){
+      m_Turret.turretMotor.set(0);
+    } if(m_Turret.getPosition() == Constants.maxLeftTurretPosition && m_Turret.turretMotor.get() < 0){
+      m_Turret.turretMotor.set(0);
+    } else{
+      manipButtonA.whileHeld(new TurretPID(Constants.turretTargetAngle,m_Turret));
+    }
+    
+    manipButtonX.whileHeld(new ShootCommand(m_Shooter, manipButtonA));
     manipButtonB.whileHeld(new ElevatorCommand(manipButtonB, m_Elevator));
-    manipButtonX.whileHeld(new IntakeCommand(m_Intake));
+    manipButtonB.whileHeld(new IntakeCommand(m_Intake));
   }
 
   public Command getAutonomousCommand() {

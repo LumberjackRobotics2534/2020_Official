@@ -9,21 +9,25 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
   private WPI_TalonSRX intakeMotor = new WPI_TalonSRX(Constants.intakeMotorDrive);
-
+  private DoubleSolenoid intakeSolenoid = new DoubleSolenoid(Constants.intakeDown, Constants.intakeUp);
   public Intake() {
 
   }
 
 public void intake(double spinSpeed) {
   intakeMotor.set(spinSpeed);
+  intakeSolenoid.set(Value.kForward);
   }
 public void stopIntake(){
   intakeMotor.set(0);
+  intakeSolenoid.set(Value.kReverse);
 }
 
   @Override

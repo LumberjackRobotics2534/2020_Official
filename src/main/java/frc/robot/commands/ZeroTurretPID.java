@@ -12,22 +12,21 @@ import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.Constants;
 import frc.robot.subsystems.Turret;
 
-
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class TurretPID extends PIDCommand {
-  public TurretPID(double _targetAngle, Turret _Turret) {
-    super(new PIDController(0.0075, 0, 0),_Turret::getX, _targetAngle,
+public class ZeroTurretPID extends PIDCommand {
+  /**
+   * Creates a new ZeroTurretPID.
+   */
+  public ZeroTurretPID(Turret _Turret) {
+    super(new PIDController(0.0075, 0, 0), _Turret::getPosition, 0,
         output -> {
           _Turret.spinTurret(output);
         },
         _Turret);
-     
-    // Configure additional PID options by calling `getController` here.
-    getController().enableContinuousInput(Constants.turretMinimumInput, Constants.turretMaximumInput);
-    getController().setTolerance(Constants.turretPositionTolerance, Constants.turretVelocityTolerance);
-    //SmartDashboard.putNumber("Skew", x);
+    getController().enableContinuousInput(Constants.zeroTurretMinimumInput, Constants.zeroTurretMaximumInput);
+    getController().setTolerance(Constants.zeroTurretPositionTolerance, Constants.turretVelocityTolerance);
   }
 
   // Returns true when the command should end.

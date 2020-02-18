@@ -53,6 +53,8 @@ public final class Constants {
     //---------------------INTAKE---------------------//
     public static final int intakeMotorDrive = 8;
     public static final double SpinSpeed = 0.8;
+    public static final int intakeUp = 6;
+    public static final int intakeDown = 7;
     //--------------------ELEVATOR--------------------//
     public static final int topElevatorMotor = 9;
     public static final int bottomElevatorMotor = 10;
@@ -65,10 +67,16 @@ public final class Constants {
     public static final double turretMaximumInput = 29.8;
     public static final double turretTargetAngle = 0;
     public static final double turretDeadzone = 0;
+    public static final int turretZeroSensorPort = 0;
+    public static final double zeroTurretMinimumInput = 0;
+    public static final double zeroTurretMaximumInput = 0;
+    public static final double zeroTurretPositionTolerance = 100;
+    public static final double maxRightTurretPosition = 0;
+	public static final double maxLeftTurretPosition = 0;
     //---------------------SHOOTER--------------------//
     public static final int shooterMotor = 5;
-    public static final int upHood = 0;
-    public static final int downHood = 1;
+    public static final int upHood = 2;
+    public static final int downHood = 3;
     public static final int kPIDLoopIdx = 0;
     public static final int kTimeoutMs = 30;
     public final static Gains kGains_Velocit = new Gains( 0.24, 0.001, 20, /*was 1023*/950.0/7200.0,  300,  1.00);
@@ -79,10 +87,19 @@ public final class Constants {
     public static final double completedRotationNumber = 0;
 	public static final double colorWheelMotorSpeed = 0;
     //----------------------HANG----------------------//
-	//-------------------PNEUMATICS-------------------//
+    public static final int leftClimbMotor = 11;
+    public static final int rightClimbMotor = 12;
+    public static final int endGameUp = 4;
+    public static final int endGameDown = 5;
+    //-------------------PNEUMATICS-------------------//
+    public static final int pressureSensor = 0;
     public static final int pcm = 19;
     //----------------------LEDS----------------------//
 	public static final int ledPort = 9;
+	
+
+
+	
 	
 
 	

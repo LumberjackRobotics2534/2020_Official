@@ -41,8 +41,8 @@ public class DriveTrain extends SubsystemBase {
     rightBack.setNeutralMode(NeutralMode.Brake);
     leftFront.setNeutralMode(NeutralMode.Brake);
     leftBack.setNeutralMode(NeutralMode.Brake);
-    rightFront.setInverted(false);
-    rightBack.setInverted(false);
+    rightFront.setInverted(true);
+    rightBack.setInverted(true);
     leftFront.setInverted(true);
     leftBack.setInverted(true);
     //Reset encoders before finishing creation of odometry

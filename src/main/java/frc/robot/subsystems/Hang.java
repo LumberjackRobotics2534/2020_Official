@@ -7,16 +7,37 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
+
 
 public class Hang extends SubsystemBase {
-  /**
-   * Creates a new Hang.
-   */
+  WPI_TalonSRX leftClimbMotor = new WPI_TalonSRX(Constants.leftClimbMotor);
+  WPI_TalonSRX rightClimbMotor = new WPI_TalonSRX(Constants.rightClimbMotor);
+  DoubleSolenoid climbSolenoid = new DoubleSolenoid(Constants.endGameUp,Constants.endGameDown);
   public Hang() {
+    leftClimbMotor.configFactoryDefault();
+    
+    leftClimbMotor.setNeutralMode(NeutralMode.Brake);
 
+    leftClimbMotor.setInverted(false);
+    
+    rightClimbMotor.configFactoryDefault();
+  
+    rightClimbMotor.setNeutralMode(NeutralMode.Brake);
+
+    rightClimbMotor.setInverted(true);
   }
-
+  public void EndGame(double _speed){
+    climbSolenoid.set(Value.kForward);
+    leftClimbMotor.set(_speed);
+    rightClimbMotor.set(_speed);
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
