@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ElevatorCommand;
+import frc.robot.commands.HangCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.JoyDriveCommand;
 import frc.robot.commands.LEDCommand;
@@ -31,6 +32,7 @@ import frc.robot.commands.TurretPID;
 import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Hang;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.RGBstrip;
 import frc.robot.subsystems.Shooter;
@@ -47,6 +49,7 @@ public class RobotContainer {
   public static final Intake m_Intake = new Intake();
   public static final Elevator m_Elevator = new Elevator();
   public static final RGBstrip m_LEDStrip = new RGBstrip();
+  public static final Hang m_Hang = new Hang();
   JoystickButton driverButtonA = new JoystickButton(driverController, Constants.buttonA);
   JoystickButton driverButtonB = new JoystickButton(driverController, Constants.buttonB);
   JoystickButton driverButtonX = new JoystickButton(driverController, Constants.buttonX);
@@ -57,6 +60,7 @@ public class RobotContainer {
   JoystickButton manipButtonB = new JoystickButton(manipController, Constants.buttonB);
   JoystickButton manipButtonX = new JoystickButton(manipController, Constants.buttonX);
   JoystickButton manipButtonY = new JoystickButton(manipController, Constants.buttonY);
+  JoystickButton manipButtonLB = new JoystickButton(manipController, Constants.leftBumper);
   JoystickButton manipButtonLeft = new JoystickButton(manipController, Constants.buttonLeft);
   JoystickButton manipButtonRight = new JoystickButton(manipController, Constants.buttonRight);
   NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
@@ -80,9 +84,8 @@ public class RobotContainer {
         new ElevatorCommand(manipButtonX, m_Elevator);
       }
       if(Elevator.ballNumber != 5){
-        new IntakeCommand(m_Intake);
+        //new IntakeCommand(m_Intake);
       } else{
-        m_Intake.stopIntake();
       }
         
     m_LEDStrip.setDefaultCommand(new LEDCommand(m_LEDStrip));
@@ -98,9 +101,10 @@ public class RobotContainer {
       manipButtonA.whileHeld(new TurretPID(Constants.turretTargetAngle,m_Turret));
     }
     
-    manipButtonX.whileHeld(new ShootCommand(m_Shooter, manipButtonA));
+    manipButtonX.whileHeld(new ShootCommand(m_Shooter, manipButtonX, manipButtonLB));
     manipButtonB.whileHeld(new ElevatorCommand(manipButtonB, m_Elevator));
-    manipButtonB.whileHeld(new IntakeCommand(m_Intake));
+    manipButtonY.whileHeld(new IntakeCommand(m_Intake));
+    driverButtonA.whenHeld(new HangCommand(m_Hang));
   }
 
   public Command getAutonomousCommand() {

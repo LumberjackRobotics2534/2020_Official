@@ -18,7 +18,7 @@ public class RotationControl extends CommandBase {
   double m_colorWheelMotorRotations;
   int m_colorWheelMotorPosition;
 
-  public RotationControl(int colorWheelMotorPosition,double colorWheelMotorRotations,ColorWheel colorWheel) {
+  public RotationControl(int colorWheelMotorPosition, double colorWheelMotorRotations, ColorWheel colorWheel) {
     //Save inputs so we can use them later and add requirements
     m_colorWheelMotorRotations = colorWheelMotorRotations;
     m_colorWheel = colorWheel;

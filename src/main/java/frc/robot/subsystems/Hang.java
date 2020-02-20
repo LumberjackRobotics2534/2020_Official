@@ -19,7 +19,7 @@ import frc.robot.Constants;
 public class Hang extends SubsystemBase {
   WPI_TalonSRX leftClimbMotor = new WPI_TalonSRX(Constants.leftClimbMotor);
   WPI_TalonSRX rightClimbMotor = new WPI_TalonSRX(Constants.rightClimbMotor);
-  DoubleSolenoid climbSolenoid = new DoubleSolenoid(Constants.endGameUp,Constants.endGameDown);
+  DoubleSolenoid climbSolenoid = new DoubleSolenoid(Constants.pcm, Constants.endGameUp, Constants.endGameDown);
   public Hang() {
     leftClimbMotor.configFactoryDefault();
     
@@ -33,11 +33,14 @@ public class Hang extends SubsystemBase {
 
     rightClimbMotor.setInverted(true);
   }
-  public void EndGame(double _speed){
-    climbSolenoid.set(Value.kForward);
+  public void Winch(double _speed){
     leftClimbMotor.set(_speed);
     rightClimbMotor.set(_speed);
   }
+  public void Raise(){
+    //climbSolenoid.set(Value.kForward);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

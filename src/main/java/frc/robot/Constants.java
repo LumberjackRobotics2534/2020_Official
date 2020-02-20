@@ -29,7 +29,6 @@ public final class Constants {
     public static final double kMaxAccelerationMetersPerSecondSquared = 3; //was 3
     public static final double kTicksToMetersConversion = ((1/14703.6897/*Rot per Tick*/)*(6*Math.PI/*In per Rot*/)*(1/39.3701/*M per In*/));
     public static final double kHundredMSToSecondsConversion = 10;
-
     public static final double kRamseteB = 2;
     public static final double kRamseteZeta = 0.7;
     public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackwidthMeters);
@@ -46,6 +45,7 @@ public final class Constants {
     public static final int buttonB = 2;
     public static final int buttonX = 3;
     public static final int buttonY = 4;
+    public static final int leftBumper = 5;
     public static final int buttonLeft = 5;
     public static final int buttonRight = 6;
     //Deadzone
@@ -53,8 +53,8 @@ public final class Constants {
     //---------------------INTAKE---------------------//
     public static final int intakeMotorDrive = 8;
     public static final double SpinSpeed = 0.8;
-    public static final int intakeUp = 6;
-    public static final int intakeDown = 7;
+    public static final int intakeUp = 7;
+    public static final int intakeDown = 6;
     //--------------------ELEVATOR--------------------//
     public static final int topElevatorMotor = 9;
     public static final int bottomElevatorMotor = 10;
@@ -83,9 +83,9 @@ public final class Constants {
     public static final int shooterSpeed = -4500;
     //-------------------COLOR WHEEL------------------//
     public static final int colorWheelMotor = 6;
-    public static final int quadrativeEncoderRotation = 36864;
-    public static final double completedRotationNumber = 0;
-	public static final double colorWheelMotorSpeed = 0;
+    public static final double quadrativeEncoderRotation = 0;
+    public static final double completedRotationNumber = 4;
+	public static final double colorWheelMotorSpeed = 1.0;
     //----------------------HANG----------------------//
     public static final int leftClimbMotor = 11;
     public static final int rightClimbMotor = 12;

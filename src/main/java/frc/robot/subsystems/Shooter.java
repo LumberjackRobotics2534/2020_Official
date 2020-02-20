@@ -20,7 +20,7 @@ import frc.robot.Constants;
 
 public class Shooter extends SubsystemBase {
   public static WPI_TalonFX shooterMotor = new WPI_TalonFX(Constants.shooterMotor);
-  public static DoubleSolenoid hoodSolenoid = new DoubleSolenoid(Constants.pcm,Constants.upHood, Constants.downHood);
+  public static DoubleSolenoid hoodSolenoid = new DoubleSolenoid(Constants.pcm, Constants.downHood, Constants.upHood);
   double rpm;
   public Shooter() {
     shooterMotor.configFactoryDefault();
@@ -41,7 +41,7 @@ public class Shooter extends SubsystemBase {
   }
   public void shoot(JoystickButton button) {
     if (button.get()) {
-			double targetVelocity_UnitsPer100ms =  -4500 * 2048 / 600;//was -3387.5
+			double targetVelocity_UnitsPer100ms =  -5500 * 2048 / 600;//was -3387.5
       shooterMotor.set(ControlMode.Velocity, targetVelocity_UnitsPer100ms);   
     } else{
       shooterMotor.set(0);

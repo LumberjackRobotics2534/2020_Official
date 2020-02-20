@@ -15,19 +15,23 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
-  private WPI_TalonSRX intakeMotor = new WPI_TalonSRX(Constants.intakeMotorDrive);
-  private DoubleSolenoid intakeSolenoid = new DoubleSolenoid(Constants.intakeDown, Constants.intakeUp);
+  private static WPI_TalonSRX intakeMotor = new WPI_TalonSRX(Constants.intakeMotorDrive);
+  private static DoubleSolenoid intakeSolenoid = new DoubleSolenoid(Constants.pcm, Constants.intakeDown, Constants.intakeUp);
+ 
+
   public Intake() {
+    intakeMotor.setInverted(true);
 
   }
 
-public void intake(double spinSpeed) {
-  intakeMotor.set(spinSpeed);
-  intakeSolenoid.set(Value.kForward);
+  public void intake(double spinSpeed) {
+    intakeMotor.set(spinSpeed);
+    intakeSolenoid.set(Value.kForward);
   }
-public void stopIntake(){
-  intakeMotor.set(0);
-  intakeSolenoid.set(Value.kReverse);
+
+  public void stopIntake() {
+    intakeMotor.set(0);
+    intakeSolenoid.set(Value.kReverse);
 }
 
   @Override

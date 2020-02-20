@@ -7,14 +7,17 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -118,33 +121,17 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
   }
-
   @Override
   public void testInit() {
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
-    leftBack.setSelectedSensorPosition(0);
-    rightBack.setSelectedSensorPosition(0);
-    navx.zeroYaw();
-    rightFront.setInverted(true);
-    rightBack.setInverted(true);
-    leftFront.setInverted(true);
-    leftBack.setInverted(true);
+
   }
 
-  public AHRS navx = new AHRS(SerialPort.Port.kMXP);
-  private WPI_TalonSRX rightFront = new WPI_TalonSRX(Constants.rightFrontDrive);
-  private WPI_TalonSRX rightBack = new WPI_TalonSRX(Constants.rightBackDrive);
-  private WPI_TalonSRX leftFront = new WPI_TalonSRX(Constants.leftFrontDrive);
-  private WPI_TalonSRX leftBack = new WPI_TalonSRX(Constants.leftBackDrive);
-  
   /**
    * This function is called periodically during test mode.
    */
   @Override
   public void testPeriodic() {
-    System.out.println(leftBack.getSelectedSensorPosition() + "/t right");
-    System.out.println(rightBack.getSelectedSensorPosition() + "/t left");
-
   }
 }

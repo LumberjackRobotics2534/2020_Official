@@ -11,7 +11,8 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Hang;
 
 public class HangCommand extends CommandBase {
-  Hang m_Hang = new Hang();
+  Hang m_Hang;
+
   public HangCommand(Hang _Hang) {
     m_Hang = _Hang;
   }
@@ -24,7 +25,8 @@ public class HangCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_Hang.EndGame(1.0);
+    m_Hang.Raise();
+    m_Hang.Winch(0.0);
   }
 
   // Called once the command ends or is interrupted.
