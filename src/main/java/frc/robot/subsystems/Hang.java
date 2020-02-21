@@ -38,7 +38,7 @@ public class Hang extends SubsystemBase {
     rightClimbMotor.set(_speed);
   }
   public void Raise(){
-    //climbSolenoid.set(Value.kForward);
+    climbSolenoid.set(Value.kForward);
   }
 
   @Override
