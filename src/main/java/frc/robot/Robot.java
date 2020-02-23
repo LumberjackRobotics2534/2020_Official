@@ -13,14 +13,10 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Elevator;
-import frc.robot.subsystems.Shooter;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -32,12 +28,8 @@ public class Robot extends TimedRobot {
   public static DriveTrain m_DriveTrain;
   private RobotContainer m_robotContainer; //DO NOT DELETE
   private Command m_autonomousCommand;
-  double current;
-  double current0;
-  PowerDistributionPanel pdp = new PowerDistributionPanel(20);
-  static int rpm;
   NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-  NetworkTableEntry tx = table.getEntry("tx");
+  NetworkTableEntry tx;
   public static double x;
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -65,6 +57,8 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+    tx = table.getEntry("tx");
+    x = tx.getDouble(0.0);
   }
 
   /**

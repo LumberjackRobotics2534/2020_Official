@@ -45,7 +45,6 @@ public final class Constants {
     public static final int buttonB = 2;
     public static final int buttonX = 3;
     public static final int buttonY = 4;
-    public static final int leftBumper = 5;
     public static final int buttonLeft = 5;
     public static final int buttonRight = 6;
     //Deadzone
@@ -61,11 +60,11 @@ public final class Constants {
     public static final double LiftSpeed = 0.6;
     public static final int irSensorTop = 2;
     public static final int irSensorBottom = 1;
-    public static final double minTopPresenceVoltage = 2.5;
+    public static final double minTopPresenceVoltage = 1.5;
     public static final double minBottomPresenceVoltage = 1.25;
     public static final double maxBottomPresenceVoltage = 1.85;
-    public static final double topLiftSpeed = 0.6;
-    public static final double bottomLiftSpeed = 0.5;
+    public static final double topLiftSpeed = 0.4;
+    public static final double bottomLiftSpeed = 0.3;
     //---------------------TURRET---------------------//
     public static final int turretMotor = 7;
     public static final double turretPositionTolerance = 1;
@@ -86,13 +85,14 @@ public final class Constants {
     public static final int downHood = 3;
     public static final int kPIDLoopIdx = 0;
     public static final int kTimeoutMs = 30;
-    public final static Gains kGains_Velocit = new Gains( 0.24, 0.001, 20, /*was 1023*/950.0/7200.0,  300,  1.00);
+    public static final double acceptableRpmError = 0.05; //5%
+    public final static Gains kGains_Velocit = new Gains( 1.6, 0.004, 20, 1023/7200,  300,  1.00);
     public static final int shooterSpeed = -4500;
     //-------------------COLOR WHEEL------------------//
     public static final int colorWheelMotor = 6;
-    public static final double quadrativeEncoderRotation = 1024*(1/8/*Reduction from Motor to WOF*/);
-    public static final double completedRotationNumber = 4;
-	public static final double colorWheelMotorSpeed = 1.0;
+    public static final double quadrativeEncoderRotation = 1024*(36/*Reduction from Motor to WOF*/);
+    public static final double completedRotationNumber = 26;
+	public static final double colorWheelMotorSpeed = 0.5;
     //----------------------HANG----------------------//
     public static final int leftClimbMotor = 11;
     public static final int rightClimbMotor = 12;

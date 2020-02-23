@@ -8,18 +8,13 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.subsystems.Elevator;
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Hang;
 
-public class IndexCommand extends CommandBase {
-  Elevator m_Elevator;
-  JoystickButton button;
-  
-  public IndexCommand(JoystickButton _button, Elevator _Elevator) {
-    button = _button;
-    m_Elevator = _Elevator;
-    addRequirements(m_Elevator);
+public class WinchCommand extends CommandBase {
+  Hang m_Hang;
+  public WinchCommand(Hang _Hang) {
+    m_Hang = _Hang;
+    addRequirements(m_Hang);
   }
 
   // Called when the command is initially scheduled.
@@ -30,20 +25,13 @@ public class IndexCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (Shooter.shooterReady){
-      m_Elevator.lift();
-    } else if (m_Elevator.topBallPresence()){
-      m_Elevator.stopLifting();
-    } else if(m_Elevator.bottomBallPresence()) {
-      m_Elevator.lift();
-    } else {
-      m_Elevator.stopLifting();
-    }
+    m_Hang.Winch(0.5);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_Hang.stopWinch();
   }
 
   // Returns true when the command should end.

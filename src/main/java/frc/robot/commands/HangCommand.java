@@ -26,12 +26,12 @@ public class HangCommand extends CommandBase {
   @Override
   public void execute() {
     m_Hang.Raise();
-    m_Hang.Winch(0.0);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_Hang.Lower();
   }
 
   // Returns true when the command should end.

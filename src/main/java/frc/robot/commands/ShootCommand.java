@@ -9,20 +9,14 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.Constants;
-import frc.robot.Robot;
 import frc.robot.subsystems.Shooter;
 
 public class ShootCommand extends CommandBase {
   Shooter m_shooter;
-  JoystickButton button;
-  JoystickButton button2;
-  public boolean shooterReady = false;
-
-  public ShootCommand(Shooter _shooter, JoystickButton _button, JoystickButton _button2) {
+  JoystickButton m_Button;
+  public ShootCommand(Shooter _shooter, JoystickButton _button) {
     m_shooter = _shooter;
-    button = _button;
-    button2 = _button2;
+    m_Button = _button;
     addRequirements(m_shooter); 
   }
 
@@ -34,9 +28,7 @@ public class ShootCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_shooter.shoot(button);
-    m_shooter.hoodUp(button2.get());
-
+    m_shooter.shoot(m_Button);
   }
 
   // Called once the command ends or is interrupted.
@@ -48,10 +40,6 @@ public class ShootCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (button.get() == false){
-      return true;
-    } else {
-      return false;
-    }
+    return false;
   }
 }

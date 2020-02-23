@@ -22,7 +22,6 @@ public class Elevator extends SubsystemBase {
   private AnalogInput irBottom = new AnalogInput(Constants.irSensorBottom);
   private WPI_TalonSRX topElevatorMotor = new WPI_TalonSRX(Constants.topElevatorMotor);
   private WPI_TalonFX bottomElevatorMotor = new WPI_TalonFX(Constants.bottomElevatorMotor);
-
   public Elevator() {
     topElevatorMotor.configFactoryDefault();
 
@@ -53,15 +52,16 @@ public class Elevator extends SubsystemBase {
     } else {
       topPresence = false;
     }
+    System.out.println(irTop.getAverageVoltage());
     return(topPresence);
   }
   public boolean bottomBallPresence() {
-    if(irBottom.getAverageVoltage() > Constants.minBottomPresenceVoltage && irBottom.getAverageVoltage() < Constants.minBottomPresenceVoltage){
+    if(irBottom.getAverageVoltage() > Constants.minBottomPresenceVoltage 
+    && irBottom.getAverageVoltage() < Constants.maxBottomPresenceVoltage){
       bottomPresence = true;
     }else{
       bottomPresence = false;
     }
-    System.out.println(irBottom.getAverageVoltage());
     return(bottomPresence);
   }
 
