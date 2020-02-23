@@ -2,10 +2,10 @@ package frc.robot;
 
 import java.util.List;
 
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.RamseteController;
@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.geometry.Translation2d;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
@@ -22,11 +21,12 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.HangCommand;
-import frc.robot.commands.IndexCommand;
 import frc.robot.commands.HoodCommand;
+import frc.robot.commands.IndexCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.JoyDriveCommand;
 import frc.robot.commands.LEDCommand;
+import frc.robot.commands.RotationControl;
 import frc.robot.commands.ShootCommand;
 import frc.robot.commands.TurretCommand;
 import frc.robot.commands.TurretPID;
@@ -78,10 +78,9 @@ public class RobotContainer {
     //Sets TurretCommand as Default Command for the Turret Subsystem
     m_Turret.setDefaultCommand(new TurretCommand(
         () -> manipController.getX(Hand.kLeft),m_Turret));
-
-    
-    m_Elevator.setDefaultCommand(new IndexCommand(manipButtonX, m_Elevator));
+        
     m_LEDStrip.setDefaultCommand(new LEDCommand(m_LEDStrip));
+    m_Elevator.setDefaultCommand(new IndexCommand(m_Elevator));
   }
     
 
@@ -90,6 +89,7 @@ public class RobotContainer {
     manipButtonX.whileHeld(new ShootCommand(m_Shooter, manipButtonX));
     manipButtonY.whileHeld(new IntakeCommand(m_Intake));
     manipButtonLeft.whileHeld(new HoodCommand(m_Shooter));
+    manipButtonRight.whenPressed(new RotationControl(m_ColorWheel));
     driverButtonA.whenHeld(new HangCommand(m_Hang));
     driverButtonB.whileHeld(new WinchCommand(m_Hang));
   }
@@ -110,6 +110,14 @@ public class RobotContainer {
       config.addConstraint(autoVoltageConstraint);
     //Create a Trajectory to follow. UNITS ARE IN METERS from starting position.
 
+/*  Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
+      List.of(
+        new Pose2d(0, 0, new Rotation2d(0)), //Start Point
+        //Interior Waypoints
+        new Pose2d(3, 0, new Rotation2d(0))), //End Point
+      config); //Pass Config */
+
+    
     Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
       //Start at the origin facing the positive X direction
       new Pose2d(0, 0, new Rotation2d(0)),

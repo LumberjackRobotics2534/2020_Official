@@ -7,36 +7,62 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.subsystems.Elevator;
-import frc.robot.subsystems.Shooter;
 
-public class IndexCommand extends CommandBase {
-  private Elevator m_Elevator;
 
-  public IndexCommand(Elevator _Elevator) {
-    m_Elevator = _Elevator;
-    addRequirements(m_Elevator);
+public class PositionControl extends CommandBase {
+
+  String gameData;
+
+  /**
+   * Creates a new PositionControl.
+   */
+  public PositionControl() {
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+
+    //Gets the color from the FMS thing and assigns that color to a variable
+
+    gameData = DriverStation.getInstance().getGameSpecificMessage(); 
+
+    if(gameData.length() > 0) {
+
+      switch (gameData.charAt(0)) {
+
+        case 'B' :
+        //Blue case code
+        break;
+
+        case 'G' :
+        //green case code
+        break;
+
+        case 'Y' :
+        //yellow case code
+        break;
+
+        case 'R' :
+        //red case code
+        break;
+
+
+
+
+
+      }
+
+    }
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (Shooter.shooterReady){
-      m_Elevator.lift();
-    } else if (m_Elevator.topBallPresence()){
-      m_Elevator.stopLifting();
-    } else if(m_Elevator.bottomBallPresence()) {
-      m_Elevator.lift();
-    } else {
-      m_Elevator.stopLifting();
-    }
   }
 
   // Called once the command ends or is interrupted.

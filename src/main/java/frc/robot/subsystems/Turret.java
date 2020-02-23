@@ -74,7 +74,8 @@ public double getX() {
 public double getDistance(){
   ty = table.getEntry("ty");
   y = ty.getDouble(0.0);
-  distance = distanceSmoother.addSample((54/Math.tan(Math.toRadians(22 + y))));
+  distanceSmoother.addSample((54/Math.tan(Math.toRadians(22 + y))));
+  distance = distanceSmoother.getAverage(); 
   SmartDashboard.putNumber("Distance", distance);
   return distance;
 }

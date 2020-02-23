@@ -24,8 +24,10 @@ public class Shooter extends SubsystemBase {
   public static DoubleSolenoid hoodSolenoid = new DoubleSolenoid(Constants.pcm, Constants.upHood, Constants.downHood);
   double targetRpm;
   double actualRpm;
-  public static boolean shooterReady = false;
+  public static boolean shooterReady;
   public Shooter() {
+    shooterReady = false;
+
     SmartDashboard.putNumber("RPM", 0);
     shooterMotor.configFactoryDefault();
     shooterMotor.setNeutralMode(NeutralMode.Coast);
@@ -46,8 +48,9 @@ public class Shooter extends SubsystemBase {
 
   public void shoot(JoystickButton button) {
     if(button.get()){
-		double targetVelocity_UnitsPer100ms =  -targetRpm * 2048 / 600;//was -3387.5
-    shooterMotor.set(ControlMode.Velocity, targetVelocity_UnitsPer100ms);
+      targetRpm = SmartDashboard.getNumber("RPM", 0.0);
+	  	double targetVelocity_UnitsPer100ms =  -targetRpm * 2048 / 600;//was -3387.5
+      shooterMotor.set(ControlMode.Velocity, targetVelocity_UnitsPer100ms);
     }
   }
   public void shooterOff(){
@@ -55,11 +58,11 @@ public class Shooter extends SubsystemBase {
   }
   
   public void hoodUp(){
-    hoodSolenoid.set(Value.kForward);
+    hoodSolenoid.set(Value.kReverse);
   }
   
   public void hoodDown(){
-    hoodSolenoid.set(Value.kReverse);
+    hoodSolenoid.set(Value.kForward);
   }
 
   public double getSpeed(){
@@ -71,7 +74,7 @@ public class Shooter extends SubsystemBase {
     SmartDashboard.putNumber("Actual RPM", actualRpm);
     if (actualRpm > targetRpm - targetRpm*Constants.acceptableRpmError 
         && actualRpm < targetRpm + targetRpm*Constants.acceptableRpmError){
-
+          shooterReady = true;
     } else {
       shooterReady = false;
     }
