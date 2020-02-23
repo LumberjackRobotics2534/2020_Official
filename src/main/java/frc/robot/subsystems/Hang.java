@@ -17,29 +17,20 @@ import frc.robot.Constants;
 
 
 public class Hang extends SubsystemBase {
-  WPI_TalonSRX leftClimbMotor = new WPI_TalonSRX(Constants.leftClimbMotor);
-  WPI_TalonSRX rightClimbMotor = new WPI_TalonSRX(Constants.rightClimbMotor);
+  WPI_TalonSRX climbMotor = new WPI_TalonSRX(Constants.climbMotor);
   DoubleSolenoid climbSolenoid = new DoubleSolenoid(Constants.pcm, Constants.endGameDown, Constants.endGameUp);
   public Hang() {
-    leftClimbMotor.configFactoryDefault();
-    
-    leftClimbMotor.setNeutralMode(NeutralMode.Brake);
-
-    leftClimbMotor.setInverted(true);
-    
-    rightClimbMotor.configFactoryDefault();
+    climbMotor.configFactoryDefault();
   
-    rightClimbMotor.setNeutralMode(NeutralMode.Brake);
+    climbMotor.setNeutralMode(NeutralMode.Brake);
 
-    rightClimbMotor.setInverted(false);
+    climbMotor.setInverted(false);
   }
-  public void Winch(double _speed){
-    leftClimbMotor.set(_speed);
-    rightClimbMotor.set(_speed);
+  public void Winch(){
+    climbMotor.set(0.4);
   }
-  public void stopWinch(){
-    leftClimbMotor.set(0);
-    rightClimbMotor.set(0);
+  public void StopWinch(){
+    climbMotor.set(0);
   }
   public void Raise(){
     climbSolenoid.set(Value.kForward);

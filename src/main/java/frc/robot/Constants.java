@@ -95,8 +95,7 @@ public final class Constants {
     public static final double completedRotationNumber = 26;
 	public static final double colorWheelMotorSpeed = 0.5;
     //----------------------HANG----------------------//
-    public static final int leftClimbMotor = 11;
-    public static final int rightClimbMotor = 12;
+    public static final int climbMotor = 11;
     public static final int endGameUp = 4;
     public static final int endGameDown = 5;
     //-------------------PNEUMATICS-------------------//
