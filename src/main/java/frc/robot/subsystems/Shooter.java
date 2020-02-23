@@ -46,14 +46,10 @@ public class Shooter extends SubsystemBase {
 
   public void shoot(JoystickButton button) {
     if(button.get()){
-    targetRpm = SmartDashboard.getNumber("TARGET RPM", 0.0);
 		double targetVelocity_UnitsPer100ms =  -targetRpm * 2048 / 600;//was -3387.5
     shooterMotor.set(ControlMode.Velocity, targetVelocity_UnitsPer100ms);
-    } else{
-      shooterMotor.set(0.0);
     }
   }
-
   public void shooterOff(){
     shooterMotor.set(0);
   }
