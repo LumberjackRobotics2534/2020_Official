@@ -59,6 +59,13 @@ public final class Constants {
     public static final int topElevatorMotor = 9;
     public static final int bottomElevatorMotor = 10;
     public static final double LiftSpeed = 0.6;
+    public static final int irSensorTop = 2;
+    public static final int irSensorBottom = 1;
+    public static final double minTopPresenceVoltage = 2.5;
+    public static final double minBottomPresenceVoltage = 1.25;
+    public static final double maxBottomPresenceVoltage = 1.85;
+    public static final double topLiftSpeed = 0.6;
+    public static final double bottomLiftSpeed = 0.5;
     //---------------------TURRET---------------------//
     public static final int turretMotor = 7;
     public static final double turretPositionTolerance = 1;

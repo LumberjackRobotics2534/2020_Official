@@ -21,8 +21,8 @@ import edu.wpi.first.wpilibj.trajectory.constraint.DifferentialDriveVoltageConst
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.ElevatorCommand;
 import frc.robot.commands.HangCommand;
+import frc.robot.commands.IndexCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.JoyDriveCommand;
 import frc.robot.commands.LEDCommand;
@@ -80,14 +80,8 @@ public class RobotContainer {
         m_Turret.setDefaultCommand(new TurretCommand(
         () -> manipController.getX(Hand.kLeft),m_Turret));
 
-      if(Robot.rpm == Constants.shooterSpeed){
-        new ElevatorCommand(manipButtonX, m_Elevator);
-      }
-      if(Elevator.ballNumber != 5){
-        //new IntakeCommand(m_Intake);
-      } else{
-      }
-        
+    
+    m_Elevator.setDefaultCommand(new IndexCommand(manipButtonX, m_Elevator));
     m_LEDStrip.setDefaultCommand(new LEDCommand(m_LEDStrip));
   }
     
@@ -102,8 +96,7 @@ public class RobotContainer {
     }
     
     manipButtonX.whileHeld(new ShootCommand(m_Shooter, manipButtonX, manipButtonLB));
-    manipButtonB.whileHeld(new ElevatorCommand(manipButtonB, m_Elevator));
-    manipButtonY.whileHeld(new IntakeCommand(m_Intake));
+    manipButtonB.whileHeld(new IndexCommand(manipButtonB, m_Elevator));
     driverButtonA.whenHeld(new HangCommand(m_Hang));
   }
 

@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Shooter;
 
 /**
@@ -64,13 +65,6 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-    current = pdp.getTotalCurrent();
-    current0 = pdp.getCurrent(0);
-    SmartDashboard.putNumber("Current", current0);
-    rpm = Math.abs(Shooter.shooterMotor.getSelectedSensorVelocity()*600/2048);
-    SmartDashboard.putNumber("RPMs", rpm);
-    x = tx.getDouble(0.0);
-    SmartDashboard.putNumber("RobotSkew", x);
   }
 
   /**

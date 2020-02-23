@@ -9,12 +9,15 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.subsystems.Shooter;
 
 public class ShootCommand extends CommandBase {
   Shooter m_shooter;
   JoystickButton button;
   JoystickButton button2;
+  public boolean shooterReady = false;
 
   public ShootCommand(Shooter _shooter, JoystickButton _button, JoystickButton _button2) {
     m_shooter = _shooter;
@@ -33,6 +36,7 @@ public class ShootCommand extends CommandBase {
   public void execute() {
     m_shooter.shoot(button);
     m_shooter.hoodUp(button2.get());
+
   }
 
   // Called once the command ends or is interrupted.

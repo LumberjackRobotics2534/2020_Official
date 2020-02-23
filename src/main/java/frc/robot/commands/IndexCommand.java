@@ -9,14 +9,13 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.Elevator;
 
-public class ElevatorCommand extends CommandBase {
+public class IndexCommand extends CommandBase {
   Elevator m_Elevator;
   JoystickButton button;
   
-  public ElevatorCommand(JoystickButton _button, Elevator _Elevator) {
+  public IndexCommand(JoystickButton _button, Elevator _Elevator) {
     button = _button;
     m_Elevator = _Elevator;
     addRequirements(m_Elevator);
@@ -30,13 +29,19 @@ public class ElevatorCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.m_Elevator.liftBalls(.6, .5);
+    if (button.get()){
+      m_Elevator.lift();
+    } else if (m_Elevator.topBallPresence()){
+      m_Elevator.stopLifting();
+    } else if(m_Elevator.bottomBallPresence()) {
+      m_Elevator.lift();
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_Elevator.stopElevator();
+    m_Elevator.stopLifting();
   }
 
   // Returns true when the command should end.
