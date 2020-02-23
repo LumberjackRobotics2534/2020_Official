@@ -10,6 +10,8 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -17,7 +19,7 @@ public class Elevator extends SubsystemBase {
   public static int ballNumber;
   private WPI_TalonSRX topElevatorMotor = new WPI_TalonSRX(Constants.topElevatorMotor);
   private WPI_TalonFX bottomElevatorMotor = new WPI_TalonFX(Constants.bottomElevatorMotor);
-  
+  AnalogInput intakeIR = new AnalogInput(0);
   public Elevator() {
     topElevatorMotor.configFactoryDefault();
     

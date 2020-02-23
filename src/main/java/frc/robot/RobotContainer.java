@@ -23,12 +23,14 @@ import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ElevatorCommand;
 import frc.robot.commands.HangCommand;
+import frc.robot.commands.HoodCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.JoyDriveCommand;
 import frc.robot.commands.LEDCommand;
 import frc.robot.commands.ShootCommand;
 import frc.robot.commands.TurretCommand;
 import frc.robot.commands.TurretPID;
+import frc.robot.commands.WinchCommand;
 import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
@@ -60,7 +62,6 @@ public class RobotContainer {
   JoystickButton manipButtonB = new JoystickButton(manipController, Constants.buttonB);
   JoystickButton manipButtonX = new JoystickButton(manipController, Constants.buttonX);
   JoystickButton manipButtonY = new JoystickButton(manipController, Constants.buttonY);
-  JoystickButton manipButtonLB = new JoystickButton(manipController, Constants.leftBumper);
   JoystickButton manipButtonLeft = new JoystickButton(manipController, Constants.buttonLeft);
   JoystickButton manipButtonRight = new JoystickButton(manipController, Constants.buttonRight);
   NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
@@ -68,43 +69,28 @@ public class RobotContainer {
   double x;
   public RobotContainer() {
     // Configure the button bindings
-    tx = table.getEntry("tx");
-    x = tx.getDouble(0.0);
-    SmartDashboard.putNumber("ContrainerSkew", x);
+
     configureButtonBindings();
     m_DriveTrain.setDefaultCommand(new JoyDriveCommand(
         () -> driverController.getX(Hand.kLeft),
         () -> driverController.getY(Hand.kLeft), 
         () -> driverController.getX(Hand.kRight), m_DriveTrain));
-        //Sets TurretCommand as Default Command for the Turret Subsystem
-        m_Turret.setDefaultCommand(new TurretCommand(
+    //Sets TurretCommand as Default Command for the Turret Subsystem
+    m_Turret.setDefaultCommand(new TurretCommand(
         () -> manipController.getX(Hand.kLeft),m_Turret));
-
-      if(Robot.rpm == Constants.shooterSpeed){
-        new ElevatorCommand(manipButtonX, m_Elevator);
-      }
-      if(Elevator.ballNumber != 5){
-        //new IntakeCommand(m_Intake);
-      } else{
-      }
         
     m_LEDStrip.setDefaultCommand(new LEDCommand(m_LEDStrip));
   }
     
 
   private void configureButtonBindings() {
-    if(m_Turret.getPosition() == Constants.maxRightTurretPosition && m_Turret.turretMotor.get() > 0){
-      m_Turret.turretMotor.set(0);
-    } if(m_Turret.getPosition() == Constants.maxLeftTurretPosition && m_Turret.turretMotor.get() < 0){
-      m_Turret.turretMotor.set(0);
-    } else{
-      manipButtonA.whileHeld(new TurretPID(Constants.turretTargetAngle,m_Turret));
-    }
-    
-    manipButtonX.whileHeld(new ShootCommand(m_Shooter, manipButtonX, manipButtonLB));
+    manipButtonA.whileHeld(new TurretPID(Constants.turretTargetAngle,m_Turret));
     manipButtonB.whileHeld(new ElevatorCommand(manipButtonB, m_Elevator));
+    manipButtonX.whileHeld(new ShootCommand(m_Shooter, manipButtonX));
     manipButtonY.whileHeld(new IntakeCommand(m_Intake));
+    manipButtonLeft.whileHeld(new HoodCommand(m_Shooter));
     driverButtonA.whenHeld(new HangCommand(m_Hang));
+    driverButtonB.whileHeld(new WinchCommand(m_Hang));
   }
 
   public Command getAutonomousCommand() {

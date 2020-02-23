@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.ColorMatch;
@@ -46,6 +47,8 @@ public class ColorWheel extends SubsystemBase {
     m_colorMatcher.addColorMatch(kGreenTarget);
     m_colorMatcher.addColorMatch(kRedTarget);
     m_colorMatcher.addColorMatch(kYellowTarget);
+
+    colorWheelMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
   }
 
   public void spinColorWheel(double _speed) {

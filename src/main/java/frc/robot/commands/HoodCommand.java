@@ -8,13 +8,13 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Hang;
+import frc.robot.subsystems.Shooter;
 
-public class HangCommand extends CommandBase {
-  Hang m_Hang;
-
-  public HangCommand(Hang _Hang) {
-    m_Hang = _Hang;
+public class HoodCommand extends CommandBase {
+  Shooter m_Shooter;
+  public HoodCommand(Shooter _Shooter) {
+    m_Shooter = _Shooter;
+    addRequirements(m_Shooter);
   }
 
   // Called when the command is initially scheduled.
@@ -25,13 +25,13 @@ public class HangCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_Hang.Raise();
+    m_Shooter.hoodUp();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_Hang.Lower();
+    m_Shooter.hoodDown();
   }
 
   // Returns true when the command should end.

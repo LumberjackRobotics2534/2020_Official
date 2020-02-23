@@ -14,8 +14,10 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Other.SampleSmoother;
 
 
 
@@ -25,10 +27,13 @@ public class Turret extends SubsystemBase {
   NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
   NetworkTableEntry tx;
   public double x;
+  NetworkTableEntry ty;
+  double y;
+  double distance;
   DigitalInput turretZeroSensor = new DigitalInput(Constants.turretZeroSensorPort);
   boolean zero;
   double turretPosition;
-  
+  SampleSmoother distanceSmoother = new SampleSmoother(5);
   public Turret() {
     turretMotor.configFactoryDefault();
     
@@ -39,6 +44,10 @@ public class Turret extends SubsystemBase {
 
 public void spinTurret(double _speed){
   turretMotor.set(_speed);
+}
+public void turretOff(){
+  turretMotor.set(0);
+
 }
 public double getPosition(){
   turretPosition = turretMotor.getSelectedSensorPosition();  
@@ -62,8 +71,16 @@ public double getX() {
   x = tx.getDouble(0.0);
   return x;
 }
+public double getDistance(){
+  ty = table.getEntry("ty");
+  y = ty.getDouble(0.0);
+  distance = distanceSmoother.addSample((54/Math.tan(Math.toRadians(22 + y))));
+  SmartDashboard.putNumber("Distance", distance);
+  return distance;
+}
   @Override
   public void periodic() {
+    this.getDistance();
     this.zeroEncoder();
     this.stopTurret();
   }

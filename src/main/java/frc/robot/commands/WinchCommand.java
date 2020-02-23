@@ -10,11 +10,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Hang;
 
-public class HangCommand extends CommandBase {
+public class WinchCommand extends CommandBase {
   Hang m_Hang;
-
-  public HangCommand(Hang _Hang) {
+  public WinchCommand(Hang _Hang) {
     m_Hang = _Hang;
+    addRequirements(m_Hang);
   }
 
   // Called when the command is initially scheduled.
@@ -25,13 +25,13 @@ public class HangCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_Hang.Raise();
+    m_Hang.Winch(0.5);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_Hang.Lower();
+    m_Hang.stopWinch();
   }
 
   // Returns true when the command should end.
