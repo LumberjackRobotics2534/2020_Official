@@ -33,9 +33,9 @@ public class ColorWheel extends SubsystemBase {
   private String colorString;
   private ColorMatchResult match;
   public ColorWheel() {
-    /*------------------------------------------------------------------------*/
-    /* Color Wheel WILL NOT WORK if you do not re-deploy code on robot startup*/
-    /*------------------------------------------------------------------------*/
+    /*-------------------------------------------------------------------------*/
+    /* Color Sensor WILL NOT WORK if you do not re-deploy code on robot startup*/
+    /*-------------------------------------------------------------------------*/
 
     colorWheelMotor.configFactoryDefault();
     

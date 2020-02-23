@@ -7,17 +7,29 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.Constants;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Turret;
 
 public class ShootCommand extends CommandBase {
   Shooter m_shooter;
   JoystickButton m_Button;
+  private double dashRpm;
+  private double equRpm;
+  private double actualRpm;
+  private double distance = 0.0;
+  public static boolean shooterReady;
+
+  
   public ShootCommand(Shooter _shooter, JoystickButton _button) {
     m_shooter = _shooter;
     m_Button = _button;
     addRequirements(m_shooter); 
+    SmartDashboard.putNumber("RPM", 0);
+    shooterReady = false;
   }
 
   // Called when the command is initially scheduled.
@@ -28,7 +40,28 @@ public class ShootCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_shooter.shoot(m_Button);
+    getDashVelocity();
+    getEquationVelocity();
+    if(m_Button.get()){
+      double targetVelocity_UnitsPer100ms =  -dashRpm * 2048 / 600;//was -3387.5
+      m_shooter.shoot(targetVelocity_UnitsPer100ms);
+    }
+
+    actualRpm = m_shooter.getAngularVelocity();
+    SmartDashboard.putNumber("Actual RPM", actualRpm);
+    if (actualRpm > dashRpm - dashRpm*Constants.acceptableRpmError 
+        && actualRpm < dashRpm + dashRpm*Constants.acceptableRpmError){
+          shooterReady = true;
+    } else {
+      shooterReady = false;
+    }
+  }
+  public void getDashVelocity(){
+    dashRpm = SmartDashboard.getNumber("RPM", 0.0);
+  }
+  public void getEquationVelocity() {
+    distance = Turret.getDistance();
+    
   }
 
   // Called once the command ends or is interrupted.

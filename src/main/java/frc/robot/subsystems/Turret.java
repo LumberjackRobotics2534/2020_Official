@@ -24,61 +24,68 @@ import frc.robot.Other.SampleSmoother;
 public class Turret extends SubsystemBase {
   //Creates Turret Motor 
   public WPI_TalonSRX turretMotor = new WPI_TalonSRX(Constants.turretMotor);
-  NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+  static NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
   NetworkTableEntry tx;
   public double x;
-  NetworkTableEntry ty;
-  double y;
-  double distance;
+  static NetworkTableEntry ty;
+  static double y;
+  static double distance;
   DigitalInput turretZeroSensor = new DigitalInput(Constants.turretZeroSensorPort);
   boolean zero;
   double turretPosition;
-  SampleSmoother distanceSmoother = new SampleSmoother(5);
+  static SampleSmoother distanceSmoother = new SampleSmoother(5);
+
   public Turret() {
     turretMotor.configFactoryDefault();
-    
+
     turretMotor.setNeutralMode(NeutralMode.Brake);
 
     turretMotor.setInverted(false);
   }
 
-public void spinTurret(double _speed){
-  turretMotor.set(_speed);
-}
-public void turretOff(){
-  turretMotor.set(0);
+  public void spinTurret(double _speed) {
+    turretMotor.set(_speed);
+  }
 
-}
-public double getPosition(){
-  turretPosition = turretMotor.getSelectedSensorPosition();  
-  return turretPosition;
-}
-public void zeroEncoder(){
-  zero = turretZeroSensor.get();
-  if(zero){
-    turretMotor.setSelectedSensorPosition(0);
-  }
-}
-public void stopTurret(){
-  if(turretMotor.getSelectedSensorPosition() == Constants.maxRightTurretPosition && turretMotor.get() > 0){
+  public void turretOff() {
     turretMotor.set(0);
-  } else if(turretMotor.getSelectedSensorPosition() == Constants.maxLeftTurretPosition && turretMotor.get() < 0){
-    turretMotor.set(0);
+
   }
-}
-public double getX() {
-  tx = table.getEntry("tx");
-  x = tx.getDouble(0.0);
-  return x;
-}
-public double getDistance(){
-  ty = table.getEntry("ty");
-  y = ty.getDouble(0.0);
-  distanceSmoother.addSample((54/Math.tan(Math.toRadians(22 + y))));
-  distance = distanceSmoother.getAverage(); 
-  SmartDashboard.putNumber("Distance", distance);
-  return distance;
-}
+
+  public double getPosition() {
+    turretPosition = turretMotor.getSelectedSensorPosition();
+    return turretPosition;
+  }
+
+  public void zeroEncoder() {
+    zero = turretZeroSensor.get();
+    if (zero) {
+      turretMotor.setSelectedSensorPosition(0);
+    }
+  }
+
+  public void stopTurret() {
+    if (turretMotor.getSelectedSensorPosition() == Constants.maxRightTurretPosition && turretMotor.get() > 0) {
+      turretMotor.set(0);
+    } else if (turretMotor.getSelectedSensorPosition() == Constants.maxLeftTurretPosition && turretMotor.get() < 0) {
+      turretMotor.set(0);
+    }
+  }
+
+  public double getX() {
+    tx = table.getEntry("tx");
+    x = tx.getDouble(0.0);
+    return x;
+  }
+
+  public static double getDistance() {
+    ty = table.getEntry("ty");
+    y = ty.getDouble(0.0);
+    distanceSmoother.addSample((54 / Math.tan(Math.toRadians(22 + y))));
+    distance = distanceSmoother.getAverage();
+    SmartDashboard.putNumber("Distance", distance);
+    return distance;
+  }
   @Override
   public void periodic() {
     this.getDistance();
