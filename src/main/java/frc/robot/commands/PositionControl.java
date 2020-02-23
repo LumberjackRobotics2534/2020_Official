@@ -9,17 +9,21 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.ColorWheel;
 
 
 public class PositionControl extends CommandBase {
 
   String gameData;
+  ColorWheel m_ColorWheel;
 
   /**
    * Creates a new PositionControl.
    */
-  public PositionControl() {
+  public PositionControl(ColorWheel _colorWheel) {
     // Use addRequirements() here to declare subsystem dependencies.
+      m_ColorWheel = _colorWheel;
+      addRequirements(m_ColorWheel);
   }
 
   // Called when the command is initially scheduled.
@@ -30,39 +34,62 @@ public class PositionControl extends CommandBase {
 
     gameData = DriverStation.getInstance().getGameSpecificMessage(); 
 
-    if(gameData.length() > 0) {
+      
 
-      switch (gameData.charAt(0)) {
-
-        case 'B' :
-        //Blue case code
-        break;
-
-        case 'G' :
-        //green case code
-        break;
-
-        case 'Y' :
-        //yellow case code
-        break;
-
-        case 'R' :
-        //red case code
-        break;
-
-
-
-
-
-      }
-
-    }
+    
 
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
+    if(gameData.length() > 0) {
+
+      switch (gameData.charAt(0)) {
+
+        case 'Y' :
+        //yellow case code
+        
+        while (m_ColorWheel.getColor() != "Y") {
+          m_ColorWheel.spin(.1);
+        }
+        break;
+
+        case 'R' :
+        //red case code
+
+        while (m_ColorWheel.getColor() != "R") {
+          m_ColorWheel.spin(.1);
+        }
+        break;
+
+        case 'G' :
+        //green case code
+
+        while (m_ColorWheel.getColor() != "G") {
+          m_ColorWheel.spin(.1);
+
+        }
+        break;
+
+        case 'B' :
+        //blue case code
+        
+        while (m_ColorWheel.getColor() != "B") {
+          m_ColorWheel.spin(.1);
+
+        }
+
+        break;
+
+        default :
+
+        m_ColorWheel.spin(0);
+
+      }
+    }
+
   }
 
   // Called once the command ends or is interrupted.

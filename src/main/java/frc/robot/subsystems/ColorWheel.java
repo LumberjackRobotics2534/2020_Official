@@ -51,8 +51,29 @@ public class ColorWheel extends SubsystemBase {
     colorWheelMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
   }
 
-  public void spinColorWheel(double _speed) {
+  public void spin(double _speed) {
     colorWheelMotor.set(_speed);
+  }
+
+  public String getColor() {
+
+    detectedColor = colorSensor.getColor();
+    match = m_colorMatcher.matchClosestColor(detectedColor);
+
+    if (match.color == kBlueTarget) {
+      colorString = "B";
+    } else if (match.color == kRedTarget) {
+      colorString = "R";
+    } else if (match.color == kGreenTarget) {
+      colorString = "G";
+    } else if (match.color == kYellowTarget) {
+      colorString = "Y";
+    } else {
+      colorString = "Unknown???????";
+    }
+
+    return colorString;
+
   }
 
   @Override
