@@ -13,8 +13,9 @@ import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Shooter;
 
 public class IndexCommand extends CommandBase {
-  Elevator m_Elevator;
-  JoystickButton button;
+  private Elevator m_Elevator;
+  private JoystickButton button;
+
   
   public IndexCommand(JoystickButton _button, Elevator _Elevator) {
     button = _button;

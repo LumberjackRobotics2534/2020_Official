@@ -18,6 +18,8 @@ import frc.robot.Constants;
 public class Elevator extends SubsystemBase {
   private boolean topPresence = false;
   private boolean bottomPresence = false;
+  private int bottomPresenceTicks = 0;
+
   private AnalogInput irTop = new AnalogInput(Constants.irSensorTop);
   private AnalogInput irBottom = new AnalogInput(Constants.irSensorBottom);
   private WPI_TalonSRX topElevatorMotor = new WPI_TalonSRX(Constants.topElevatorMotor);
@@ -47,19 +49,22 @@ public class Elevator extends SubsystemBase {
   }
 
   public boolean topBallPresence() {
-    if (irTop.getVoltage() >= Constants.minTopPresenceVoltage) {
+    if(irTop.getAverageVoltage() > Constants.minTopPresenceVoltage ){
       topPresence = true;
-    } else {
+    }else{
       topPresence = false;
     }
-    System.out.println(irTop.getAverageVoltage());
     return(topPresence);
   }
   public boolean bottomBallPresence() {
-    if(irBottom.getAverageVoltage() > Constants.minBottomPresenceVoltage 
-    && irBottom.getAverageVoltage() < Constants.maxBottomPresenceVoltage){
+
+    if(bottomPresenceTicks > Constants.minPresenceTicks){
       bottomPresence = true;
-    }else{
+    }else if (irBottom.getAverageVoltage() > Constants.minBottomPresenceVoltage
+           && irBottom.getAverageVoltage() < Constants.maxBottomPresenceVoltage) {
+      bottomPresenceTicks++;
+    } else {
+      bottomPresenceTicks = 0;
       bottomPresence = false;
     }
     return(bottomPresence);

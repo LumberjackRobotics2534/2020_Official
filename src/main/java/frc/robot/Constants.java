@@ -65,6 +65,7 @@ public final class Constants {
     public static final double maxBottomPresenceVoltage = 1.85;
     public static final double topLiftSpeed = 0.4;
     public static final double bottomLiftSpeed = 0.3;
+    public static final int minPresenceTicks = 200; //TODO: Adjust value of ticks
     //---------------------TURRET---------------------//
     public static final int turretMotor = 7;
     public static final double turretPositionTolerance = 1;
