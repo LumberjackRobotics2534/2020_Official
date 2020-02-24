@@ -65,7 +65,7 @@ public final class Constants {
     public static final double maxBottomPresenceVoltage = 1.85;
     public static final double topLiftSpeed = 0.6;
     public static final double bottomLiftSpeed = 0.5;
-    public static final int minPresenceTicks = 200; //TODO: Adjust value of ticks
+    public static final int minPresenceTicks = 500; //TODO: Adjust value of ticks
     //---------------------TURRET---------------------//
     public static final int turretMotor = 7;
     public static final double turretPositionTolerance = 1;
@@ -95,8 +95,7 @@ public final class Constants {
     public static final double completedRotationNumber = 26;
 	public static final double colorWheelMotorSpeed = 0.5;
     //----------------------HANG----------------------//
-    public static final int leftClimbMotor = 11;
-    public static final int rightClimbMotor = 12;
+    public static final int climbMotor = 11;
     public static final int endGameUp = 4;
     public static final int endGameDown = 5;
     //-------------------PNEUMATICS-------------------//

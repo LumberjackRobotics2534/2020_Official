@@ -8,12 +8,17 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.Hang;
 
 public class WinchCommand extends CommandBase {
   Hang m_Hang;
-  public WinchCommand(Hang _Hang) {
+  JoystickButton m_Button1;
+  JoystickButton m_Button2;
+  public WinchCommand(Hang _Hang, JoystickButton _Button1, JoystickButton _Button2) {
     m_Hang = _Hang;
+    m_Button1 = _Button1;
+    m_Button2 = _Button2;
     addRequirements(m_Hang);
   }
 
@@ -25,13 +30,22 @@ public class WinchCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_Hang.Winch(0.5);
+    if (m_Button1.get()){
+      m_Hang.Winch();
+    } else {
+      m_Hang.StopWinch();
+    }
+    if (m_Button2.get()){
+      m_Hang.Raise();
+    } else {
+      m_Hang.Lower();
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_Hang.stopWinch();
+    m_Hang.StopWinch();
   }
 
   // Returns true when the command should end.

@@ -37,14 +37,14 @@ public class RotationControl extends CommandBase {
     m_colorWheelMotorPosition = ColorWheel.colorWheelMotor.getSelectedSensorPosition();
     m_colorWheelMotorRotations = m_colorWheelMotorPosition / Constants.quadrativeEncoderRotation;
     if (m_colorWheelMotorRotations < Constants.completedRotationNumber){
-    RobotContainer.m_ColorWheel.spinColorWheel(Constants.colorWheelMotorSpeed);
+    RobotContainer.m_ColorWheel.spin(Constants.colorWheelMotorSpeed);
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_colorWheel.spinColorWheel(0);
+    m_colorWheel.spin(0);
   }
 
 
