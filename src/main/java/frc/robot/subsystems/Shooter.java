@@ -14,6 +14,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -38,6 +39,7 @@ public class Shooter extends SubsystemBase {
 
   public void shoot(double targetVelocity) {
     shooterMotor.set(ControlMode.Velocity, targetVelocity);
+    SmartDashboard.putNumber("Target Velocity", targetVelocity);
   }
 
   public void shooterOff(){
@@ -45,11 +47,11 @@ public class Shooter extends SubsystemBase {
   }
   
   public void hoodUp(){
-    hoodSolenoid.set(Value.kReverse);
+    hoodSolenoid.set(Value.kForward);
   }
   
   public void hoodDown(){
-    hoodSolenoid.set(Value.kForward);
+    hoodSolenoid.set(Value.kReverse);
   }
   public double getAngularVelocity(){
     return -shooterMotor.getSelectedSensorVelocity()*600 / 2048;

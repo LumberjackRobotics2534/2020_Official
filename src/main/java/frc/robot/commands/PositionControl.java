@@ -61,32 +61,72 @@ public class PositionControl extends CommandBase {
 
         if (m_ColorWheel.getColor() == "G") {
           return;
+          //The wheel stays in place, it's already at the right color
         }
 
         if (m_ColorWheel.getColor() == "R") {
 
-            
+            //need to do testing to see how long and at what power the motor needs to run
 
+            /* **** SPIN THE MOTOR ONE TILE TO THE LEFT **** */
         }
-        
-        while (m_ColorWheel.getColor() != "Y") {
-          m_ColorWheel.spin(.1);
+
+        if (m_ColorWheel.getColor() == "B") {
+
+          //need to do testing to see how long and at what power the motor needs to run
+          
+          /* **** SPIN THE MOTOR ONE TITLE TO THE RIGHT **** */
         }
         break;
 
         case 'R' :
         //red case code
 
-        while (m_ColorWheel.getColor() != "R") {
-          m_ColorWheel.spin(.1);
+        if (m_ColorWheel.getColor() == "Y") {
+
+          //need to do testing to see how long and at what power the motor needs to run
+          
+          /* **** SPIN THE MOTOR ONE TITLE TO THE RIGHT **** */
+
+        }
+
+        if (m_ColorWheel.getColor() == "G") {
+
+          //need to do testing to see how long and at what power the motor needs to run
+
+            /* **** SPIN THE MOTOR ONE TILE TO THE LEFT **** */
+
+        }
+
+        if (m_ColorWheel.getColor() == "B") {
+
+          //The wheel stays in place, it's already at the right color
+
         }
         break;
 
         case 'G' :
         //green case code
 
-        while (m_ColorWheel.getColor() != "G") {
-          m_ColorWheel.spin(.1);
+        if (m_ColorWheel.getColor() == "Y") {
+
+          //The wheel stays in place, it's already at the right color
+
+        }
+
+        if (m_ColorWheel.getColor() == "B") {
+
+          //need to do testing to see how long and at what power the motor needs to run
+
+            /* **** SPIN THE MOTOR ONE TILE TO THE LEFT **** */
+
+        }
+
+        if (m_ColorWheel.getColor() == "R") {
+
+            //need to do testing to see how long and at what power the motor needs to run
+          
+          /* **** SPIN THE MOTOR ONE TITLE TO THE RIGHT **** */
 
         }
         break;
@@ -94,8 +134,25 @@ public class PositionControl extends CommandBase {
         case 'B' :
         //blue case code
         
-        while (m_ColorWheel.getColor() != "B") {
-          m_ColorWheel.spin(.1);
+        if (m_ColorWheel.getColor() == "Y") {
+
+          //need to do testing to see how long and at what power the motor needs to run
+
+            /* **** SPIN THE MOTOR ONE TILE TO THE LEFT **** */
+
+        }
+
+        if (m_ColorWheel.getColor() == "R") {
+
+          //The wheel stays in place, it's already at the right color
+
+        }
+
+        if (m_ColorWheel.getColor() == "G") {
+
+          //need to do testing to see how long and at what power the motor needs to run
+
+            /* **** SPIN THE MOTOR ONE TILE TO THE RIGHT **** */
 
         }
 
@@ -121,16 +178,4 @@ public class PositionControl extends CommandBase {
     return false;
   }
 
-
-  public void spinUntil(float _encoderUnits, float _speed) {
-
-    colorWheelMotor.setSelectedSensorPosition(0);
-
-    while (/*encoder object value*/ <= _encoderUnits) {
-
-      colorWheelMotor.spin(1);
-
-    }
-
-  }
 }
