@@ -27,7 +27,7 @@ public class Hang extends SubsystemBase {
     climbMotor.setInverted(false);
   }
   public void Winch(){
-    climbMotor.set(0.4);
+    climbMotor.set(0.2);
   }
   public void StopWinch(){
     climbMotor.set(0);

@@ -50,8 +50,8 @@ public class ShootCommand extends CommandBase {
     actualRpm = m_shooter.getAngularVelocity();
     SmartDashboard.putNumber("Actual RPM", actualRpm);
     if (actualRpm > dashRpm - dashRpm*Constants.acceptableRpmError 
-        && actualRpm < dashRpm + dashRpm*Constants.acceptableRpmError){
-          shooterReady = true;
+    && actualRpm < dashRpm + dashRpm*Constants.acceptableRpmError){
+      shooterReady = true;  
     } else {
       shooterReady = false;
     }
@@ -68,6 +68,7 @@ public class ShootCommand extends CommandBase {
   @Override
   public void end(final boolean interrupted) {
     m_shooter.shooterOff();
+    shooterReady = false;
   }
 
   // Returns true when the command should end.

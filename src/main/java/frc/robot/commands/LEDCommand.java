@@ -36,7 +36,7 @@ public class LEDCommand extends CommandBase {
 
     } else if(-2 >= Robot.x && Robot.x >= 2 && RobotContainer.manipButtonA.get()){
       for (var i = 0; i < m_ledstrip.m_LedBuffer.getLength(); i++){
-        m_ledstrip.m_LedBuffer.setRGB (i, 255, 156, 0);
+        m_ledstrip.m_LedBuffer.setRGB (i, 128, 0, 128);
       }
 
     } else if(DriverStation.getInstance().isFMSAttached()){
