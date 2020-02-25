@@ -7,6 +7,8 @@
 
 package frc.robot.commands;
 
+import com.revrobotics.ColorSensorV3;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ColorWheel;
@@ -16,14 +18,25 @@ public class PositionControl extends CommandBase {
 
   String gameData;
   ColorWheel m_ColorWheel;
+  ColorSensorV3 m_ColorSensor;
+  int yellow1;
+  int yellow2;
+  int red1;
+  int red2;
+  int green1;
+  int green2;
+  int blue1;
+  int blue2;
+
 
   /**
    * Creates a new PositionControl.
    */
-  public PositionControl(ColorWheel _colorWheel) {
+  public PositionControl(ColorWheel _colorWheel, ColorSensorV3 _colorSensor) {
     // Use addRequirements() here to declare subsystem dependencies.
       m_ColorWheel = _colorWheel;
       addRequirements(m_ColorWheel);
+      m_ColorSensor = _colorSensor;
   }
 
   // Called when the command is initially scheduled.
@@ -32,12 +45,7 @@ public class PositionControl extends CommandBase {
 
     //Gets the color from the FMS thing and assigns that color to a variable
 
-    gameData = DriverStation.getInstance().getGameSpecificMessage(); 
-
-      
-
-    
-
+    gameData = DriverStation.getInstance().getGameSpecificMessage();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -50,6 +58,16 @@ public class PositionControl extends CommandBase {
 
         case 'Y' :
         //yellow case code
+
+        if (m_ColorWheel.getColor() == "G") {
+          return;
+        }
+
+        if (m_ColorWheel.getColor() == "R") {
+
+            
+
+        }
         
         while (m_ColorWheel.getColor() != "Y") {
           m_ColorWheel.spin(.1);
@@ -101,5 +119,18 @@ public class PositionControl extends CommandBase {
   @Override
   public boolean isFinished() {
     return false;
+  }
+
+
+  public void spinUntil(float _encoderUnits, float _speed) {
+
+    colorWheelMotor.setSelectedSensorPosition(0);
+
+    while (/*encoder object value*/ <= _encoderUnits) {
+
+      colorWheelMotor.spin(1);
+
+    }
+
   }
 }

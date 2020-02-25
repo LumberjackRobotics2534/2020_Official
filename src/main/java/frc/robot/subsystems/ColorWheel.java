@@ -49,11 +49,14 @@ public class ColorWheel extends SubsystemBase {
     m_colorMatcher.addColorMatch(kYellowTarget);
 
     colorWheelMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+    colorWheelMotor.setSelectedSensorPosition(0);
   }
 
   public void spin(double _speed) {
     colorWheelMotor.set(_speed);
   }
+
+ 
 
   public String getColor() {
 
