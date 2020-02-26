@@ -43,7 +43,7 @@ public class ShootCommand extends CommandBase {
     getDashVelocity();
     getEquationVelocity();
     if(m_Button.get()){
-      double targetVelocity_UnitsPer100ms =  -dashRpm * 2048 / 600;//was -3387.5
+      double targetVelocity_UnitsPer100ms =  -equRpm * 2048 / 600;//was -3387.5
       m_shooter.shoot(targetVelocity_UnitsPer100ms);
     }
 
@@ -61,7 +61,15 @@ public class ShootCommand extends CommandBase {
   }
   public void getEquationVelocity() {
     distance = Turret.getDistance();
-    
+    if(distance >= 67 && distance <= 127){
+     equRpm = (0.0000422)*Math.pow(distance, 4)*-1 + 0.01756*Math.pow(distance, 3) + -2.706*Math.pow(distance, 2) + 183.9*Math.pow(distance, 1) - 2154;
+    } else if(distance > 127 && distance < 169){
+     equRpm = (Math.pow(distance - 127, 2))/12;
+    } else if(distance >= 169 && distance <= 400){
+      equRpm = (0.0000002801)*Math.pow(distance, 4) - 0.0002518*Math.pow(distance, 3) + 0.08358*Math.pow(distance, 2) - 12.15*Math.pow(distance, 1) + 5653;
+    } else{
+      equRpm = 0;
+    }
   }
 
   // Called once the command ends or is interrupted.
