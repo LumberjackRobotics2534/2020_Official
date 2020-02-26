@@ -23,7 +23,7 @@ public class Elevator extends SubsystemBase {
   private AnalogInput irTop = new AnalogInput(Constants.irSensorTop);
   private AnalogInput irBottom = new AnalogInput(Constants.irSensorBottom);
   private WPI_TalonSRX topElevatorMotor = new WPI_TalonSRX(Constants.topElevatorMotor);
-  private WPI_TalonFX bottomElevatorMotor = new WPI_TalonFX(Constants.bottomElevatorMotor);
+  private WPI_TalonSRX bottomElevatorMotor = new WPI_TalonSRX(Constants.bottomElevatorMotor);
   public Elevator() {
     topElevatorMotor.configFactoryDefault();
 
@@ -41,6 +41,10 @@ public class Elevator extends SubsystemBase {
   public void lift() {
     topElevatorMotor.set(Constants.topLiftSpeed);
     bottomElevatorMotor.set(Constants.bottomLiftSpeed);
+  }
+  public void feed(){
+    topElevatorMotor.set(Constants.topFeedSpeed);
+    bottomElevatorMotor.set(Constants.bottomFeedSpeed);
   }
 
   public void stopLifting() {

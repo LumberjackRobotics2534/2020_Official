@@ -33,9 +33,8 @@ public class RotationControl extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
     m_colorWheelMotorPosition = ColorWheel.colorWheelMotor.getSelectedSensorPosition();
-    m_colorWheelMotorRotations = m_colorWheelMotorPosition / Constants.quadrativeEncoderRotation;
+    m_colorWheelMotorRotations = Math.abs(m_colorWheelMotorPosition / Constants.quadrativeEncoderRotation);
     if (m_colorWheelMotorRotations < Constants.completedRotationNumber){
     RobotContainer.m_ColorWheel.spin(Constants.colorWheelMotorSpeed);
     }
@@ -52,6 +51,10 @@ public class RotationControl extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
-  }
+    if (m_colorWheelMotorRotations > Constants.completedRotationNumber){
+      return true;
+   } else{
+      return false;
+   }
+ }
 }

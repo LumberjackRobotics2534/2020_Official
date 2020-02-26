@@ -23,7 +23,7 @@ public final class Constants {
     public static final double kvVoltSecondsPerMeter = 1.64;
     public static final double kaVoltSecondsSquaredPerMeter = 0.208;
     public static final double kMaxVoltage = 10;
-    public static final double kPDriveVel = 0.01; //was 8.76
+    public static final double kPDriveVel =  8.76; //was 8.76 0.8
     public static final double kTrackwidthMeters = 1.3609938869150051; //was 0.5588
     public static final double kMaxSpeedMetersPerSecond = 3; //was 3
     public static final double kMaxAccelerationMetersPerSecondSquared = 3; //was 3
@@ -63,8 +63,10 @@ public final class Constants {
     public static final double minTopPresenceVoltage = 1.5;
     public static final double minBottomPresenceVoltage = 1.25;
     public static final double maxBottomPresenceVoltage = 1.85;
-    public static final double topLiftSpeed = 0.6;
-    public static final double bottomLiftSpeed = 0.5;
+    public static final double topLiftSpeed = 0.4;
+    public static final double bottomLiftSpeed = 0.3;
+    public static final double topFeedSpeed = 0.6;
+    public static final double bottomFeedSpeed = 0.5;
     public static final int minPresenceTicks = 500; //TODO: Adjust value of ticks
     //---------------------TURRET---------------------//
     public static final int turretMotor = 7;

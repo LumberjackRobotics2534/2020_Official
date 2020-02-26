@@ -102,18 +102,12 @@ public class RobotContainer {
       Constants.kMaxVoltage); //This is the max voltage
     //Create a trajectory configuration
     TrajectoryConfig config = new TrajectoryConfig(Constants.kMaxSpeedMetersPerSecond, Constants.kMaxAccelerationMetersPerSecondSquared);
-      // Add kinematics to ensure max speed is actually obeyed
-      config.setKinematics(Constants.kDriveKinematics);
-      // Apply the voltage constraint
-      config.addConstraint(autoVoltageConstraint);
+    // Add kinematics to ensure max speed is actually obeyed
+    config.setKinematics(Constants.kDriveKinematics);
+    // Apply the voltage constraint
+    config.addConstraint(autoVoltageConstraint);
     //Create a Trajectory to follow. UNITS ARE IN METERS from starting position.
-
-/*  Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
-      List.of(
-        new Pose2d(0, 0, new Rotation2d(0)), //Start Point
-        //Interior Waypoints
-        new Pose2d(3, 0, new Rotation2d(0))), //End Point
-      config); //Pass Config */
+    config.setReversed(true);
 
     
     Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
@@ -122,7 +116,7 @@ public class RobotContainer {
       //Pass through these interior points
       List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
       //End position
-      new Pose2d(3, 0, new Rotation2d(0)),
+      new Pose2d(-3, 0, new Rotation2d(0)),
       //Pass config
       config);
 
