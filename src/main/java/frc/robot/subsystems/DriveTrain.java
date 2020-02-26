@@ -29,10 +29,10 @@ public class DriveTrain extends SubsystemBase {
   //Set up odomentry
   private DifferentialDriveOdometry m_odometry;
   //Set up gyro
-  private AHRS navx = new AHRS(SerialPort.Port.kMXP);
+  private static AHRS navx = new AHRS(SerialPort.Port.kMXP);
 
   public DriveTrain() {
-    //Configurations for talons
+    // Configurations for talons
     rightFront.configFactoryDefault();
     rightBack.configFactoryDefault();
     leftFront.configFactoryDefault();
@@ -45,15 +45,20 @@ public class DriveTrain extends SubsystemBase {
     rightBack.setInverted(true);
     leftFront.setInverted(true);
     leftBack.setInverted(true);
-    //Reset encoders before finishing creation of odometry
+    // Reset encoders before finishing creation of odometry
     leftFront.setSelectedSensorPosition(0);
     rightFront.setSelectedSensorPosition(0);
     navx.zeroYaw();
     m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading()));
   }
-  //Mecanum drive command for manual control
-  public void drive(double _ySpeed, double _xSpeed, double _rot){
+
+  // Mecanum drive command for manual control
+  public void drive(double _ySpeed, double _xSpeed, double _rot) {
     mecanumDriveTrain.driveCartesian(_ySpeed, _xSpeed, _rot);
+  }
+
+  public static void zero() {
+    navx.zeroYaw();
   }
 
   public double getHeading() {
@@ -62,15 +67,15 @@ public class DriveTrain extends SubsystemBase {
 
   public void tankDriveVolts(double leftVolts, double rightVolts){
     leftSide.setVoltage(leftVolts);
-    rightSide.setVoltage(/*-*/rightVolts);
-    System.out.println("left\t"+leftVolts);
-    System.out.println("right\t"+rightVolts);
+    rightSide.setVoltage(-rightVolts);
+    //System.out.println("left\t"+ leftVolts);
+    //System.out.println("right\t"+ -rightVolts);
     mecanumDriveTrain.feed();
   }
   
   public Pose2d getPose() {
     //Get position in METERS
-    System.out.println("pose\t" + m_odometry.getPoseMeters());
+    System.out.println(getHeading());
     return m_odometry.getPoseMeters();
 
   }

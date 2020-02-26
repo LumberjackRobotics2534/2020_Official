@@ -49,7 +49,6 @@ public class ColorWheel extends SubsystemBase {
     m_colorMatcher.addColorMatch(kYellowTarget);
 
     colorWheelMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
-    colorWheelMotor.setSelectedSensorPosition(0);
   }
 
   public void spin(double _speed) {
@@ -97,5 +96,6 @@ public class ColorWheel extends SubsystemBase {
     }
     SmartDashboard.putNumber("Confidence", match.confidence);
     SmartDashboard.putString("Detected Color", colorString);
+    SmartDashboard.putNumber("Encoder Value", colorWheelMotor.getSelectedSensorPosition());
   }
 }

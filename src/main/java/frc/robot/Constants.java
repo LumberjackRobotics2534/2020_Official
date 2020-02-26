@@ -19,12 +19,12 @@ public final class Constants {
     public static final int leftBackDrive = 3;
     public static final int integratedEncoderTicksPerRot = 2048*(105/26);
     //----- -----------MOTION PROFILING----------------//
-    public static final double ksVolts = 0.111;
-    public static final double kvVoltSecondsPerMeter = 1.62;
-    public static final double kaVoltSecondsSquaredPerMeter = 0.179;
+    public static final double ksVolts = 0.209;
+    public static final double kvVoltSecondsPerMeter = 1.64;
+    public static final double kaVoltSecondsSquaredPerMeter = 0.208;
     public static final double kMaxVoltage = 10;
-    public static final double kPDriveVel = 7.6; //was 7.6
-    public static final double kTrackwidthMeters = 0.5588; //was 1.1541452808922656
+    public static final double kPDriveVel =  8.76; //was 8.76 0.8
+    public static final double kTrackwidthMeters = 1.3609938869150051; //was 0.5588
     public static final double kMaxSpeedMetersPerSecond = 3; //was 3
     public static final double kMaxAccelerationMetersPerSecondSquared = 3; //was 3
     public static final double kTicksToMetersConversion = ((1/14703.6897/*Rot per Tick*/)*(6*Math.PI/*In per Rot*/)*(1/39.3701/*M per In*/));
@@ -63,8 +63,10 @@ public final class Constants {
     public static final double minTopPresenceVoltage = 1.5;
     public static final double minBottomPresenceVoltage = 1.25;
     public static final double maxBottomPresenceVoltage = 1.85;
-    public static final double topLiftSpeed = 0.6;
-    public static final double bottomLiftSpeed = 0.5;
+    public static final double topLiftSpeed = 0.4;
+    public static final double bottomLiftSpeed = 0.3;
+    public static final double topFeedSpeed = 0.6;
+    public static final double bottomFeedSpeed = 0.5;
     public static final int minPresenceTicks = 500; //TODO: Adjust value of ticks
     //---------------------TURRET---------------------//
     public static final int turretMotor = 7;

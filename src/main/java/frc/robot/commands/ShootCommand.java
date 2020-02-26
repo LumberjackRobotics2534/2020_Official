@@ -15,13 +15,13 @@ import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Turret;
 
 public class ShootCommand extends CommandBase {
-  Shooter m_shooter;
-  JoystickButton m_Button;
-  private double dashRpm;
+  private Shooter m_shooter;
+  private JoystickButton m_Button;
+  public static double dashRpm;
   private double equRpm;
   private double actualRpm;
   private double distance = 0.0;
-  public static boolean shooterReady;
+
 
   
   public ShootCommand(Shooter _shooter, JoystickButton _button) {
@@ -29,7 +29,7 @@ public class ShootCommand extends CommandBase {
     m_Button = _button;
     addRequirements(m_shooter); 
     SmartDashboard.putNumber("RPM", 0);
-    shooterReady = false;
+
   }
 
   // Called when the command is initially scheduled.
@@ -49,17 +49,13 @@ public class ShootCommand extends CommandBase {
 
     actualRpm = m_shooter.getAngularVelocity();
     SmartDashboard.putNumber("Actual RPM", actualRpm);
-    if (actualRpm > dashRpm - dashRpm*Constants.acceptableRpmError 
-    && actualRpm < dashRpm + dashRpm*Constants.acceptableRpmError){
-      shooterReady = true;  
-    } else {
-      shooterReady = false;
-    }
+
   }
   public void getDashVelocity(){
     dashRpm = SmartDashboard.getNumber("RPM", 0.0);
   }
   public void getEquationVelocity() {
+    
     distance = Turret.getDistance();
     if(distance >= 67 && distance <= 127){
      equRpm = (0.0000422)*Math.pow(distance, 4)*-1 + 0.01756*Math.pow(distance, 3) + -2.706*Math.pow(distance, 2) + 183.9*Math.pow(distance, 1) - 2154;
@@ -76,7 +72,7 @@ public class ShootCommand extends CommandBase {
   @Override
   public void end(final boolean interrupted) {
     m_shooter.shooterOff();
-    shooterReady = false;
+
   }
 
   // Returns true when the command should end.

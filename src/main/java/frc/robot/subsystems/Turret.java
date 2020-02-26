@@ -40,7 +40,7 @@ public class Turret extends SubsystemBase {
 
     turretMotor.setNeutralMode(NeutralMode.Brake);
 
-    turretMotor.setInverted(false);
+    turretMotor.setInverted(true);
   }
 
   public void spinTurret(double _speed) {

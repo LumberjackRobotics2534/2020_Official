@@ -16,6 +16,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.DriveTrain;
 
 /**
@@ -31,6 +32,7 @@ public class Robot extends TimedRobot {
   NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
   NetworkTableEntry tx;
   public static double x;
+  ColorWheel m_ColorWheel = new ColorWheel();
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -78,7 +80,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-
+    DriveTrain.zero();
     
   }
 
@@ -97,6 +99,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
     CommandScheduler.getInstance().cancelAll();
+    ColorWheel.colorWheelMotor.setSelectedSensorPosition(0);
   }
 
   /**
