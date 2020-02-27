@@ -16,7 +16,7 @@ public class RotationControl extends CommandBase {
   //Create varraibles for spin commands
   ColorWheel m_colorWheel;
   double m_colorWheelMotorRotations;
-  int m_colorWheelMotorPosition;
+  double m_colorWheelMotorPosition;
 
   public RotationControl(ColorWheel colorWheel) {
     //Save inputs so we can use them later and add requirements
@@ -33,11 +33,9 @@ public class RotationControl extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_colorWheelMotorPosition = ColorWheel.colorWheelMotor.getSelectedSensorPosition();
-    m_colorWheelMotorRotations = Math.abs(m_colorWheelMotorPosition / Constants.quadrativeEncoderRotation);
-    if (m_colorWheelMotorRotations < Constants.completedRotationNumber){
+    m_colorWheelMotorPosition = ColorWheel.getPosition();
     RobotContainer.m_ColorWheel.spin(Constants.colorWheelMotorSpeed);
-    }
+    
   }
 
   // Called once the command ends or is interrupted.

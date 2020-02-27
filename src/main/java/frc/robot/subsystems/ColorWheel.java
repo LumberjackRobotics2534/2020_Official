@@ -13,7 +13,6 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
-
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
@@ -32,13 +31,15 @@ public class ColorWheel extends SubsystemBase {
   private Color detectedColor;
   private String colorString;
   private ColorMatchResult match;
+  private static double position;
+
   public ColorWheel() {
     /*-------------------------------------------------------------------------*/
-    /* Color Sensor WILL NOT WORK if you do not re-deploy code on robot startup*/
+    /* Color Sensor WILL NOT WORK if you do not re-deploy code on robot startup */
     /*-------------------------------------------------------------------------*/
 
     colorWheelMotor.configFactoryDefault();
-    
+
     colorWheelMotor.setNeutralMode(NeutralMode.Brake);
 
     colorWheelMotor.setInverted(false);
@@ -48,11 +49,17 @@ public class ColorWheel extends SubsystemBase {
     m_colorMatcher.addColorMatch(kRedTarget);
     m_colorMatcher.addColorMatch(kYellowTarget);
 
-    colorWheelMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+    colorWheelMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
   }
 
   public void spin(double _speed) {
     colorWheelMotor.set(_speed);
+  }
+
+  public static double getPosition() {
+    position = colorWheelMotor.getSelectedSensorPosition() / Constants.quadrativeEncoderRotation;
+    System.out.println(position);
+    return position;
   }
 
  

@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import frc.robot.Other.Gains;
 
 public final class Constants {
-
     //-------------------DRIVE TRAIN-------------------//
 	public static final int rightFrontDrive = 2;
 	public static final int rightBackDrive = 4;
@@ -67,7 +66,7 @@ public final class Constants {
     public static final double bottomLiftSpeed = 0.3;
     public static final double topFeedSpeed = 0.6;
     public static final double bottomFeedSpeed = 0.5;
-    public static final int minPresenceTicks = 500; //TODO: Adjust value of ticks
+    public static final int minPresenceTicks = 1000; //TODO: Adjust value of ticks
     //---------------------TURRET---------------------//
     public static final int turretMotor = 7;
     public static final double turretPositionTolerance = 1;
@@ -89,12 +88,12 @@ public final class Constants {
     public static final int kPIDLoopIdx = 0;
     public static final int kTimeoutMs = 30;
     public static final double acceptableRpmError = 0.05; //5%
-    public final static Gains kGains_Velocit = new Gains( 1.6, 0.004, 20, 1023/7200,  300,  1.00);
+    public static final Gains kGains_Velocit = new Gains( 1.6, 0.004, 20, 1023/7200,  300,  1.00);
     public static final int shooterSpeed = -4500;
     //-------------------COLOR WHEEL------------------//
     public static final int colorWheelMotor = 6;
-    public static final double quadrativeEncoderRotation = 1024*(8/*Reduction from Motor to WOF*/);
-    public static final double completedRotationNumber = 26;
+    public static final double quadrativeEncoderRotation = 1024*(32/4/*Reduction from Motor to WOF*/);
+    public static final double completedRotationNumber = 3.1;
 	public static final double colorWheelMotorSpeed = 0.5;
     //----------------------HANG----------------------//
     public static final int climbMotor = 11;
@@ -104,19 +103,5 @@ public final class Constants {
     public static final int pressureSensor = 0;
     public static final int pcm = 19;
     //----------------------LEDS----------------------//
-	public static final int ledPort = 9;
-	
-
-
-	
-	
-
-	
-
-	
-	
-	
-	
-	
-
+    public static final int ledPort = 9;
 }

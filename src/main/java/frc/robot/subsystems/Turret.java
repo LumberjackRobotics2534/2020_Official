@@ -25,14 +25,15 @@ public class Turret extends SubsystemBase {
   //Creates Turret Motor 
   public WPI_TalonSRX turretMotor = new WPI_TalonSRX(Constants.turretMotor);
   static NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-  NetworkTableEntry tx;
+  private NetworkTableEntry tx;
   public double x;
   static NetworkTableEntry ty;
   static double y;
   static double distance;
-  DigitalInput turretZeroSensor = new DigitalInput(Constants.turretZeroSensorPort);
-  boolean zero;
-  double turretPosition;
+  private DigitalInput turretZeroSensor = new DigitalInput(Constants.turretZeroSensorPort);
+  private boolean zero;
+  private double turretPosition;
+  private static int lightCode = 1;
   static SampleSmoother distanceSmoother = new SampleSmoother(5);
 
   public Turret() {
@@ -73,19 +74,32 @@ public class Turret extends SubsystemBase {
   }
 
   public double getX() {
+    lightsEnabled(true);
     tx = table.getEntry("tx");
     x = tx.getDouble(0.0);
     return x;
   }
 
   public static double getDistance() {
+    lightsEnabled(true);
     ty = table.getEntry("ty");
     y = ty.getDouble(0.0);
     distanceSmoother.addSample((54 / Math.tan(Math.toRadians(22 + y))));
     distance = distanceSmoother.getAverage();
     SmartDashboard.putNumber("Distance", distance);
+
     return distance;
   }
+
+  public static void lightsEnabled(boolean enabled) {
+    if (enabled) {
+      lightCode = 3; // On
+    } else {
+      lightCode = 1; //Off
+    }
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(lightCode);
+  }
+
   @Override
   public void periodic() {
     this.getDistance();
