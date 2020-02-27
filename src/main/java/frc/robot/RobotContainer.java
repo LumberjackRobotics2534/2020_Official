@@ -25,6 +25,7 @@ import frc.robot.commands.IndexCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.JoyDriveCommand;
 import frc.robot.commands.LEDCommand;
+import frc.robot.commands.PositionControl;
 import frc.robot.commands.RotationControl;
 import frc.robot.commands.ShootCommand;
 import frc.robot.commands.TurretCommand;
@@ -88,7 +89,7 @@ public class RobotContainer {
     manipButtonA.whileHeld(new TurretPID(Constants.turretTargetAngle, m_Turret));
     manipButtonX.whileHeld(new ShootCommand(m_Shooter, manipButtonX));
     manipButtonY.whileHeld(new IntakeCommand(m_Intake));
-    manipButtonLeft.whileHeld(new HoodCommand(m_Shooter));
+    manipButtonLeft.whenPressed(new PositionControl(m_ColorWheel));
     manipButtonRight.whenPressed(new RotationControl(m_ColorWheel));
   }
 

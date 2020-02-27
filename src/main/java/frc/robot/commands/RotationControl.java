@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
@@ -15,8 +16,7 @@ import frc.robot.subsystems.ColorWheel;
 public class RotationControl extends CommandBase {
   //Create varraibles for spin commands
   ColorWheel m_colorWheel;
-  double m_colorWheelMotorRotations;
-  double m_colorWheelMotorPosition;
+  double m_colorWheelPosition = 0;
 
   public RotationControl(ColorWheel colorWheel) {
     //Save inputs so we can use them later and add requirements
@@ -33,9 +33,9 @@ public class RotationControl extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_colorWheelMotorPosition = ColorWheel.getPosition();
+    m_colorWheelPosition = ColorWheel.getPosition();
     m_colorWheel.spin(Constants.colorWheelRotationSpeed);
-    
+    System.out.println(m_colorWheelPosition);
   }
 
   // Called once the command ends or is interrupted.
@@ -49,7 +49,7 @@ public class RotationControl extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (m_colorWheelMotorRotations > Constants.completedRotationNumber){
+    if (m_colorWheelPosition > Constants.completedRotationNumber){
       return true;
    } else{
       return false;
