@@ -95,7 +95,8 @@ public final class Constants {
     public static final int colorWheelMotor = 6;
     public static final double quadrativeEncoderRotation = 1024*(32/4/*Reduction from Motor to WOF*/);
     public static final double completedRotationNumber = 3.1;
-	public static final double colorWheelMotorSpeed = 0.5;
+    public static final double colorWheelPositionSpeed = 0.5;
+    public static final double colorWheelRotationSpeed = 0.5;
     //----------------------HANG----------------------//
     public static final int climbMotor = 11;
     public static final int endGameUp = 4;

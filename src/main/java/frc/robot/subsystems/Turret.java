@@ -89,7 +89,7 @@ public class Turret extends SubsystemBase {
   @Override
   public void periodic() {
     this.getDistance();
-    this.zeroEncoder();
     this.stopTurret();
+    SmartDashboard.putNumber("Hey Dude", this.getPosition());
   }
 }
