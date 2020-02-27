@@ -11,6 +11,7 @@ import com.revrobotics.ColorSensorV3;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.ColorWheel;
 
 
@@ -19,14 +20,8 @@ public class PositionControl extends CommandBase {
   String gameData;
   ColorWheel m_ColorWheel;
   ColorSensorV3 m_ColorSensor;
-  int yellow1;
-  int yellow2;
-  int red1;
-  int red2;
-  int green1;
-  int green2;
-  int blue1;
-  int blue2;
+  boolean rotationsCompleted = false;
+  
 
 
   /**
@@ -46,6 +41,7 @@ public class PositionControl extends CommandBase {
     //Gets the color from the FMS thing and assigns that color to a variable
 
     gameData = DriverStation.getInstance().getGameSpecificMessage();
+    rotationsCompleted = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -60,8 +56,13 @@ public class PositionControl extends CommandBase {
         //yellow case code
 
         if (m_ColorWheel.getColor() == "G") {
-          return;
+          
           //The wheel stays in place, it's already at the right color
+
+          rotationsCompleted = true;
+
+          return;
+
         }
 
         if (m_ColorWheel.getColor() == "R") {
@@ -69,6 +70,11 @@ public class PositionControl extends CommandBase {
             //need to do testing to see how long and at what power the motor needs to run
 
             /* **** SPIN THE MOTOR ONE TILE TO THE LEFT **** */
+          m_ColorWheel.spin(Constants.colorWheelPositionSpeed);
+          if ( m_ColorWheel.getPosition() > 0.125) {
+            rotationsCompleted = true;
+          }
+
         }
 
         if (m_ColorWheel.getColor() == "B") {
@@ -76,6 +82,11 @@ public class PositionControl extends CommandBase {
           //need to do testing to see how long and at what power the motor needs to run
           
           /* **** SPIN THE MOTOR ONE TITLE TO THE RIGHT **** */
+
+          m_ColorWheel.spin(-Constants.colorWheelPositionSpeed);
+          if ( m_ColorWheel.getPosition() > 0.125) {
+            rotationsCompleted = true;
+          }
         }
         break;
 
@@ -87,6 +98,10 @@ public class PositionControl extends CommandBase {
           //need to do testing to see how long and at what power the motor needs to run
           
           /* **** SPIN THE MOTOR ONE TITLE TO THE RIGHT **** */
+          m_ColorWheel.spin(-Constants.colorWheelPositionSpeed);
+          if ( m_ColorWheel.getPosition() > 0.125) {
+            rotationsCompleted = true;
+          }
 
         }
 
@@ -95,6 +110,11 @@ public class PositionControl extends CommandBase {
           //need to do testing to see how long and at what power the motor needs to run
 
             /* **** SPIN THE MOTOR ONE TILE TO THE LEFT **** */
+
+            m_ColorWheel.spin(Constants.colorWheelPositionSpeed);
+          if ( m_ColorWheel.getPosition() > 0.125) {
+            rotationsCompleted = true;
+          }
 
         }
 
@@ -120,6 +140,11 @@ public class PositionControl extends CommandBase {
 
             /* **** SPIN THE MOTOR ONE TILE TO THE LEFT **** */
 
+            m_ColorWheel.spin(Constants.colorWheelPositionSpeed);
+          if ( m_ColorWheel.getPosition() > 0.125) {
+            rotationsCompleted = true;
+          }
+
         }
 
         if (m_ColorWheel.getColor() == "R") {
@@ -127,6 +152,11 @@ public class PositionControl extends CommandBase {
             //need to do testing to see how long and at what power the motor needs to run
           
           /* **** SPIN THE MOTOR ONE TITLE TO THE RIGHT **** */
+
+          m_ColorWheel.spin(-Constants.colorWheelPositionSpeed);
+          if ( m_ColorWheel.getPosition() > 0.125) {
+            rotationsCompleted = true;
+          }
 
         }
         break;
@@ -139,6 +169,11 @@ public class PositionControl extends CommandBase {
           //need to do testing to see how long and at what power the motor needs to run
 
             /* **** SPIN THE MOTOR ONE TILE TO THE LEFT **** */
+
+            m_ColorWheel.spin(Constants.colorWheelPositionSpeed);
+          if ( m_ColorWheel.getPosition() > 0.125) {
+            rotationsCompleted = true;
+          }
 
         }
 
@@ -153,6 +188,11 @@ public class PositionControl extends CommandBase {
           //need to do testing to see how long and at what power the motor needs to run
 
             /* **** SPIN THE MOTOR ONE TILE TO THE RIGHT **** */
+
+            m_ColorWheel.spin(-Constants.colorWheelPositionSpeed);
+          if ( m_ColorWheel.getPosition() > 0.125) {
+            rotationsCompleted = true;
+          }
 
         }
 
@@ -170,12 +210,13 @@ public class PositionControl extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_ColorWheel.spin(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return rotationsCompleted;
   }
 
 }

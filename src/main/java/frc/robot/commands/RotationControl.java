@@ -27,14 +27,14 @@ public class RotationControl extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    ColorWheel.colorWheelMotor.setSelectedSensorPosition(0);
+    m_colorWheel.reset();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     m_colorWheelMotorPosition = ColorWheel.getPosition();
-    RobotContainer.m_ColorWheel.spin(Constants.colorWheelMotorSpeed);
+    m_colorWheel.spin(Constants.colorWheelRotationSpeed);
     
   }
 

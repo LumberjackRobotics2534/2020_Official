@@ -49,16 +49,17 @@ public class ColorWheel extends SubsystemBase {
     m_colorMatcher.addColorMatch(kRedTarget);
     m_colorMatcher.addColorMatch(kYellowTarget);
 
-    colorWheelMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
   }
 
   public void spin(double _speed) {
     colorWheelMotor.set(_speed);
   }
+  public void reset(){
+    colorWheelMotor.setSelectedSensorPosition(0);
+  }
 
   public static double getPosition() {
-    position = colorWheelMotor.getSelectedSensorPosition() / Constants.quadrativeEncoderRotation;
-    System.out.println(position);
+    position = Math.abs(colorWheelMotor.getSelectedSensorPosition() / Constants.quadrativeEncoderRotation);
     return position;
   }
 
