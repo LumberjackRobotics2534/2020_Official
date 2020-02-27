@@ -59,7 +59,8 @@ public class ColorWheel extends SubsystemBase {
   }
 
   public static double getPosition() {
-    position = Math.abs(colorWheelMotor.getSelectedSensorPosition() / Constants.quadrativeEncoderRotation);
+    position = colorWheelMotor.getSelectedSensorPosition() / Constants.quadrativeEncoderRotation;
+    System.out.println(position);
     return position;
   }
 

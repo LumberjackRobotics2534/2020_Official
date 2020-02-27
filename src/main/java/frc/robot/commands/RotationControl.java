@@ -34,9 +34,8 @@ public class RotationControl extends CommandBase {
   @Override
   public void execute() {
     m_colorWheelMotorPosition = ColorWheel.getPosition();
-    if (m_colorWheelMotorRotations < Constants.completedRotationNumber){
     RobotContainer.m_ColorWheel.spin(Constants.colorWheelMotorSpeed);
-    }
+    
   }
 
   // Called once the command ends or is interrupted.
