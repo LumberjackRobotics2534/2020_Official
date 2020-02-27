@@ -8,7 +8,6 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -36,6 +35,10 @@ public class Elevator extends SubsystemBase {
     bottomElevatorMotor.setNeutralMode(NeutralMode.Brake);
 
     bottomElevatorMotor.setInverted(true);
+
+    topPresence = false;
+    
+    bottomPresence = false;
   }
 
   public void lift() {
@@ -47,7 +50,7 @@ public class Elevator extends SubsystemBase {
     bottomElevatorMotor.set(Constants.bottomFeedSpeed);
   }
 
-  public void stopLifting() {
+  public void stopAll() {
     topElevatorMotor.set(0);
     bottomElevatorMotor.set(0);
   }

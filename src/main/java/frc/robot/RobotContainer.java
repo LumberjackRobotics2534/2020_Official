@@ -85,7 +85,7 @@ public class RobotContainer {
     
 
   private void configureButtonBindings() {
-    manipButtonA.whileHeld(new TurretPID(Constants.turretTargetAngle,m_Turret));
+    manipButtonA.whileHeld(new TurretPID(Constants.turretTargetAngle, m_Turret));
     manipButtonX.whileHeld(new ShootCommand(m_Shooter, manipButtonX));
     manipButtonY.whileHeld(new IntakeCommand(m_Intake));
     manipButtonLeft.whileHeld(new HoodCommand(m_Shooter));

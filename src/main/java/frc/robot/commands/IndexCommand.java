@@ -30,11 +30,11 @@ public class IndexCommand extends CommandBase {
     if (Shooter.shooterReady){
       m_Elevator.feed();
     } else if (m_Elevator.topBallPresence()){
-      m_Elevator.stopLifting();
+      m_Elevator.stopAll();
     } else if(m_Elevator.bottomBallPresence()) {
       m_Elevator.lift();
     } else {
-      m_Elevator.stopLifting();
+      m_Elevator.stopAll();
     }
   }
 

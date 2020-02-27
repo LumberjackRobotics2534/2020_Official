@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -24,6 +25,7 @@ public class Shooter extends SubsystemBase {
   private static DoubleSolenoid hoodSolenoid = new DoubleSolenoid(Constants.pcm, Constants.upHood, Constants.downHood);
   public static boolean shooterReady = false;
   private double currentRpm = 0;
+
   public Shooter() {
     shooterMotor.configFactoryDefault();
     shooterMotor.setNeutralMode(NeutralMode.Coast);
@@ -52,6 +54,7 @@ public class Shooter extends SubsystemBase {
   public void hoodUp(){
     hoodSolenoid.set(Value.kForward);
   }
+  
   
   public void hoodDown(){
     hoodSolenoid.set(Value.kReverse);

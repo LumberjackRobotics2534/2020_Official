@@ -19,20 +19,23 @@ import frc.robot.subsystems.Turret;
 public class TurretPID extends PIDCommand {
   public TurretPID(double _targetAngle, Turret _Turret) {
     super(new PIDController(0.0075, 0, 0),_Turret::getX, _targetAngle,
-        output -> {
-          _Turret.spinTurret(output);
-        },
-        _Turret);
-     
+      output -> {
+        _Turret.spinTurret(output);
+      },
+      _Turret);
+    
     // Configure additional PID options by calling `getController` here.
     getController().enableContinuousInput(Constants.turretMinimumInput, Constants.turretMaximumInput);
     getController().setTolerance(Constants.turretPositionTolerance, Constants.turretVelocityTolerance);
     //SmartDashboard.putNumber("Skew", x);
+
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    Turret.lightsEnabled(false);
     return getController().atSetpoint();
+
   }
 }
