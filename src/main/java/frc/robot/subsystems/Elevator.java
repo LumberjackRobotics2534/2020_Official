@@ -18,6 +18,7 @@ public class Elevator extends SubsystemBase {
   private boolean topPresence = false;
   private boolean bottomPresence = false;
   private int bottomPresenceTicks = 0;
+  private double distance = 0;
 
   private AnalogInput irTop = new AnalogInput(Constants.irSensorTop);
   private AnalogInput irBottom = new AnalogInput(Constants.irSensorBottom);
@@ -35,6 +36,8 @@ public class Elevator extends SubsystemBase {
     bottomElevatorMotor.setNeutralMode(NeutralMode.Brake);
 
     bottomElevatorMotor.setInverted(true);
+
+    bottomElevatorMotor.setSelectedSensorPosition(0);
 
     topPresence = false;
     
@@ -63,17 +66,28 @@ public class Elevator extends SubsystemBase {
     }
     return(topPresence);
   }
-  public boolean bottomBallPresence() {
 
-    if(bottomPresenceTicks > Constants.minPresenceTicks){
-      bottomPresence = true;
-    }else if (irBottom.getAverageVoltage() > Constants.minBottomPresenceVoltage
+  public double getDistance () {
+    distance = bottomElevatorMotor.getSelectedSensorPosition();
+    return distance;
+  }
+
+  public void reset(){
+    bottomElevatorMotor.setSelectedSensorPosition(0);
+  }
+
+  public boolean bottomBallPresence() {
+    if (irBottom.getAverageVoltage() > Constants.minBottomPresenceVoltage
            && irBottom.getAverageVoltage() < Constants.maxBottomPresenceVoltage) {
       bottomPresenceTicks++;
+      if(bottomPresenceTicks > Constants.minPresenceTicks){
+        bottomPresence = true;
+      }
     } else {
       bottomPresenceTicks = 0;
       bottomPresence = false;
     }
+    System.out.println(irBottom.getAverageVoltage());
     return(bottomPresence);
   }
 
