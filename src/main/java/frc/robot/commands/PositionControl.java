@@ -65,13 +65,24 @@ public class PositionControl extends CommandBase {
 
         }
 
+        if (m_ColorWheel.getColor() == "Y") {
+
+          //wheel rotates two tiles
+
+          m_ColorWheel.spin(Constants.colorWheelPositionSpeed);
+          if ( ColorWheel.getPosition() > 0.25) {
+            rotationsCompleted = true;
+          }
+
+        }
+
         if (m_ColorWheel.getColor() == "R") {
 
             //need to do testing to see how long and at what power the motor needs to run
 
             /* **** SPIN THE MOTOR ONE TILE TO THE LEFT **** */
           m_ColorWheel.spin(Constants.colorWheelPositionSpeed);
-          if ( m_ColorWheel.getPosition() > 0.125) {
+          if ( ColorWheel.getPosition() > 0.125) {
             rotationsCompleted = true;
           }
 
@@ -84,7 +95,7 @@ public class PositionControl extends CommandBase {
           /* **** SPIN THE MOTOR ONE TITLE TO THE RIGHT **** */
 
           m_ColorWheel.spin(-Constants.colorWheelPositionSpeed);
-          if ( m_ColorWheel.getPosition() > 0.125) {
+          if ( ColorWheel.getPosition() > 0.125) {
             rotationsCompleted = true;
           }
         }
@@ -99,7 +110,18 @@ public class PositionControl extends CommandBase {
           
           /* **** SPIN THE MOTOR ONE TITLE TO THE RIGHT **** */
           m_ColorWheel.spin(-Constants.colorWheelPositionSpeed);
-          if ( m_ColorWheel.getPosition() > 0.125) {
+          if ( ColorWheel.getPosition() > 0.125) {
+            rotationsCompleted = true;
+          }
+
+        }
+
+        if (m_ColorWheel.getColor() == "R") {
+
+          //wheel rotates two tiles in any direction
+
+          m_ColorWheel.spin(Constants.colorWheelPositionSpeed);
+          if ( ColorWheel.getPosition() > 0.25) {
             rotationsCompleted = true;
           }
 
@@ -112,7 +134,7 @@ public class PositionControl extends CommandBase {
             /* **** SPIN THE MOTOR ONE TILE TO THE LEFT **** */
 
             m_ColorWheel.spin(Constants.colorWheelPositionSpeed);
-          if ( m_ColorWheel.getPosition() > 0.125) {
+          if ( ColorWheel.getPosition() > 0.125) {
             rotationsCompleted = true;
           }
 
@@ -134,6 +156,17 @@ public class PositionControl extends CommandBase {
 
         }
 
+        if (m_ColorWheel.getColor() == "G") {
+          
+          //wheel rotates two tiles
+
+          m_ColorWheel.spin(Constants.colorWheelPositionSpeed);
+          if ( ColorWheel.getPosition() > 0.25) {
+            rotationsCompleted = true;
+          }
+
+        }
+
         if (m_ColorWheel.getColor() == "B") {
 
           //need to do testing to see how long and at what power the motor needs to run
@@ -141,7 +174,7 @@ public class PositionControl extends CommandBase {
             /* **** SPIN THE MOTOR ONE TILE TO THE LEFT **** */
 
             m_ColorWheel.spin(Constants.colorWheelPositionSpeed);
-          if ( m_ColorWheel.getPosition() > 0.125) {
+          if ( ColorWheel.getPosition() > 0.125) {
             rotationsCompleted = true;
           }
 
@@ -154,7 +187,7 @@ public class PositionControl extends CommandBase {
           /* **** SPIN THE MOTOR ONE TITLE TO THE RIGHT **** */
 
           m_ColorWheel.spin(-Constants.colorWheelPositionSpeed);
-          if ( m_ColorWheel.getPosition() > 0.125) {
+          if ( ColorWheel.getPosition() > 0.125) {
             rotationsCompleted = true;
           }
 
@@ -171,9 +204,21 @@ public class PositionControl extends CommandBase {
             /* **** SPIN THE MOTOR ONE TILE TO THE LEFT **** */
 
             m_ColorWheel.spin(Constants.colorWheelPositionSpeed);
-          if ( m_ColorWheel.getPosition() > 0.125) {
+          if ( ColorWheel.getPosition() > 0.125) {
             rotationsCompleted = true;
           }
+
+        }
+
+        if (m_ColorWheel.getColor() == "B") {
+
+          //wheel rotates two tiles
+
+          m_ColorWheel.spin(Constants.colorWheelPositionSpeed);
+          if ( ColorWheel.getPosition() > 0.25) {
+            rotationsCompleted = true;
+          }
+
 
         }
 
@@ -190,7 +235,7 @@ public class PositionControl extends CommandBase {
             /* **** SPIN THE MOTOR ONE TILE TO THE RIGHT **** */
 
             m_ColorWheel.spin(-Constants.colorWheelPositionSpeed);
-          if ( m_ColorWheel.getPosition() > 0.125) {
+          if ( ColorWheel.getPosition() > 0.125) {
             rotationsCompleted = true;
           }
 
