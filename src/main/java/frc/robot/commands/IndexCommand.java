@@ -8,11 +8,13 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Shooter;
 
 public class IndexCommand extends CommandBase {
   private Elevator m_Elevator;
+  private boolean wasFeeding = false;
 
   public IndexCommand(Elevator _Elevator) {
     m_Elevator = _Elevator;
@@ -27,14 +29,22 @@ public class IndexCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (Shooter.shooterReady){
+    if (Shooter.shooterReady) {
       m_Elevator.feed();
-    } else if (m_Elevator.topBallPresence()){
+    } else if (m_Elevator.topBallPresence()) {
       m_Elevator.stopAll();
-    } else if(m_Elevator.bottomBallPresence()) {
+    } else if (m_Elevator.bottomBallPresence()) {
       m_Elevator.lift();
+      m_Elevator.reset();
+      wasFeeding = true;
     } else {
-      m_Elevator.stopAll();
+      if (wasFeeding){
+        m_Elevator.lift();
+        if (m_Elevator.getDistance() > Constants.extraFeedDistance){
+          m_Elevator.stopAll();
+          wasFeeding = false;
+        }
+      }
     }
   }
 
