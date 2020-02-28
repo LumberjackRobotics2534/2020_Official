@@ -12,7 +12,6 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -23,8 +22,6 @@ import frc.robot.commands.ShootCommand;
 public class Shooter extends SubsystemBase {
   private static WPI_TalonFX shooterMotor = new WPI_TalonFX(Constants.shooterMotor);
   private static DoubleSolenoid hoodSolenoid = new DoubleSolenoid(Constants.pcm, Constants.upHood, Constants.downHood);
-  public static boolean shooterReady = false;
-  private double currentRpm = 0;
 
   public Shooter() {
     shooterMotor.configFactoryDefault();
@@ -48,7 +45,7 @@ public class Shooter extends SubsystemBase {
 
   public void shooterOff(){
     shooterMotor.set(0);
-    shooterReady = false;
+    ShootCommand.shooterReady = false;
   }
   
   public void hoodUp(){
@@ -66,12 +63,6 @@ public class Shooter extends SubsystemBase {
 
   @Override
   public void periodic() {
-    currentRpm = getAngularVelocity();
-    if (currentRpm > ShootCommand.dashRpm - ShootCommand.dashRpm*Constants.acceptableRpmError 
-    && currentRpm < currentRpm + ShootCommand.dashRpm*Constants.acceptableRpmError){
-      shooterReady = true;  
-    } else {
-      shooterReady = false;
-    }
+
   }
 }

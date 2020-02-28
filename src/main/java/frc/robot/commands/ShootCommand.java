@@ -10,6 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.Constants;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Turret;
 
@@ -20,15 +21,14 @@ public class ShootCommand extends CommandBase {
   private double equRpm;
   private double actualRpm;
   private double distance = 0.0;
-
-
+  public static boolean shooterReady = false;
   
   public ShootCommand(Shooter _shooter, JoystickButton _button) {
     m_shooter = _shooter;
     m_Button = _button;
     addRequirements(m_shooter); 
     SmartDashboard.putNumber("RPM", 0);
-
+    shooterReady = false;
   }
 
   // Called when the command is initially scheduled.
@@ -48,8 +48,14 @@ public class ShootCommand extends CommandBase {
 
     actualRpm = m_shooter.getAngularVelocity();
     SmartDashboard.putNumber("Actual RPM", actualRpm);
-
+    if (actualRpm > equRpm - equRpm*Constants.acceptableRpmError 
+    && actualRpm < equRpm + equRpm*Constants.acceptableRpmError){
+      shooterReady = true;  
+    } else {
+      shooterReady = false;
+    }
   }
+
   public void getDashVelocity(){
     dashRpm = SmartDashboard.getNumber("RPM", 0.0);
   }
