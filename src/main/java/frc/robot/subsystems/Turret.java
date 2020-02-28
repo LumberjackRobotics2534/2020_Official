@@ -34,7 +34,7 @@ public class Turret extends SubsystemBase {
   private boolean zero;
   private double turretPosition;
   private static int lightCode = 1;
-  static SampleSmoother distanceSmoother = new SampleSmoother(5);
+  static SampleSmoother distanceSmoother = new SampleSmoother(10);
 
   public Turret() {
     turretMotor.configFactoryDefault();
@@ -87,7 +87,6 @@ public class Turret extends SubsystemBase {
     distanceSmoother.addSample((54 / Math.tan(Math.toRadians(22 + y))));
     distance = distanceSmoother.getAverage();
     SmartDashboard.putNumber("Distance", distance);
-
     return distance;
   }
 
@@ -95,7 +94,7 @@ public class Turret extends SubsystemBase {
     if (enabled) {
       lightCode = 3; // On
     } else {
-      lightCode = 1; //Off
+      lightCode = 3; //Off
     }
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(lightCode);
   }

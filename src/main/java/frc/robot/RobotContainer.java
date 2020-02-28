@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.HoodCommand;
+import frc.robot.commands.HoodDistanceCommand;
 import frc.robot.commands.IndexCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.JoyDriveCommand;
@@ -82,6 +83,7 @@ public class RobotContainer {
     m_LEDStrip.setDefaultCommand(new LEDCommand(m_LEDStrip));
     m_Elevator.setDefaultCommand(new IndexCommand(m_Elevator));
     m_Hang.setDefaultCommand(new WinchCommand(m_Hang, driverButtonA, driverButtonX));
+    m_Shooter.setDefaultCommand(new HoodDistanceCommand(m_Shooter));
   }
     
 

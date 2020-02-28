@@ -88,7 +88,7 @@ public final class Constants {
     public static final int kPIDLoopIdx = 0;
     public static final int kTimeoutMs = 30;
     public static final double acceptableRpmError = 0.05; //5%
-    public static final Gains kGains_Velocit = new Gains( 1.6, 0.004, 20, 1023/7200,  300,  1.00);
+    public static final Gains kGains_Velocit = new Gains( 0.6, 0.002, 10, 1023/7200,  300,  1.00);//1.6, 0.004, 20, 1023/7200,  300,  1.00
     public static final int shooterSpeed = -4500;
     //-------------------COLOR WHEEL------------------//
     public static final int colorWheelMotor = 6;
