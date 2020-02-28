@@ -40,8 +40,9 @@ public class Elevator extends SubsystemBase {
     bottomElevatorMotor.setSelectedSensorPosition(0);
 
     topPresence = false;
-    
     bottomPresence = false;
+    bottomPresenceTicks = 0;
+    distance = 0;
   }
 
   public void lift() {
