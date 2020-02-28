@@ -70,7 +70,7 @@ public final class Constants {
     public static final double extraFeedDistance = 1024;
     //---------------------TURRET---------------------//
     public static final int turretMotor = 7;
-    public static final double turretPositionTolerance = 1;
+    public static final double turretPositionTolerance = 0;
     public static final double turretVelocityTolerance = 0;
     public static final double turretMinimumInput = -29.8;
     public static final double turretMaximumInput = 29.8;

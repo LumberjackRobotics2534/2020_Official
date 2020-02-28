@@ -81,7 +81,7 @@ public class RobotContainer {
         () -> manipController.getX(Hand.kLeft),m_Turret));
         
     m_LEDStrip.setDefaultCommand(new LEDCommand(m_LEDStrip));
-    m_Elevator.setDefaultCommand(new IndexCommand(m_Elevator));
+    //m_Elevator.setDefaultCommand(new IndexCommand(m_Elevator));
     m_Hang.setDefaultCommand(new WinchCommand(m_Hang, driverButtonA, driverButtonX));
     m_Shooter.setDefaultCommand(new HoodDistanceCommand(m_Shooter));
   }
@@ -89,6 +89,7 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     manipButtonA.whileHeld(new TurretPID(Constants.turretTargetAngle, m_Turret));
+    manipButtonB.whileHeld(new IndexCommand(m_Elevator));
     manipButtonX.whileHeld(new ShootCommand(m_Shooter, manipButtonX));
     manipButtonY.whileHeld(new IntakeCommand(m_Intake));
     manipButtonLeft.whenPressed(new PositionControl(m_ColorWheel));

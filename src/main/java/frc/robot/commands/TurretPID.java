@@ -18,7 +18,7 @@ import frc.robot.subsystems.Turret;
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class TurretPID extends PIDCommand {
   public TurretPID(double _targetAngle, Turret _Turret) {
-    super(new PIDController(0.0075, 0, 0),_Turret::getX, _targetAngle,
+    super(new PIDController(0.0105, 0.00005, 0),_Turret::getX, _targetAngle,
       output -> {
         _Turret.spinTurret(output);
       },
