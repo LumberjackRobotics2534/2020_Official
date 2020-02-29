@@ -11,7 +11,6 @@ import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrain;
 
 public class JoyDriveCommand extends CommandBase {
@@ -42,7 +41,7 @@ public class JoyDriveCommand extends CommandBase {
     leftY = m_leftY.getAsDouble();
     leftX = m_leftX.getAsDouble();
     rightX = m_rightX.getAsDouble();
-    RobotContainer.m_DriveTrain.drive(leftY, -leftX, rightX);
+    m_DriveTrain.drive(leftY, -leftX, rightX);
   }
 
   // Called once the command ends or is interrupted.

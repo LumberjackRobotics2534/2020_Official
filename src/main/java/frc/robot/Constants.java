@@ -31,6 +31,9 @@ public final class Constants {
     public static final double kRamseteB = 2;
     public static final double kRamseteZeta = 0.7;
     public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackwidthMeters);
+    //-----------------NonProfiledAuto----------------//
+    public static final double angleDriveMinimumInput = -180;
+	public static final double angleDriveMaximumInput = 180;
     //-------------------CONTROLLER-------------------//
     //Controller IDs
     public static final int driverControllerPort = 0;

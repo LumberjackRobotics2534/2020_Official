@@ -15,10 +15,12 @@ public class WinchCommand extends CommandBase {
   Hang m_Hang;
   JoystickButton m_Button1;
   JoystickButton m_Button2;
-  public WinchCommand(Hang _Hang, JoystickButton _Button1, JoystickButton _Button2) {
+  JoystickButton m_Button3;
+  public WinchCommand(Hang _Hang, JoystickButton _Button1, JoystickButton _Button2, JoystickButton _Button3) {
     m_Hang = _Hang;
     m_Button1 = _Button1;
     m_Button2 = _Button2;
+    m_Button3 = _Button3;
     addRequirements(m_Hang);
   }
 
@@ -34,6 +36,9 @@ public class WinchCommand extends CommandBase {
       m_Hang.Winch();
     } else {
       m_Hang.StopWinch();
+    }
+    if(m_Button3.get()){
+      m_Hang.WinchBackwards();
     }
     if (m_Button2.get()){
       m_Hang.Raise();
