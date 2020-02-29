@@ -1,6 +1,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.kauailabs.navx.frc.AHRS;
@@ -45,11 +46,16 @@ public class DriveTrain extends SubsystemBase {
     rightBack.setInverted(true);
     leftFront.setInverted(true);
     leftBack.setInverted(true);
+    rightFront.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+    rightBack.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+    leftFront.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+    leftBack.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
     // Reset encoders before finishing creation of odometry
     leftFront.setSelectedSensorPosition(0);
     rightFront.setSelectedSensorPosition(0);
     navx.zeroYaw();
     m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading()));
+    mecanumDriveTrain.setDeadband(Constants.deadzone);
   }
 
   // Mecanum drive command for manual control
@@ -64,7 +70,7 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public double getHeading() {
-    return Math.IEEEremainder(navx.getAngle(), 360);
+    return -1 * Math.IEEEremainder(navx.getAngle(), 360);
     
   }
 

@@ -42,15 +42,6 @@ public class JoyDriveCommand extends CommandBase {
     leftY = m_leftY.getAsDouble();
     leftX = m_leftX.getAsDouble();
     rightX = m_rightX.getAsDouble();
-    if (Math.abs(leftY) < Constants.deadzone){ 
-      leftY = 0.0;
-    }
-    if (Math.abs(leftX) < Constants.deadzone){
-      leftX = 0.0;
-    }
-    if (Math.abs(rightX) < Constants.deadzone){
-      rightX = 0.0;
-    } 
     RobotContainer.m_DriveTrain.drive(leftY, -leftX, rightX);
   }
 
