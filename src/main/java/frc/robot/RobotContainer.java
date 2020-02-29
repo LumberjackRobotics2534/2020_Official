@@ -20,7 +20,6 @@ import edu.wpi.first.wpilibj.trajectory.constraint.DifferentialDriveVoltageConst
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.HoodCommand;
 import frc.robot.commands.HoodDistanceCommand;
 import frc.robot.commands.IndexCommand;
 import frc.robot.commands.IntakeCommand;
@@ -120,7 +119,7 @@ public class RobotContainer {
       //Pass through these interior points
       List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
       //End position
-      new Pose2d(-3, 0, new Rotation2d(0)),
+      new Pose2d(3, 0, new Rotation2d(0)),
       //Pass config
       config);
 

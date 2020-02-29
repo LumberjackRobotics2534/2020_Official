@@ -66,7 +66,7 @@ public final class Constants {
     public static final double bottomLiftSpeed = 0.3;
     public static final double topFeedSpeed = 0.6;
     public static final double bottomFeedSpeed = 0.5;
-    public static final int minPresenceTicks = 10; //TODO: Adjust value of ticks
+    public static final int minPresenceTicks = 10;
     public static final double extraFeedDistance = 1024;
     //---------------------TURRET---------------------//
     public static final int turretMotor = 7;
@@ -88,14 +88,13 @@ public final class Constants {
     public static final int downHood = 3;
     public static final int kPIDLoopIdx = 0;
     public static final int kTimeoutMs = 30;
-    public static final double acceptableRpmError = 0.05; //5%
+    public static final double acceptableRpmError = 1.05; //5%
     public static final Gains kGains_Velocit = new Gains( 0.6, 0.002, 10, 1023/7200,  300,  1.00);//1.6, 0.004, 20, 1023/7200,  300,  1.00
-    public static final int shooterSpeed = -4500;
     //-------------------COLOR WHEEL------------------//
     public static final int colorWheelMotor = 6;
     public static final double quadrativeEncoderRotation = 4096*(32/4/*Reduction from Motor to WOF*/);
     public static final double completedRotationNumber = 3.1;
-    public static final double colorWheelPositionSpeed = 0.5;
+    public static final double colorWheelPositionSpeed = 0.5; //Two different speeds for rotation control and position control
     public static final double colorWheelRotationSpeed = 1.0;
     //----------------------HANG----------------------//
     public static final int climbMotor = 11;

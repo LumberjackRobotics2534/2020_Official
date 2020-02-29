@@ -7,16 +7,9 @@
 
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.DriveTrain;
 
 /**
@@ -26,13 +19,8 @@ import frc.robot.subsystems.DriveTrain;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static DriveTrain m_DriveTrain;
-  private RobotContainer m_robotContainer; //DO NOT DELETE
+  private RobotContainer m_robotContainer;
   private Command m_autonomousCommand;
-  NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-  NetworkTableEntry tx;
-  public static double x;
-  ColorWheel m_ColorWheel = new ColorWheel();
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -42,7 +30,6 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-
   }
 
   /**
@@ -59,8 +46,7 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-    tx = table.getEntry("tx");
-    x = tx.getDouble(0.0);
+
   }
 
   /**
@@ -68,7 +54,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
-    //ColorWheel.colorWheelMotor.setSelectedSensorPosition(0);
   }
 
   @Override
@@ -99,7 +84,6 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
     CommandScheduler.getInstance().cancelAll();
-    ColorWheel.colorWheelMotor.setSelectedSensorPosition(0);
   }
 
   /**
@@ -113,17 +97,12 @@ public class Robot extends TimedRobot {
   public void testInit() {
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
-    colorWheelMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
-    colorWheelMotor.setSelectedSensorPosition(0);
   }
-  public static WPI_TalonSRX colorWheelMotor = new WPI_TalonSRX(Constants.colorWheelMotor);
-
 
   /**
    * This function is called periodically during test mode.
    */
   @Override
   public void testPeriodic() {
-    System.out.println(colorWheelMotor.getSelectedSensorPosition());
   }
 }
