@@ -81,6 +81,10 @@ public class DriveTrain extends SubsystemBase {
     return m_odometry.getPoseMeters();
   }
 
+  public int getEncoderPosition(){
+    return leftFront.getSelectedSensorPosition();
+  }
+
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
     //Get wheel speeds
     return new DifferentialDriveWheelSpeeds(
