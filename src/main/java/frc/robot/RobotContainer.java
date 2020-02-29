@@ -80,7 +80,7 @@ public class RobotContainer {
         () -> manipController.getX(Hand.kLeft),m_Turret));
         
     m_LEDStrip.setDefaultCommand(new LEDCommand(m_LEDStrip));
-    //m_Elevator.setDefaultCommand(new IndexCommand(m_Elevator));
+    m_Elevator.setDefaultCommand(new IndexCommand(m_Elevator));
     m_Hang.setDefaultCommand(new WinchCommand(m_Hang, driverButtonA, driverButtonX));
     m_Shooter.setDefaultCommand(new HoodDistanceCommand(m_Shooter));
   }
@@ -88,7 +88,6 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     manipButtonA.whileHeld(new TurretPID(Constants.turretTargetAngle, m_Turret));
-    manipButtonB.whileHeld(new IndexCommand(m_Elevator));
     manipButtonX.whileHeld(new ShootCommand(m_Shooter, manipButtonX));
     manipButtonY.whileHeld(new IntakeCommand(m_Intake));
     manipButtonLeft.whenPressed(new PositionControl(m_ColorWheel));
@@ -110,14 +109,14 @@ public class RobotContainer {
     // Apply the voltage constraint
     config.addConstraint(autoVoltageConstraint);
     //Create a Trajectory to follow. UNITS ARE IN METERS from starting position.
-    config.setReversed(true);
+    config.setReversed(false);
 
     
     Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
       //Start at the origin facing the positive X direction
       new Pose2d(0, 0, new Rotation2d(0)),
       //Pass through these interior points
-      List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
+      List.of(/*new Translation2d(1, 1), new Translation2d(2, 0)*/),
       //End position
       new Pose2d(3, 0, new Rotation2d(0)),
       //Pass config

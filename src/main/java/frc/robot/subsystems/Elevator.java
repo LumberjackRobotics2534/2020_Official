@@ -88,7 +88,6 @@ public class Elevator extends SubsystemBase {
       bottomPresenceTicks = 0;
       bottomPresence = false;
     }
-    System.out.println(irBottom.getAverageVoltage());
     return(bottomPresence);
   }
 

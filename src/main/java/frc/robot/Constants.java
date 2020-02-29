@@ -16,16 +16,16 @@ public final class Constants {
 	public static final int rightBackDrive = 4;
 	public static final int leftFrontDrive = 1;
     public static final int leftBackDrive = 3;
-    public static final int integratedEncoderTicksPerRot = 2048*(105/26);
+    public static final int integratedEncoderTicksPerRot = 2048*(280/39);
     //----- -----------MOTION PROFILING----------------//
-    public static final double ksVolts = 0.209;
+    public static final double ksVolts = 0.247;
     public static final double kvVoltSecondsPerMeter = 1.64;
-    public static final double kaVoltSecondsSquaredPerMeter = 0.208;
+    public static final double kaVoltSecondsSquaredPerMeter = 0.217;
     public static final double kMaxVoltage = 10;
-    public static final double kPDriveVel =  8.76; //was 8.76 0.8
+    public static final double kPDriveVel =  0.291; //was 0.291
     public static final double kTrackwidthMeters = 1.3609938869150051; //was 0.5588
-    public static final double kMaxSpeedMetersPerSecond = 3; //was 3
-    public static final double kMaxAccelerationMetersPerSecondSquared = 3; //was 3
+    public static final double kMaxSpeedMetersPerSecond = 10;
+    public static final double kMaxAccelerationMetersPerSecondSquared = 3; 
     public static final double kTicksToMetersConversion = ((1/14703.6897/*Rot per Tick*/)*(6*Math.PI/*In per Rot*/)*(1/39.3701/*M per In*/));
     public static final double kHundredMSToSecondsConversion = 10;
     public static final double kRamseteB = 2;
@@ -60,13 +60,13 @@ public final class Constants {
     public static final int irSensorTop = 2;
     public static final int irSensorBottom = 1;
     public static final double minTopPresenceVoltage = 1.5;
-    public static final double minBottomPresenceVoltage = 1.22;
+    public static final double minBottomPresenceVoltage = 1.0;
     public static final double maxBottomPresenceVoltage = 1.85;
     public static final double topLiftSpeed = 0.4;
     public static final double bottomLiftSpeed = 0.3;
     public static final double topFeedSpeed = 0.6;
     public static final double bottomFeedSpeed = 0.5;
-    public static final int minPresenceTicks = 10;
+    public static final int minPresenceTicks = 15;
     public static final double extraFeedDistance = 1024;
     //---------------------TURRET---------------------//
     public static final int turretMotor = 7;
@@ -88,7 +88,7 @@ public final class Constants {
     public static final int downHood = 3;
     public static final int kPIDLoopIdx = 0;
     public static final int kTimeoutMs = 30;
-    public static final double acceptableRpmError = 1.05; //5%
+    public static final double acceptableRpmError = 0.05; //5%
     public static final Gains kGains_Velocit = new Gains( 0.6, 0.002, 10, 1023/7200,  300,  1.00);//1.6, 0.004, 20, 1023/7200,  300,  1.00
     //-------------------COLOR WHEEL------------------//
     public static final int colorWheelMotor = 6;

@@ -17,18 +17,18 @@ import frc.robot.Constants;
 
 public class DriveTrain extends SubsystemBase {
   //Create Talons
-  private WPI_TalonFX rightFront = new WPI_TalonFX(Constants.rightFrontDrive);
+  private static WPI_TalonFX rightFront = new WPI_TalonFX(Constants.rightFrontDrive);
   private WPI_TalonFX rightBack = new WPI_TalonFX(Constants.rightBackDrive);
-  private WPI_TalonFX leftFront = new WPI_TalonFX(Constants.leftFrontDrive);
+  private static WPI_TalonFX leftFront = new WPI_TalonFX(Constants.leftFrontDrive);
   private WPI_TalonFX leftBack = new WPI_TalonFX(Constants.leftBackDrive);
-  //Create Mecanum drive for manual control
+  // Create Mecanum drive for manual control
   private MecanumDrive mecanumDriveTrain = new MecanumDrive(leftFront, leftBack, rightFront, rightBack);
 
   private SpeedControllerGroup leftSide = new SpeedControllerGroup(leftFront, leftBack);
   private SpeedControllerGroup rightSide = new SpeedControllerGroup(rightFront, rightBack);
-  //Set up odomentry
+  // Set up odomentry
   private DifferentialDriveOdometry m_odometry;
-  //Set up gyro
+  // Set up gyro
   private static AHRS navx = new AHRS(SerialPort.Port.kMXP);
 
   public DriveTrain() {
@@ -59,25 +59,26 @@ public class DriveTrain extends SubsystemBase {
 
   public static void zero() {
     navx.zeroYaw();
+    leftFront.setSelectedSensorPosition(0);
+    rightFront.setSelectedSensorPosition(0);
   }
 
   public double getHeading() {
     return Math.IEEEremainder(navx.getAngle(), 360);
+    
   }
 
   public void tankDriveVolts(double leftVolts, double rightVolts){
     leftSide.setVoltage(leftVolts);
-    rightSide.setVoltage(-rightVolts);
-    //System.out.println("left\t"+ leftVolts);
-    //System.out.println("right\t"+ -rightVolts);
+    rightSide.setVoltage(rightVolts);
+    System.out.println(leftVolts + "left");
+    System.out.println(rightVolts + "right");
     mecanumDriveTrain.feed();
   }
   
   public Pose2d getPose() {
     //Get position in METERS
-    System.out.println(getHeading());
     return m_odometry.getPoseMeters();
-
   }
 
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
@@ -85,7 +86,7 @@ public class DriveTrain extends SubsystemBase {
     return new DifferentialDriveWheelSpeeds(
       //Get velocity in TICKS/100MS, convert to METERS/SECOND
       leftFront.getSelectedSensorVelocity()*Constants.kTicksToMetersConversion*Constants.kHundredMSToSecondsConversion,
-      rightFront.getSelectedSensorVelocity()*Constants.kTicksToMetersConversion*Constants.kHundredMSToSecondsConversion);
+      -rightFront.getSelectedSensorVelocity()*Constants.kTicksToMetersConversion*Constants.kHundredMSToSecondsConversion);
   }
 
   @Override
@@ -95,7 +96,6 @@ public class DriveTrain extends SubsystemBase {
       Rotation2d.fromDegrees(getHeading()), 
       //Get distance travelled in TICKS, convert to METERS
       leftFront.getSelectedSensorPosition()*Constants.kTicksToMetersConversion,
-      rightFront.getSelectedSensorPosition()*Constants.kTicksToMetersConversion/* * (-1)*/);
-    
+      -rightFront.getSelectedSensorPosition()*Constants.kTicksToMetersConversion);
   }
 }

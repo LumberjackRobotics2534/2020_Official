@@ -28,19 +28,18 @@ public class ShootCommand extends CommandBase {
     m_Button = _button;
     addRequirements(m_shooter); 
     SmartDashboard.putNumber("RPM", 0);
-    shooterReady = false;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    this.getEquationVelocity();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     getDashVelocity();
+    getEquationVelocity();
     if(m_Button.get()){
       double targetVelocity_UnitsPer100ms =  -equRpm* 2048 / 600;
       m_shooter.shoot(targetVelocity_UnitsPer100ms);
@@ -50,10 +49,11 @@ public class ShootCommand extends CommandBase {
     SmartDashboard.putNumber("Actual RPM", actualRpm);
     if (actualRpm > equRpm - equRpm*Constants.acceptableRpmError 
     && actualRpm < equRpm + equRpm*Constants.acceptableRpmError){
-      shooterReady = true;  
+      shooterReady = true; 
     } else {
       shooterReady = false;
     }
+    System.out.println(shooterReady + "shooter");
   }
 
   public void getDashVelocity(){
@@ -76,6 +76,7 @@ public class ShootCommand extends CommandBase {
   @Override
   public void end(final boolean interrupted) {
     m_shooter.shooterOff();
+    shooterReady = false;
 
   }
 

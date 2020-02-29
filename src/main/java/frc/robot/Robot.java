@@ -54,6 +54,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+    DriveTrain.zero();
   }
 
   @Override
@@ -72,8 +73,13 @@ public class Robot extends TimedRobot {
   /**
    * This function is called periodically during autonomous.
    */
+  int i = 0;
   @Override
   public void autonomousPeriodic() {
+    if (i == 0){
+      DriveTrain.zero();
+      i++;
+    }
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     if(m_autonomousCommand != null){
       m_autonomousCommand.schedule();

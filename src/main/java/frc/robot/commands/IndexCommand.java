@@ -43,6 +43,8 @@ public class IndexCommand extends CommandBase {
           m_Elevator.stopAll();
           wasFeeding = false;
         }
+      }else{
+        m_Elevator.stopAll();
       }
     }
 
