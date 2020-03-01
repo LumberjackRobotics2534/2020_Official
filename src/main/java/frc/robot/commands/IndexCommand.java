@@ -28,7 +28,7 @@ public class IndexCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (ShootCommand.shooterReady) {
+    if (AutoShootCommand.shooterReady) {
       m_Elevator.feed();
     } else if (m_Elevator.topBallPresence()) {
       m_Elevator.stopAll();
@@ -54,6 +54,7 @@ public class IndexCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     m_Elevator.stopAll();
+
   }
 
   // Returns true when the command should end.

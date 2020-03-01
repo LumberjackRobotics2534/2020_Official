@@ -25,6 +25,7 @@ public class NonProfiledAutoShootCommand extends SequentialCommandGroup {
     m_Balls = Balls;
     addCommands(
       new TurretPID(Constants.turretTargetAngle, m_Turret),
+
       new AutoShootCommand(m_Shooter, m_Balls)
     ); 
   }

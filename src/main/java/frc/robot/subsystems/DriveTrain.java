@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -31,6 +32,8 @@ public class DriveTrain extends SubsystemBase {
   private DifferentialDriveOdometry m_odometry;
   // Set up gyro
   private static AHRS navx = new AHRS(SerialPort.Port.kMXP);
+  int position;
+  double speed;
 
   public DriveTrain() {
     // Configurations for talons
@@ -107,5 +110,9 @@ public class DriveTrain extends SubsystemBase {
       //Get distance travelled in TICKS, convert to METERS
       leftFront.getSelectedSensorPosition()*Constants.kTicksToMetersConversion,
       -rightFront.getSelectedSensorPosition()*Constants.kTicksToMetersConversion);
+    position = getEncoderPosition();
+    speed = leftFront.get();
+    SmartDashboard.putNumber("Drive Encoder", position);
+    SmartDashboard.putNumber("Speed", speed);
   }
 }

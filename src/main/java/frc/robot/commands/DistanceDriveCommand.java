@@ -14,11 +14,11 @@ import frc.robot.subsystems.DriveTrain;
 public class DistanceDriveCommand extends PIDCommand {
   public DistanceDriveCommand(DriveTrain _driveTrain, int _targetDistance) {
     super( 
-        new PIDController(0, 0, 0),
+        new PIDController(0.0005, 0, 0),
         _driveTrain::getEncoderPosition,
         _targetDistance,
         output -> {
-          _driveTrain.drive(output, 0, 0);
+          _driveTrain.drive(0, output, 0);
         },
         _driveTrain);
   }

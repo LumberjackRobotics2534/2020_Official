@@ -34,7 +34,7 @@ public final class Constants {
     //-----------------NonProfiledAuto----------------//
     public static final double angleDriveMinimumInput = -180;
     public static final double angleDriveMaximumInput = 180;
-    public static final int threeBalltargetDistance = 22055;
+    public static final int threeBalltargetDistance = -22055;
     //-------------------CONTROLLER-------------------//
     //Controller IDs
     public static final int driverControllerPort = 0;
@@ -74,7 +74,7 @@ public final class Constants {
     public static final double extraFeedDistance = 1024;
     //---------------------TURRET---------------------//
     public static final int turretMotor = 7;
-    public static final double turretPositionTolerance = 0;
+    public static final double turretPositionTolerance = 1;
     public static final double turretVelocityTolerance = 0;
     public static final double turretMinimumInput = -29.8;
     public static final double turretMaximumInput = 29.8;
@@ -93,7 +93,7 @@ public final class Constants {
     public static final int kPIDLoopIdx = 0;
     public static final int kTimeoutMs = 30;
     public static final double acceptableRpmError = 0.05; //5%
-    public static final Gains kGains_Velocit = new Gains( 0.6, 0.002, 10, 1023/7200,  300,  1.00);//1.6, 0.004, 20, 1023/7200,  300,  1.00
+    public static final Gains kGains_Velocit = new Gains( 0.6, 0.00225, 10, 1023/7200,  300,  1.00);//1.6, 0.004, 20, 1023/7200,  300,  1.00
     //-------------------COLOR WHEEL------------------//
     public static final int colorWheelMotor = 6;
     public static final double quadrativeEncoderRotation = 4096*(32/4/*Reduction from Motor to WOF*/);

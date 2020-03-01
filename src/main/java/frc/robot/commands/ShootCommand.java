@@ -53,7 +53,6 @@ public class ShootCommand extends CommandBase {
     } else {
       shooterReady = false;
     }
-    System.out.println(shooterReady + "shooter");
   }
 
   public void getDashVelocity(){

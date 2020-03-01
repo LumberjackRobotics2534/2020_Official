@@ -1,5 +1,7 @@
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants;
@@ -9,6 +11,7 @@ import frc.robot.subsystems.Turret;
 
 public class AutoShootCommand extends CommandBase {
   private Shooter m_shooter;
+  Elevator m_Elevator;
   private double equRpm;
   private double actualRpm;
   private double distance = 0.0;
@@ -17,6 +20,7 @@ public class AutoShootCommand extends CommandBase {
   private boolean wastopBallPresent = false;
   private static int shotsTaken = 0;
   private int targetShots;
+  Timer shooterTimer = new Timer();
   
   public AutoShootCommand(Shooter _shooter, int _targetShots) {
     m_shooter = _shooter;
@@ -28,26 +32,33 @@ public class AutoShootCommand extends CommandBase {
   @Override
   public void initialize() {
     shotsTaken = 0;
+    shooterTimer.reset();
+    shooterTimer.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     getEquationVelocity();
+    getShotsTaken();
     double targetVelocity_UnitsPer100ms =  -equRpm* 2048 / 600;
     m_shooter.shoot(targetVelocity_UnitsPer100ms);
     actualRpm = m_shooter.getAngularVelocity();
     if (actualRpm > equRpm - equRpm*Constants.acceptableRpmError 
-    && actualRpm < equRpm + equRpm*Constants.acceptableRpmError){
+    && actualRpm < equRpm + equRpm*Constants.acceptableRpmError
+    && (shooterTimer.get() > 1.25)){
       shooterReady = true; 
     } else {
       shooterReady = false;
     }
-    System.out.println(shooterReady + "shooter");
+    SmartDashboard.putBoolean("WasPresent", wastopBallPresent);
+    SmartDashboard.putBoolean("Top Ball", topBallPresence);
+    SmartDashboard.putNumber("Shots Taken", shotsTaken);
+    SmartDashboard.putNumber("EQURPM", equRpm);
   }
 
   public int getShotsTaken(){
-    topBallPresence = Elevator.topBallPresence();
+    topBallPresence = m_Elevator.topBallPresence();
     if(topBallPresence){
       wastopBallPresent = true;
     } else if(topBallPresence == false && wastopBallPresent){
@@ -60,7 +71,7 @@ public class AutoShootCommand extends CommandBase {
   public void getEquationVelocity() {
     distance = Turret.getDistance();
     if(distance >= 67 && distance <= 127){
-     equRpm = (0.0000422)*Math.pow(distance, 4)*-1 + 0.01756*Math.pow(distance, 3) + -2.706*Math.pow(distance, 2) + 183.9*Math.pow(distance, 1) - 2154;
+     equRpm = (0.0000422)*Math.pow(distance, 4)*-1 + 0.01756*Math.pow(distance, 3) + -2.706*Math.pow(distance, 2) + 183.9*Math.pow(distance, 1) - 2140;
     } else if(distance > 127 && distance < 169){
      equRpm = ((Math.pow(distance - 127, 2))/12)+2547.728;
     } else if(distance >= 169 && distance <= 400){

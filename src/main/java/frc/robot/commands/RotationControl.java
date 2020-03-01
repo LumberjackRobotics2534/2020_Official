@@ -33,7 +33,6 @@ public class RotationControl extends CommandBase {
   public void execute() {
     m_colorWheelPosition = ColorWheel.getPosition();
     m_colorWheel.spin(Constants.colorWheelRotationSpeed);
-    System.out.println(m_colorWheelPosition);
   }
 
   // Called once the command ends or is interrupted.

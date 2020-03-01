@@ -67,7 +67,10 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     DriveTrain.zero();
-    
+    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    if(m_autonomousCommand != null){
+      m_autonomousCommand.schedule();
+    }
   }
 
   /**
@@ -80,11 +83,7 @@ public class Robot extends TimedRobot {
       DriveTrain.zero();
       i++;
     }
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-    if(m_autonomousCommand != null){
-      m_autonomousCommand.schedule();
-      
-    }
+    
   }
 
   @Override

@@ -17,10 +17,12 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Other.SampleSmoother;
 import frc.robot.commands.ShootCommand;
 
 public class Shooter extends SubsystemBase {
   private static WPI_TalonFX shooterMotor = new WPI_TalonFX(Constants.shooterMotor);
+  double actualRpm;
 
   public Shooter() {
     shooterMotor.configFactoryDefault();
@@ -54,6 +56,7 @@ public class Shooter extends SubsystemBase {
 
   @Override
   public void periodic() {
-
+    actualRpm = getAngularVelocity();
+    SmartDashboard.putNumber("Actual RPM", actualRpm);
   }
 }
