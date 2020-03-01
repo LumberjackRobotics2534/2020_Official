@@ -33,7 +33,8 @@ public final class Constants {
     public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackwidthMeters);
     //-----------------NonProfiledAuto----------------//
     public static final double angleDriveMinimumInput = -180;
-	public static final double angleDriveMaximumInput = 180;
+    public static final double angleDriveMaximumInput = 180;
+    public static final int threeBalltargetDistance = 22055;
     //-------------------CONTROLLER-------------------//
     //Controller IDs
     public static final int driverControllerPort = 0;

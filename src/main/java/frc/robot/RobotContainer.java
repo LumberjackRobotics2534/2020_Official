@@ -19,16 +19,17 @@ import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.trajectory.constraint.DifferentialDriveVoltageConstraint;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
-import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.HoodDistanceCommand;
 import frc.robot.commands.IndexCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.JoyDriveCommand;
 import frc.robot.commands.LEDCommand;
+import frc.robot.commands.NonProfiledAutoShootCommand;
 import frc.robot.commands.PositionControl;
 import frc.robot.commands.RotationControl;
 import frc.robot.commands.ShootCommand;
+import frc.robot.commands.ThreeBallAutoCommand;
 import frc.robot.commands.TurretCommand;
 import frc.robot.commands.TurretPID;
 import frc.robot.commands.WinchCommand;
@@ -36,6 +37,7 @@ import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Hang;
+import frc.robot.subsystems.Hood;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.RGBstrip;
 import frc.robot.subsystems.Shooter;
@@ -53,6 +55,7 @@ public class RobotContainer {
   public static final Elevator m_Elevator = new Elevator();
   public static final RGBstrip m_LEDStrip = new RGBstrip();
   public static final Hang m_Hang = new Hang();
+  public static final Hood m_Hood = new Hood();
   JoystickButton driverButtonA = new JoystickButton(driverController, Constants.buttonA);
   JoystickButton driverButtonB = new JoystickButton(driverController, Constants.buttonB);
   JoystickButton driverButtonX = new JoystickButton(driverController, Constants.buttonX);
@@ -68,22 +71,19 @@ public class RobotContainer {
   NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
   NetworkTableEntry tx;
   double x;
+
   public RobotContainer() {
     // Configure the button bindings
-    
+
     configureButtonBindings();
-    m_DriveTrain.setDefaultCommand(new JoyDriveCommand(
-        () -> driverController.getX(Hand.kLeft),
-        () -> driverController.getY(Hand.kLeft), 
-        () -> driverController.getX(Hand.kRight), m_DriveTrain));
-    //Sets TurretCommand as Default Command for the Turret Subsystem
-    m_Turret.setDefaultCommand(new TurretCommand(
-        () -> manipController.getX(Hand.kLeft),m_Turret));
-        
+    m_DriveTrain.setDefaultCommand(new JoyDriveCommand(() -> driverController.getX(Hand.kLeft),
+        () -> driverController.getY(Hand.kLeft), () -> driverController.getX(Hand.kRight), m_DriveTrain));
+    // Sets TurretCommand as Default Command for the Turret Subsystem
+    m_Turret.setDefaultCommand(new TurretCommand(() -> manipController.getX(Hand.kLeft), m_Turret));
     m_LEDStrip.setDefaultCommand(new LEDCommand(m_LEDStrip));
     m_Elevator.setDefaultCommand(new IndexCommand(m_Elevator));
     m_Hang.setDefaultCommand(new WinchCommand(m_Hang, driverButtonA, driverButtonX, driverButtonY));
-    m_Shooter.setDefaultCommand(new HoodDistanceCommand(m_Shooter));
+    m_Hood.setDefaultCommand(new HoodDistanceCommand(m_Hood));
   }
     
 
@@ -145,6 +145,6 @@ public class RobotContainer {
       //Tells RamseteCommand the name of the DriveTrain we created
       m_DriveTrain);
     //Run RamseteCommand, then stop turning the wheels.
-    return ramseteCommand.andThen(() -> m_DriveTrain.tankDriveVolts(0, 0));
+    return /*ramseteCommand.andThen(() -> m_DriveTrain.tankDriveVolts(0, 0));*/ new ThreeBallAutoCommand(m_Turret, m_Shooter, m_DriveTrain, Constants.threeBalltargetDistance);
   }
 }

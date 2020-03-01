@@ -66,7 +66,9 @@ public class ShootCommand extends CommandBase {
     } else if(distance > 127 && distance < 169){
      equRpm = ((Math.pow(distance - 127, 2))/12)+2547.728;
     } else if(distance >= 169 && distance <= 400){
-      equRpm = (0.0000002801)*Math.pow(distance, 4) - 0.0002518*Math.pow(distance, 3) + 0.08358*Math.pow(distance, 2) - 12.15*Math.pow(distance, 1) + 5653;
+     equRpm = (0.0000002801)*Math.pow(distance, 4) - 0.0002518*Math.pow(distance, 3) + 0.08358*Math.pow(distance, 2) - 12.15*Math.pow(distance, 1) + 5653;
+    } else if(distance > 400 ){
+     equRpm = 5600;
     } else{
       equRpm = 0;
     }

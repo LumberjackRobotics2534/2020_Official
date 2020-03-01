@@ -21,7 +21,6 @@ import frc.robot.commands.ShootCommand;
 
 public class Shooter extends SubsystemBase {
   private static WPI_TalonFX shooterMotor = new WPI_TalonFX(Constants.shooterMotor);
-  private static DoubleSolenoid hoodSolenoid = new DoubleSolenoid(Constants.pcm, Constants.upHood, Constants.downHood);
 
   public Shooter() {
     shooterMotor.configFactoryDefault();
@@ -48,14 +47,6 @@ public class Shooter extends SubsystemBase {
     ShootCommand.shooterReady = false;
   }
   
-  public void hoodUp(){
-    hoodSolenoid.set(Value.kForward);
-  }
-  
-  
-  public void hoodDown(){
-    hoodSolenoid.set(Value.kReverse);
-  }
   public double getAngularVelocity(){
     return -shooterMotor.getSelectedSensorVelocity()*600 / 2048;
   }

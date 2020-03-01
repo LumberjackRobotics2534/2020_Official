@@ -8,18 +8,18 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Hood;
 import frc.robot.subsystems.Turret;
 
 public class HoodDistanceCommand extends CommandBase {
-  Shooter m_Shooter;
+  Hood m_Hood;
   double distance = 0.0;
-  public HoodDistanceCommand(Shooter _Shooter) {
-    m_Shooter = _Shooter;
-    addRequirements(m_Shooter);
+  public HoodDistanceCommand(Hood _Hood) {
+    m_Hood = _Hood;
+    addRequirements(m_Hood);
   }
 
-  // Called when the command is initially scheduled.
+// Called when the command is initially scheduled.
   @Override
   public void initialize() {
   }
@@ -29,9 +29,9 @@ public class HoodDistanceCommand extends CommandBase {
   public void execute() {
     distance = Turret.getDistance();
     if(distance < 169){
-      m_Shooter.hoodUp();
+      m_Hood.hoodUp();
     } else if(distance >= 169){
-      m_Shooter.hoodDown();
+      m_Hood.hoodDown();
     }
   }
 
