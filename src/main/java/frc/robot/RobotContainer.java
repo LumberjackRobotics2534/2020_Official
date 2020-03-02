@@ -25,14 +25,15 @@ import frc.robot.commands.IndexCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.JoyDriveCommand;
 import frc.robot.commands.LEDCommand;
+import frc.robot.commands.LowerHangCommand;
 import frc.robot.commands.NonProfiledAutoShootCommand;
 import frc.robot.commands.PositionControl;
+import frc.robot.commands.RaiseHangCommand;
 import frc.robot.commands.RotationControl;
 import frc.robot.commands.ShootCommand;
 import frc.robot.commands.ThreeBallAutoCommand;
 import frc.robot.commands.TurretCommand;
 import frc.robot.commands.TurretPID;
-import frc.robot.commands.WinchCommand;
 import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
@@ -82,7 +83,6 @@ public class RobotContainer {
     m_Turret.setDefaultCommand(new TurretCommand(() -> manipController.getX(Hand.kLeft), m_Turret));
     m_LEDStrip.setDefaultCommand(new LEDCommand(m_LEDStrip));
     m_Elevator.setDefaultCommand(new IndexCommand(m_Elevator));
-    m_Hang.setDefaultCommand(new WinchCommand(m_Hang, driverButtonA, driverButtonX, driverButtonY));
     m_Hood.setDefaultCommand(new HoodDistanceCommand(m_Hood));
   }
     
@@ -91,6 +91,8 @@ public class RobotContainer {
     manipButtonA.whileHeld(new TurretPID(Constants.turretTargetAngle, m_Turret));
     manipButtonX.whileHeld(new ShootCommand(m_Shooter, manipButtonX));
     manipButtonY.whileHeld(new IntakeCommand(m_Intake));
+    driverButtonX.whenHeld(new LowerHangCommand(m_Hang));
+    driverButtonA.whenHeld(new RaiseHangCommand(m_Hang));
     manipButtonLeft.whenPressed(new PositionControl(m_ColorWheel));
     manipButtonRight.whenPressed(new RotationControl(m_ColorWheel));
   }
