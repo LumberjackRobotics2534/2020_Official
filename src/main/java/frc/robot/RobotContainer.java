@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.controller.RamseteController;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.geometry.Translation2d;
 import edu.wpi.first.wpilibj.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
@@ -26,12 +25,11 @@ import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.JoyDriveCommand;
 import frc.robot.commands.LEDCommand;
 import frc.robot.commands.LowerHangCommand;
-import frc.robot.commands.NonProfiledAutoShootCommand;
 import frc.robot.commands.PositionControl;
 import frc.robot.commands.RaiseHangCommand;
+import frc.robot.commands.RightSideAutoCommand;
 import frc.robot.commands.RotationControl;
 import frc.robot.commands.ShootCommand;
-import frc.robot.commands.ThreeBallAutoCommand;
 import frc.robot.commands.TurretCommand;
 import frc.robot.commands.TurretPID;
 import frc.robot.subsystems.ColorWheel;
@@ -147,6 +145,6 @@ public class RobotContainer {
       //Tells RamseteCommand the name of the DriveTrain we created
       m_DriveTrain);
     //Run RamseteCommand, then stop turning the wheels.
-    return /*ramseteCommand.andThen(() -> m_DriveTrain.tankDriveVolts(0, 0));*/ new ThreeBallAutoCommand(m_Turret, m_Shooter, m_DriveTrain, Constants.threeBalltargetDistance);
+    return /*ramseteCommand.andThen(() -> m_DriveTrain.tankDriveVolts(0, 0));*/ new RightSideAutoCommand(m_Turret, m_Shooter, m_DriveTrain, m_Intake, 0.3);
   }
 }

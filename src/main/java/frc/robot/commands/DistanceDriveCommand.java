@@ -7,24 +7,43 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.controller.PIDController;
-import edu.wpi.first.wpilibj2.command.PIDCommand;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 
-public class DistanceDriveCommand extends PIDCommand {
-  public DistanceDriveCommand(DriveTrain _driveTrain, int _targetDistance) {
-    super( 
-        new PIDController(0.0005, 0, 0),
-        _driveTrain::getEncoderPosition,
-        _targetDistance,
-        output -> {
-          _driveTrain.drive(0, output, 0);
-        },
-        _driveTrain);
+public class DistanceDriveCommand extends CommandBase {
+  DriveTrain m_DriveTrain;
+  double m_speed;
+  public DistanceDriveCommand(DriveTrain _DriveTrain, double _speed) {
+    m_DriveTrain = _DriveTrain;
+    m_speed = _speed;
+    addRequirements(m_DriveTrain);
   }
 
+  // Called when the command is initially scheduled.
+  @Override
+  public void initialize() {
+  }
+
+  // Called every time the scheduler runs while the command is scheduled.
+  @Override
+  public void execute() {
+      m_DriveTrain.drive(0, m_speed, .007);
+  }
+
+  // Called once the command ends or is interrupted.
+  @Override
+  public void end(boolean interrupted) {
+  }
+
+  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return getController().atSetpoint();
+    if(m_DriveTrain.getEncoderPosition() > Constants.rightSideTargetDistance){
+      return true;
+    } else{
+      return false;
+    }
+     
   }
 }

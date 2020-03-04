@@ -10,27 +10,30 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Turret;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class ThreeBallAutoCommand extends SequentialCommandGroup {
+public class RightSideAutoCommand extends SequentialCommandGroup {
   Turret m_Turret;
   Shooter m_Shooter;
   DriveTrain m_driveTrain;
-  int m_targetDistance;
+  double m_Speed;
 
-  public ThreeBallAutoCommand(Turret _Turret, Shooter _Shooter, DriveTrain _driveTrain, int _targetDistance) {
+  public RightSideAutoCommand(Turret _Turret, Shooter _Shooter, DriveTrain _driveTrain, Intake _Intake, double _Speed) {
     m_Turret = _Turret;
     m_Shooter = _Shooter;
     m_driveTrain = _driveTrain;
-    m_targetDistance = _targetDistance;
+    m_Speed = _Speed;
     addCommands(
-      new NonProfiledAutoShootCommand(m_Turret, m_Shooter, 3),
-      new WaitCommand(.5),
-      new DistanceDriveCommand(m_driveTrain, m_targetDistance)
+      //new NonProfiledAutoShootCommand(m_Turret, m_Shooter, 3),
+      //new WaitCommand(.5),
+      //new IntakeDriveCommand(_driveTrain, _Intake, _targetDistance)//,
+      //new NonProfiledAutoShootCommand(_Turret, _Shooter, 3)
+      new IntakeDriveCommand(_driveTrain, _Intake, _Speed)
       );
   }
 }

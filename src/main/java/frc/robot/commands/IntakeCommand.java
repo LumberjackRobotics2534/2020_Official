@@ -9,7 +9,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.Intake;
 
 public class IntakeCommand extends CommandBase {
@@ -29,14 +28,13 @@ public class IntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.m_Intake.intake(Constants.SpinSpeed);
+    m_Intake.intake(Constants.SpinSpeed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     m_Intake.stopIntake();
-    RobotContainer.m_Intake.stopIntake();
   }
 
   // Returns true when the command should end.

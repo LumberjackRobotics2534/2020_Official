@@ -30,8 +30,8 @@ public class LowerHangCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (m_Hang.getWinchPosition() < Constants.winchLowerDistance){
-      m_Hang.winchBackwards();
+    if (m_Hang.getWinchPosition() > Constants.winchLowerDistance){
+      m_Hang.winch();
     } else {
       m_Hang.stopWinch();
       finished = true;

@@ -26,6 +26,9 @@ public class Hang extends SubsystemBase {
     climbMotor.setNeutralMode(NeutralMode.Brake);
 
     climbMotor.setInverted(false);
+
+    climbMotor.setSensorPhase(true);
+    resetEncoder();
   }
   public void winch(){
     climbMotor.set(0.6);
@@ -52,6 +55,7 @@ public class Hang extends SubsystemBase {
 
   @Override
   public void periodic() {
+    System.out.println(getWinchPosition());
     // This method will be called once per scheduler run
   }
 }
