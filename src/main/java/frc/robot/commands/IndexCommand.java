@@ -30,6 +30,8 @@ public class IndexCommand extends CommandBase {
   public void execute() {
     if (AutoShootCommand.shooterReady) {
       m_Elevator.feed();
+    } else if(ShootCommand.shooterReady){
+      m_Elevator.feed();
     } else if (m_Elevator.topBallPresence()) {
       m_Elevator.stopAll();
     } else if (m_Elevator.bottomBallPresence()) {
@@ -47,14 +49,6 @@ public class IndexCommand extends CommandBase {
         m_Elevator.stopAll();
       }
     }
-
-  }
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-    m_Elevator.stopAll();
-
   }
 
   // Returns true when the command should end.

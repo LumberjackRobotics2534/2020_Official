@@ -29,11 +29,11 @@ public class RightSideAutoCommand extends SequentialCommandGroup {
     m_driveTrain = _driveTrain;
     m_Speed = _Speed;
     addCommands(
-      //new NonProfiledAutoShootCommand(m_Turret, m_Shooter, 3),
-      //new WaitCommand(.5),
-      //new IntakeDriveCommand(_driveTrain, _Intake, _targetDistance)//,
-      //new NonProfiledAutoShootCommand(_Turret, _Shooter, 3)
-      new IntakeDriveCommand(_driveTrain, _Intake, _Speed)
+      new NonProfiledAutoShootCommand(m_Turret, m_Shooter, 3),
+      new WaitCommand(.5),
+      new IntakeDriveCommand(_driveTrain, _Intake, _Speed),
+      new NonProfiledAutoShootCommand(_Turret, _Shooter, 3)
+      
       );
   }
 }

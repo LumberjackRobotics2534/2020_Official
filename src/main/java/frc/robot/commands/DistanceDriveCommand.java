@@ -28,7 +28,7 @@ public class DistanceDriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      m_DriveTrain.drive(0, m_speed, .007);
+      m_DriveTrain.drive(0, m_speed, m_speed*.02333);
   }
 
   // Called once the command ends or is interrupted.
