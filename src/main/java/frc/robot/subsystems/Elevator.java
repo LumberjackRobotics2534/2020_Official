@@ -11,17 +11,16 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Elevator extends SubsystemBase {
-  private static boolean topPresence = false;
+  private boolean topPresence = false;
   private boolean bottomPresence = false;
   private int bottomPresenceTicks = 0;
   private double distance = 0;
 
-  private static AnalogInput irTop = new AnalogInput(Constants.irSensorTop);
+  private AnalogInput irTop = new AnalogInput(Constants.irSensorTop);
   private AnalogInput irBottom = new AnalogInput(Constants.irSensorBottom);
   private WPI_TalonSRX topElevatorMotor = new WPI_TalonSRX(Constants.topElevatorMotor);
   private WPI_TalonSRX bottomElevatorMotor = new WPI_TalonSRX(Constants.bottomElevatorMotor);
@@ -62,7 +61,7 @@ public class Elevator extends SubsystemBase {
     bottomElevatorMotor.set(0);
   }
 
-  public static boolean topBallPresence() {
+  public boolean topBallPresence() {
     if (irTop.getAverageVoltage() > Constants.minTopPresenceVoltage) {
       topPresence = true;
     }else{
@@ -96,7 +95,7 @@ public class Elevator extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putBoolean("Present", topPresence);
+    System.out.println(irBottom.getAverageVoltage());
   }
 
 }

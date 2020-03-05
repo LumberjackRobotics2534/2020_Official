@@ -64,8 +64,8 @@ public final class Constants {
     public static final int irSensorTop = 2;
     public static final int irSensorBottom = 1;
     public static final double minTopPresenceVoltage = 1.5;
-    public static final double minBottomPresenceVoltage = 1.0;
-    public static final double maxBottomPresenceVoltage = 1.85;
+    public static final double minBottomPresenceVoltage = 1.4;
+    public static final double maxBottomPresenceVoltage = 2.2;
     public static final double topLiftSpeed = 0.4;
     public static final double bottomLiftSpeed = 0.3;
     public static final double topFeedSpeed = 0.6;
