@@ -1,23 +1,11 @@
 package frc.robot;
 
-import java.util.List;
-
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.controller.PIDController;
-import edu.wpi.first.wpilibj.controller.RamseteController;
-import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
-import edu.wpi.first.wpilibj.geometry.Pose2d;
-import edu.wpi.first.wpilibj.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.trajectory.Trajectory;
-import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
-import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
-import edu.wpi.first.wpilibj.trajectory.constraint.DifferentialDriveVoltageConstraint;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.HoodDistanceCommand;
 import frc.robot.commands.IndexCommand;
@@ -80,14 +68,14 @@ public class RobotContainer {
     // Sets TurretCommand as Default Command for the Turret Subsystem
     m_Turret.setDefaultCommand(new TurretCommand(() -> manipController.getX(Hand.kLeft), m_Turret));
     m_LEDStrip.setDefaultCommand(new LEDCommand(m_LEDStrip));
-    //m_Elevator.setDefaultCommand(new IndexCommand(m_Elevator));
+    m_Elevator.setDefaultCommand(new IndexCommand(m_Elevator));
     m_Hood.setDefaultCommand(new HoodDistanceCommand(m_Hood));
   }
     
 
   private void configureButtonBindings() {
     manipButtonA.whileHeld(new TurretPID(Constants.turretTargetAngle, m_Turret));
-    manipButtonB.whileHeld(new IndexCommand(m_Elevator));
+    //manipButtonB.whileHeld(new IndexCommand(m_Elevator));
     manipButtonX.whileHeld(new ShootCommand(m_Shooter, manipButtonX));
     manipButtonY.whileHeld(new IntakeCommand(m_Intake));
     driverButtonX.whenHeld(new LowerHangCommand(m_Hang));
@@ -97,6 +85,7 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
+    /*
     // Create a voltage constraint to ensure we don't accelerate too fast
     var autoVoltageConstraint = new DifferentialDriveVoltageConstraint(
       new SimpleMotorFeedforward(Constants.ksVolts,
@@ -118,7 +107,7 @@ public class RobotContainer {
       //Start at the origin facing the positive X direction
       new Pose2d(0, 0, new Rotation2d(0)),
       //Pass through these interior points
-      List.of(/*new Translation2d(1, 1), new Translation2d(2, 0)*/),
+      List.of(new Translation2d(1, 1), new Translation2d(2, 0)),
       //End position
       new Pose2d(3, 0, new Rotation2d(0)),
       //Pass config
@@ -146,6 +135,8 @@ public class RobotContainer {
       //Tells RamseteCommand the name of the DriveTrain we created
       m_DriveTrain);
     //Run RamseteCommand, then stop turning the wheels.
-    return /*ramseteCommand.andThen(() -> m_DriveTrain.tankDriveVolts(0, 0));*/ new RightSideAutoCommand(m_Turret, m_Shooter, m_DriveTrain, m_Intake, 0.3);
+    return ramseteCommand.andThen(() -> m_DriveTrain.tankDriveVolts(0, 0));
+    */ 
+    return new RightSideAutoCommand(m_Turret, m_Shooter, m_DriveTrain, m_Intake, 0.3);
   }
 }
