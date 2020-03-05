@@ -18,6 +18,7 @@ import frc.robot.subsystems.Turret;
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class TurretPID extends PIDCommand {
   Turret m_Turret;
+  boolean finished = false;
   public TurretPID(double _targetAngle, Turret _Turret) {
     super(new PIDController(0.0105, 0.000048, 0),
       _Turret::getX,
@@ -33,16 +34,21 @@ public class TurretPID extends PIDCommand {
     //SmartDashboard.putNumber("Skew", x);
   }
   @Override
-  public void end(boolean interrupted){
+  public void initialize() {
+    finished = false;
+  }
+  @Override
+  public void end(boolean finished){
   }
   
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     if(Math.abs(m_Turret.getX()) <= Constants.turretPositionTolerance){
-      return true;
+      finished = true;
     } else{
-      return false;
+      finished = false;
     }
+    return finished;
   }
 }
