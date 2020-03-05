@@ -49,10 +49,10 @@ public class DriveTrain extends SubsystemBase {
     rightBack.setInverted(true);
     leftFront.setInverted(true);
     leftBack.setInverted(true);
-    rightFront.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
-    rightBack.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
-    leftFront.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
-    leftBack.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+    rightFront.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
+    rightBack.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
+    leftFront.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
+    leftBack.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
     // Reset encoders before finishing creation of odometry
     leftFront.setSelectedSensorPosition(0);
     rightFront.setSelectedSensorPosition(0);
@@ -79,9 +79,7 @@ public class DriveTrain extends SubsystemBase {
 
   public void tankDriveVolts(double leftVolts, double rightVolts){
     leftSide.setVoltage(leftVolts);
-    rightSide.setVoltage(rightVolts);
-    System.out.println(leftVolts + "left");
-    System.out.println(rightVolts + "right");
+    rightSide.setVoltage(-rightVolts);
     mecanumDriveTrain.feed();
   }
   
@@ -99,7 +97,7 @@ public class DriveTrain extends SubsystemBase {
     return new DifferentialDriveWheelSpeeds(
       //Get velocity in TICKS/100MS, convert to METERS/SECOND
       leftFront.getSelectedSensorVelocity()*Constants.kTicksToMetersConversion*Constants.kHundredMSToSecondsConversion,
-      -rightFront.getSelectedSensorVelocity()*Constants.kTicksToMetersConversion*Constants.kHundredMSToSecondsConversion);
+      rightFront.getSelectedSensorVelocity()*Constants.kTicksToMetersConversion*Constants.kHundredMSToSecondsConversion);
   }
 
   @Override

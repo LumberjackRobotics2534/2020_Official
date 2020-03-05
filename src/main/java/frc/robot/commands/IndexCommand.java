@@ -52,6 +52,12 @@ public class IndexCommand extends CommandBase {
     m_Elevator.feed();
   }
 
+  // Called once the command ends or is interrupted.
+  @Override
+  public void end(boolean interrupted) {
+    m_Elevator.stopAll();
+  }
+
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {

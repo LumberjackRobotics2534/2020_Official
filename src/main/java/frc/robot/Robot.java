@@ -59,6 +59,7 @@ public class Robot extends TimedRobot {
   public void disabledInit() {
     DriveTrain.zero();
     m_Hang.lower();
+
   }
 
   @Override
@@ -71,16 +72,12 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     DriveTrain.zero();
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-    if(m_autonomousCommand != null){
-      m_autonomousCommand.schedule();
-    }
   }
 
   /**
    * This function is called periodically during autonomous.
    */
-  int i = 0;
+
   @Override
   public void autonomousPeriodic() {
     if (i == 0){
@@ -88,6 +85,11 @@ public class Robot extends TimedRobot {
       i++;
     }
     
+    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    if(m_autonomousCommand != null){
+      m_autonomousCommand.schedule();
+      
+    }
   }
 
   @Override
