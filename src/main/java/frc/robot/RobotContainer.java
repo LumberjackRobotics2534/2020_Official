@@ -80,7 +80,7 @@ public class RobotContainer {
     // Sets TurretCommand as Default Command for the Turret Subsystem
     m_Turret.setDefaultCommand(new TurretCommand(() -> manipController.getX(Hand.kLeft), m_Turret));
     m_LEDStrip.setDefaultCommand(new LEDCommand(m_LEDStrip));
-    m_Elevator.setDefaultCommand(new IndexCommand(m_Elevator));
+    //m_Elevator.setDefaultCommand(new IndexCommand(m_Elevator));
     m_Hood.setDefaultCommand(new HoodDistanceCommand(m_Hood));
   }
     
