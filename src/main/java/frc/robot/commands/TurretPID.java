@@ -39,6 +39,7 @@ public class TurretPID extends PIDCommand {
   }
   @Override
   public void end(boolean finished){
+    finished = false;
   }
   
   // Returns true when the command should end.

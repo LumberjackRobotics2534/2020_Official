@@ -23,7 +23,6 @@ import frc.robot.subsystems.Hang;
 public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
   private Command m_autonomousCommand;
-  private Hang m_Hang = new Hang();
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -58,7 +57,7 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
     DriveTrain.zero();
-    m_Hang.lower();
+    RobotContainer.m_Hang.lower();
 
   }
 
@@ -80,10 +79,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousPeriodic() {
-    if (i == 0){
-      DriveTrain.zero();
-      i++;
-    }
+
     
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     if(m_autonomousCommand != null){
