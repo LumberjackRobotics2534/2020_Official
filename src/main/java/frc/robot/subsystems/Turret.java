@@ -77,6 +77,7 @@ public class Turret extends SubsystemBase {
     lightsEnabled(true);
     tx = table.getEntry("tx");
     x = tx.getDouble(0.0);
+    System.out.println(x);
     return x;
   }
 
@@ -86,7 +87,6 @@ public class Turret extends SubsystemBase {
     y = ty.getDouble(0.0);
     distanceSmoother.addSample((54 / Math.tan(Math.toRadians(22 + y))));
     distance = distanceSmoother.getAverage();
-    SmartDashboard.putNumber("Distance", distance);
     return distance;
   }
 
@@ -103,6 +103,5 @@ public class Turret extends SubsystemBase {
   public void periodic() {
     Turret.getDistance();
     this.stopTurret();
-    SmartDashboard.putNumber("Hey Dude", this.getPosition());
   }
 }

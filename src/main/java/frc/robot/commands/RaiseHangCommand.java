@@ -23,7 +23,7 @@ public class RaiseHangCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_Hang.resetEncoder();
+    m_Hang.resetEncoder(); //creates new command on hold, keeps resetting encoder
     finished = false;
   }
 

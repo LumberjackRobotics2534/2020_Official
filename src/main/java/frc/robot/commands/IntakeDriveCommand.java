@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
+import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 
@@ -20,7 +21,7 @@ public class IntakeDriveCommand extends ParallelDeadlineGroup {
    */
   public IntakeDriveCommand(DriveTrain _driveTrain, Intake _Intake, double _Speed) {
     super(
-     new DistanceDriveCommand(_driveTrain, _Speed),
+     new DistanceDriveCommand(_driveTrain, _Speed, Constants.rightSideTargetDistance),
      new IntakeCommand(_Intake)
     );
     

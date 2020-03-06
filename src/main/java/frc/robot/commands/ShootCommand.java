@@ -41,14 +41,14 @@ public class ShootCommand extends CommandBase {
     getDashVelocity();
     getEquationVelocity();
     if(m_Button.get()){
-      double targetVelocity_UnitsPer100ms =  -dashRpm* 2048 / 600;
+      double targetVelocity_UnitsPer100ms =  -equRpm* 2048 / 600;
       m_shooter.shoot(targetVelocity_UnitsPer100ms);
     }
 
     actualRpm = m_shooter.getAngularVelocity();
     SmartDashboard.putNumber("Actual RPM", actualRpm);
-    if (actualRpm > dashRpm - dashRpm*Constants.acceptableRpmError 
-    && actualRpm < dashRpm + dashRpm*Constants.acceptableRpmError){
+    if (actualRpm > equRpm - equRpm*Constants.acceptableRpmError 
+    && actualRpm < equRpm + equRpm*Constants.acceptableRpmError){
       shooterReady = true; 
     } else {
       shooterReady = false;

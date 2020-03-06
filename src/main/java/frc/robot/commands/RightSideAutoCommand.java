@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
@@ -31,9 +32,9 @@ public class RightSideAutoCommand extends SequentialCommandGroup {
     addCommands(
       new NonProfiledAutoShootCommand(m_Turret, m_Shooter, 3),
       new WaitCommand(.5),
-      new IntakeDriveCommand(_driveTrain, _Intake, _Speed),
+      new IntakeDriveCommand(_driveTrain, _Intake, 1.1*_Speed),
+      new DistanceDriveCommand(_driveTrain, -1.25*_Speed, Constants.rightSideTargetMoveBackDistance),
       new NonProfiledAutoShootCommand(_Turret, _Shooter, 3)
-      
       );
   }
 }

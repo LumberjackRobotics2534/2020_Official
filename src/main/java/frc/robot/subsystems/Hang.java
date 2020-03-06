@@ -48,7 +48,8 @@ public class Hang extends SubsystemBase {
     climbSolenoid.set(Value.kForward);
   }
   public double getWinchPosition(){
-    winchPosition = climbMotor.getSelectedSensorPosition();
+    winchPosition = Math.abs(climbMotor.getSelectedSensorPosition());
+    System.out.println(winchPosition);
     return winchPosition;
   }
   public void resetEncoder(){
@@ -57,7 +58,6 @@ public class Hang extends SubsystemBase {
 
   @Override
   public void periodic() {
-    System.out.println(getWinchPosition());
     // This method will be called once per scheduler run
   }
 }

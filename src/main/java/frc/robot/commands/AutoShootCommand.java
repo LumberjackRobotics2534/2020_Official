@@ -50,14 +50,11 @@ public class AutoShootCommand extends CommandBase {
     } else {
       shooterReady = false;
     }
-    SmartDashboard.putBoolean("WasPresent", wastopBallPresent);
-    SmartDashboard.putBoolean("Top Ball", topBallPresence);
-    SmartDashboard.putNumber("Shots Taken", shotsTaken);
-    SmartDashboard.putNumber("EQURPM", equRpm);
+    //System.out.println("worked");
   }
 
   public int getShotsTaken(){
-    topBallPresence = m_Elevator.topBallPresence();
+    topBallPresence = Elevator.topBallPresence();
     if(topBallPresence){
       wastopBallPresent = true;
     } else if(topBallPresence == false && wastopBallPresent){

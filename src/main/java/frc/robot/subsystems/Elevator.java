@@ -15,12 +15,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Elevator extends SubsystemBase {
-  private boolean topPresence = false;
+  private static boolean topPresence = false;
   private boolean bottomPresence = false;
   private int bottomPresenceTicks = 0;
   private double distance = 0;
 
-  private AnalogInput irTop = new AnalogInput(Constants.irSensorTop);
+  private static AnalogInput irTop = new AnalogInput(Constants.irSensorTop);
   private AnalogInput irBottom = new AnalogInput(Constants.irSensorBottom);
   private WPI_TalonSRX topElevatorMotor = new WPI_TalonSRX(Constants.topElevatorMotor);
   private WPI_TalonSRX bottomElevatorMotor = new WPI_TalonSRX(Constants.bottomElevatorMotor);
@@ -61,7 +61,7 @@ public class Elevator extends SubsystemBase {
     bottomElevatorMotor.set(0);
   }
 
-  public boolean topBallPresence() {
+  public static boolean topBallPresence() {
     if (irTop.getAverageVoltage() > Constants.minTopPresenceVoltage) {
       topPresence = true;
     }else{
@@ -95,7 +95,7 @@ public class Elevator extends SubsystemBase {
 
   @Override
   public void periodic() {
-    System.out.println(irBottom.getAverageVoltage());
+
   }
 
 }

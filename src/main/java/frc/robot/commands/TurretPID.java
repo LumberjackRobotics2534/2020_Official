@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.Constants;
 import frc.robot.subsystems.Turret;
@@ -20,7 +21,8 @@ public class TurretPID extends PIDCommand {
   Turret m_Turret;
   boolean finished = false;
   public TurretPID(double _targetAngle, Turret _Turret) {
-    super(new PIDController(0.0105, 0.000048, 0),
+    
+    super(new PIDController(0.0105, 0.000052, 0.0001), //0.0105, 0.000052, 0
       _Turret::getX,
       _targetAngle,
       output -> {
@@ -35,7 +37,6 @@ public class TurretPID extends PIDCommand {
   }
   @Override
   public void initialize() {
-    finished = false;
   }
   @Override
   public void end(boolean finished){
@@ -45,7 +46,8 @@ public class TurretPID extends PIDCommand {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(Math.abs(m_Turret.getX()) <= Constants.turretPositionTolerance){
+    finished = false;
+    if(Math.abs(m_Turret.getX()) <= Constants.turretPositionTolerance && Math.abs(m_Turret.getX()) != 0.0){
       finished = true;
     } else{
       finished = false;

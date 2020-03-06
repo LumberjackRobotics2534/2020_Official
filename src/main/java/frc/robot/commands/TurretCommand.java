@@ -35,7 +35,7 @@ public class TurretCommand extends CommandBase {
     if (Math.abs(speed) < Constants.turretDeadzone) {
       speed = 0.0;
     }
-    RobotContainer.m_Turret.spinTurret(speed*.3);
+    RobotContainer.m_Turret.spinTurret(speed*-.3);
   }
 
   // Called once the command ends or is interrupted.
