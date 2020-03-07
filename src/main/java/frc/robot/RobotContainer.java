@@ -13,6 +13,7 @@ import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.JoyDriveCommand;
 import frc.robot.commands.LEDCommand;
 import frc.robot.commands.LowerHangCommand;
+import frc.robot.commands.LowerHangManualCommand;
 import frc.robot.commands.PositionControl;
 import frc.robot.commands.RightSideAutoCommand;
 import frc.robot.commands.RotationControl;
@@ -80,6 +81,7 @@ public class RobotContainer {
     manipButtonY.whileHeld(new IntakeCommand(m_Intake));
     driverButtonX.whenPressed(new LowerHangCommand(m_Hang, driverButtonRight));
     driverButtonB.whenPressed(new ZeroRaiseCommand(m_Turret, m_Hang, driverButtonRight));
+    driverButtonY.whileHeld(new LowerHangManualCommand(m_Hang, driverButtonRight));
     manipButtonLeft.whenPressed(new PositionControl(m_ColorWheel));
     manipButtonRight.whenPressed(new RotationControl(m_ColorWheel));
   }
