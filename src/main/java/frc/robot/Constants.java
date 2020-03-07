@@ -34,7 +34,7 @@ public final class Constants {
     //-----------------NonProfiledAuto----------------//
     public static final double angleDriveMinimumInput = -180;
     public static final double angleDriveMaximumInput = 180;
-    public static final int rightSideTargetDistance = 132332;
+    public static final int rightSideTargetDistance = 132432;
     public static final int rightSideTargetMoveBackDistance = 60000;
     //-------------------CONTROLLER-------------------//
     //Controller IDs
@@ -106,7 +106,7 @@ public final class Constants {
     public static final int endGameUp = 4;
     public static final int endGameDown = 5;
     public static final double winchRaiseDistance = 45250;
-    public static final double winchLowerDistance = 72900;
+    public static final double winchLowerDistance = 79084;//73200
     //-------------------PNEUMATICS-------------------//
     public static final int pressureSensor = 0;
     public static final int pcm = 19;

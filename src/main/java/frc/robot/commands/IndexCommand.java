@@ -32,7 +32,7 @@ public class IndexCommand extends CommandBase {
       m_Elevator.feed();
     } else if(ShootCommand.shooterReady){
       m_Elevator.feed();
-    } else if (m_Elevator.topBallPresence()) {
+    } else if (Elevator.topBallPresence()) {
       m_Elevator.stopAll();
     } else if (m_Elevator.bottomBallPresence()) {
       m_Elevator.lift();
