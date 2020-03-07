@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Turret;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -30,6 +31,9 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+    RobotContainer.m_Hang.resetEncoder();
+    RobotContainer.m_Turret.lightsEnabled(false);
+
   }
 
   /**
@@ -56,7 +60,7 @@ public class Robot extends TimedRobot {
   public void disabledInit() {
     DriveTrain.zero();
     RobotContainer.m_Hang.lower();
-
+    Turret.lightsEnabled(false);
   }
 
   @Override

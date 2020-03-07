@@ -30,8 +30,8 @@ public class Turret extends SubsystemBase {
   static NetworkTableEntry ty;
   static double y;
   static double distance;
-  private DigitalInput turretZeroSensor = new DigitalInput(Constants.turretZeroSensorPort);
-  private boolean zero;
+  public DigitalInput turretZeroSensor = new DigitalInput(Constants.turretZeroSensorPort);
+  private boolean zero = false;
   private double turretPosition;
   private static int lightCode = 1;
   static SampleSmoother distanceSmoother = new SampleSmoother(10);
@@ -42,6 +42,8 @@ public class Turret extends SubsystemBase {
     turretMotor.setNeutralMode(NeutralMode.Brake);
 
     turretMotor.setInverted(true);
+    
+    zero = false;
   }
 
   public void spinTurret(double _speed) {
@@ -60,7 +62,8 @@ public class Turret extends SubsystemBase {
 
   public void zeroEncoder() {
     zero = turretZeroSensor.get();
-    if (zero) {
+    //System.out.println(zero);
+    if (zero == false) {
       turretMotor.setSelectedSensorPosition(0);
     }
   }
@@ -74,7 +77,6 @@ public class Turret extends SubsystemBase {
   }
 
   public double getX() {
-    lightsEnabled(true);
     tx = table.getEntry("tx");
     x = tx.getDouble(0.0);
     System.out.println(x);
@@ -82,7 +84,6 @@ public class Turret extends SubsystemBase {
   }
 
   public static double getDistance() {
-    lightsEnabled(true);
     ty = table.getEntry("ty");
     y = ty.getDouble(0.0);
     distanceSmoother.addSample((54 / Math.tan(Math.toRadians(22 + y))));
@@ -94,14 +95,17 @@ public class Turret extends SubsystemBase {
     if (enabled) {
       lightCode = 3; // On
     } else {
-      lightCode = 3; //Off
+      lightCode = 1; //Off
     }
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(lightCode);
   }
 
   @Override
   public void periodic() {
-    Turret.getDistance();
     this.stopTurret();
+    getPosition();
+    zeroEncoder();
+    //System.out.println(turretPosition);
+    //System.out.println(zero);
   }
 }

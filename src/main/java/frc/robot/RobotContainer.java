@@ -14,12 +14,12 @@ import frc.robot.commands.JoyDriveCommand;
 import frc.robot.commands.LEDCommand;
 import frc.robot.commands.LowerHangCommand;
 import frc.robot.commands.PositionControl;
-import frc.robot.commands.RaiseHangCommand;
 import frc.robot.commands.RightSideAutoCommand;
 import frc.robot.commands.RotationControl;
 import frc.robot.commands.ShootCommand;
 import frc.robot.commands.TurretCommand;
 import frc.robot.commands.TurretPID;
+import frc.robot.commands.ZeroRaiseCommand;
 import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
@@ -74,12 +74,12 @@ public class RobotContainer {
     
 
   private void configureButtonBindings() {
-    manipButtonA.whileHeld(new TurretPID(Constants.turretTargetAngle, m_Turret));
+    manipButtonA.whileHeld(new TurretPID(Constants.turretTargetAngle, m_Turret, manipButtonA));
     //manipButtonB.whileHeld(new IndexCommand(m_Elevator));
     manipButtonX.whileHeld(new ShootCommand(m_Shooter, manipButtonX));
     manipButtonY.whileHeld(new IntakeCommand(m_Intake));
-    driverButtonX.whenHeld(new LowerHangCommand(m_Hang));
-    driverButtonA.whenHeld(new RaiseHangCommand(m_Hang));
+    driverButtonX.whenPressed(new LowerHangCommand(m_Hang, driverButtonRight));
+    driverButtonB.whenPressed(new ZeroRaiseCommand(m_Turret, m_Hang, driverButtonRight));
     manipButtonLeft.whenPressed(new PositionControl(m_ColorWheel));
     manipButtonRight.whenPressed(new RotationControl(m_ColorWheel));
   }
@@ -137,6 +137,6 @@ public class RobotContainer {
     //Run RamseteCommand, then stop turning the wheels.
     return ramseteCommand.andThen(() -> m_DriveTrain.tankDriveVolts(0, 0));
     */ 
-    return new RightSideAutoCommand(m_Turret, m_Shooter, m_DriveTrain, m_Intake, 0.3);
+    return new RightSideAutoCommand(m_Turret, m_Shooter, m_DriveTrain, m_Intake, 0.3, driverButtonA);
   }
 }

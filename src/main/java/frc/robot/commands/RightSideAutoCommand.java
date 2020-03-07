@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
@@ -24,17 +25,17 @@ public class RightSideAutoCommand extends SequentialCommandGroup {
   DriveTrain m_driveTrain;
   double m_Speed;
 
-  public RightSideAutoCommand(Turret _Turret, Shooter _Shooter, DriveTrain _driveTrain, Intake _Intake, double _Speed) {
+  public RightSideAutoCommand(Turret _Turret, Shooter _Shooter, DriveTrain _driveTrain, Intake _Intake, double _Speed, JoystickButton button) {
     m_Turret = _Turret;
     m_Shooter = _Shooter;
     m_driveTrain = _driveTrain;
     m_Speed = _Speed;
     addCommands(
-      new NonProfiledAutoShootCommand(m_Turret, m_Shooter, 3),
+      new NonProfiledAutoShootCommand(m_Turret, m_Shooter, 3, button),
       new WaitCommand(.5),
       new IntakeDriveCommand(_driveTrain, _Intake, 1.1*_Speed),
       new DistanceDriveCommand(_driveTrain, -1.25*_Speed, Constants.rightSideTargetMoveBackDistance),
-      new NonProfiledAutoShootCommand(_Turret, _Shooter, 3)
+      new NonProfiledAutoShootCommand(_Turret, _Shooter, 3, button)
       );
   }
 }

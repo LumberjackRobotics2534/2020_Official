@@ -8,53 +8,48 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.Constants;
-import frc.robot.subsystems.Hang;
+import frc.robot.subsystems.Turret;
 
-public class RaiseHangCommand extends CommandBase {
-  private Hang m_Hang;
-  private boolean finished = false;
-  private JoystickButton m_Button;
-
-  public RaiseHangCommand(Hang _Hang, JoystickButton _button) {
-    m_Hang = _Hang;
-    m_Button = _button;
-    addRequirements(m_Hang);
-    m_Hang.resetEncoder();
+public class ZeroTurretCommand extends CommandBase {
+  Turret m_Turret;
+  public ZeroTurretCommand(Turret _Turret) {
+    m_Turret = _Turret;
+    addRequirements(m_Turret);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_Hang.resetEncoder();
-    finished = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (m_Button.get()){
-      m_Hang.raise();
-    }
-    
-    if (m_Hang.getWinchPosition() < Constants.winchRaiseDistance){
-      m_Hang.winch();
-    } else {
-      m_Hang.stopWinch();
-      finished = true;
+    if(m_Turret.turretZeroSensor.get()){ //false when zeroed
+      if(-100 >= m_Turret.getPosition()){
+        m_Turret.spinTurret(0.3);
+      } else if(m_Turret.getPosition() >= 100){
+       m_Turret.spinTurret(-0.3);
+      }
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_Hang.stopWinch();
+    m_Turret.spinTurret(0);
+    System.out.println("end");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return finished;
+    if(!m_Turret.turretZeroSensor.get()){
+      return true;
+    }else if(-100 <= m_Turret.getPosition() && m_Turret.getPosition() <= 100){
+      return true;
+    } else{
+      return false;
+    }
   }
 }

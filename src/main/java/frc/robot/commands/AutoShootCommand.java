@@ -50,7 +50,7 @@ public class AutoShootCommand extends CommandBase {
     } else {
       shooterReady = false;
     }
-    //System.out.println("worked");
+    //.println("worked");
   }
 
   public int getShotsTaken(){
@@ -67,7 +67,7 @@ public class AutoShootCommand extends CommandBase {
   public void getEquationVelocity() {
     distance = Turret.getDistance();
     if(distance >= 67 && distance <= 127){
-     equRpm = (0.0000422)*Math.pow(distance, 4)*-1 + 0.01756*Math.pow(distance, 3) + -2.706*Math.pow(distance, 2) + 183.9*Math.pow(distance, 1) - 2140;
+     equRpm = (0.0000422)*Math.pow(distance, 4)*-1 + 0.01756*Math.pow(distance, 3) + -2.706*Math.pow(distance, 2) + 183.9*Math.pow(distance, 1) - 2174;
     } else if(distance > 127 && distance < 169){
      equRpm = ((Math.pow(distance - 127, 2))/12)+2547.728;
     } else if(distance >= 169 && distance <= 400){
@@ -82,6 +82,7 @@ public class AutoShootCommand extends CommandBase {
   public void end(final boolean interrupted) {
     m_shooter.shooterOff();
     shooterReady = false;
+    Turret.lightsEnabled(false);
   }
 
   // Returns true when the command should end.

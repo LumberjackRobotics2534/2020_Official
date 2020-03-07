@@ -45,11 +45,9 @@ public class DistanceDriveCommand extends CommandBase {
   @Override
   public boolean isFinished() {
     if(Math.abs(m_DriveTrain.getEncoderPosition()) > m_distance){
-      System.out.println(Math.abs(m_DriveTrain.getEncoderPosition()) + "true");
 
       return true;
     } else{
-      System.out.println(Math.abs(m_DriveTrain.getEncoderPosition()));
 
       return false;
     }
