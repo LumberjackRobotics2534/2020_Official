@@ -57,7 +57,7 @@ public class Hang extends SubsystemBase {
 
   @Override
   public void periodic() {
-    getWinchPosition();
+    System.out.println(getWinchPosition()); 
     // This method will be called once per scheduler run
   }
 }

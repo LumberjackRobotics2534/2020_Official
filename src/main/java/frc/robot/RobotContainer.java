@@ -17,6 +17,7 @@ import frc.robot.commands.PositionControl;
 import frc.robot.commands.RightSideAutoCommand;
 import frc.robot.commands.RotationControl;
 import frc.robot.commands.ShootCommand;
+import frc.robot.commands.ThreeBallAutoCommand;
 import frc.robot.commands.TurretCommand;
 import frc.robot.commands.TurretPID;
 import frc.robot.commands.ZeroRaiseCommand;
