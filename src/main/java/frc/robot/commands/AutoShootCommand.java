@@ -30,6 +30,7 @@ public class AutoShootCommand extends CommandBase {
   @Override
   public void initialize() {
     shotsTaken = 0;
+    Turret.lightsEnabled(true);
     shooterTimer.reset();
     shooterTimer.start();
   }
@@ -49,7 +50,6 @@ public class AutoShootCommand extends CommandBase {
     } else {
       shooterReady = false;
     }
-    //.println("worked");
   }
 
   public int getShotsTaken(){

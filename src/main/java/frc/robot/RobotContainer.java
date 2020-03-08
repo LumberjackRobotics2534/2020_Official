@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.HoodDistanceCommand;
 import frc.robot.commands.IndexCommand;
 import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.IntakeReverseCommand;
 import frc.robot.commands.JoyDriveCommand;
 import frc.robot.commands.LEDCommand;
 import frc.robot.commands.LowerHangCommand;
@@ -82,11 +83,12 @@ public class RobotContainer {
     //manipButtonB.whileHeld(new IndexCommand(m_Elevator));
     manipButtonX.whileHeld(new ShootCommand(m_Shooter, manipButtonX));
     manipButtonY.whileHeld(new IntakeCommand(m_Intake));
+    manipButtonB.whileHeld(new IntakeReverseCommand(m_Intake));
     driverButtonX.whenPressed(new LowerHangCommand(m_Hang, driverButtonRight));
     driverButtonY.whileHeld(new LowerHangManualCommand(m_Hang, driverButtonRight));
     driverButtonB.whenPressed(new ZeroRaiseCommand(m_Turret, m_Hang, driverButtonRight));
-    manipButtonLeft.whenPressed(new PositionControl(m_ColorWheel));
-    manipButtonRight.whenPressed(new RotationControl(m_ColorWheel));
+    //manipButtonLeft.whenPressed(new PositionControl(m_ColorWheel));
+    driverButtonLeft.whenPressed(new RotationControl(m_ColorWheel));
   }
 
   public Command getAutonomousCommand() {

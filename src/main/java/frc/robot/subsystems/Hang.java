@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -20,9 +21,11 @@ public class Hang extends SubsystemBase {
   private WPI_TalonSRX climbMotor = new WPI_TalonSRX(Constants.climbMotor);
   private DoubleSolenoid climbSolenoid = new DoubleSolenoid(Constants.pcm, Constants.endGameUp, Constants.endGameDown);
   private double winchPosition = 0;
+  private static Compressor compressor = new Compressor(Constants.pcm);
+
   public Hang() {
     climbMotor.configFactoryDefault();
-  
+
     climbMotor.setNeutralMode(NeutralMode.Brake);
 
     climbMotor.setInverted(true);
@@ -32,14 +35,25 @@ public class Hang extends SubsystemBase {
     lower();
     resetEncoder();
   }
-  public void winch(){
+
+  public void winch() {
     climbMotor.set(0.6);
   }
+
   public void winchBackwards() {
     climbMotor.set(-0.6);
   }
-  public void stopWinch(){
+
+  public void stopWinch() {
     climbMotor.set(0);
+  }
+
+  public static void enableCompressor(boolean status) {
+    if (status) {
+      compressor.start();
+    } else {
+      compressor.stop();
+    }
   }
   public void raise(){
     climbSolenoid.set(Value.kReverse);

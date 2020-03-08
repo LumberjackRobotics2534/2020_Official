@@ -56,6 +56,7 @@ public final class Constants {
     //---------------------INTAKE---------------------//
     public static final int intakeMotorDrive = 8;
     public static final double SpinSpeed = 0.8;
+    public static final double reverseSpinSpeed = 0.5;
     public static final int intakeUp = 7;
     public static final int intakeDown = 6;
     //--------------------ELEVATOR--------------------//
@@ -112,4 +113,5 @@ public final class Constants {
     public static final int pcm = 19;
     //----------------------LEDS----------------------//
     public static final int ledPort = 9;
+
 }

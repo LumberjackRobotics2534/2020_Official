@@ -8,48 +8,39 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.Constants;
+import frc.robot.subsystems.Intake;
 
-public class DistanceDriveCommand extends CommandBase {
-  DriveTrain m_DriveTrain;
-  double m_speed;
-  int m_distance = 1000000000;
-  public DistanceDriveCommand(DriveTrain _DriveTrain, double _speed, int _distance) {
-    m_DriveTrain = _DriveTrain;
-    m_speed = _speed;
-    m_distance = _distance;
-    addRequirements(m_DriveTrain);
+public class IntakeReverseCommand extends CommandBase {
+  Intake m_Intake;
+
+  public IntakeReverseCommand(Intake _Intake) {
+    m_Intake = _Intake;
+    addRequirements(m_Intake);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    DriveTrain.zero();
+
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      m_DriveTrain.drive(0, m_speed, 0);
+    m_Intake.reverse(Constants.reverseSpinSpeed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    DriveTrain.zero();
+    m_Intake.stopIntake();
   }
-
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(Math.abs(m_DriveTrain.getEncoderPosition()) > m_distance){
-
-      return true;
-    } else{
-
-      return false;
-    }
-     
+    return false;
   }
 }

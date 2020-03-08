@@ -29,6 +29,7 @@ public class RaiseHangCommand extends CommandBase {
   public void initialize() {
     m_Hang.resetEncoder();
     finished = false;
+    m_Hang.enableCompressor(false);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

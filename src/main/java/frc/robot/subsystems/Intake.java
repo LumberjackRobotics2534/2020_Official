@@ -31,6 +31,10 @@ public class Intake extends SubsystemBase {
     intakeSolenoid.set(Value.kForward);
   }
 
+  public void reverse(double spinSpeed){
+    intakeMotor.set(-spinSpeed);
+  }
+
   public void stopIntake() {
     intakeMotor.set(0);
     intakeSolenoid.set(Value.kReverse);
