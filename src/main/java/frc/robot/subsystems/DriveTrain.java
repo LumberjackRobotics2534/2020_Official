@@ -63,7 +63,7 @@ public class DriveTrain extends SubsystemBase {
 
   // Mecanum drive command for manual control
   public void drive(double _ySpeed, double _xSpeed, double _rot) {
-    mecanumDriveTrain.driveCartesian(_ySpeed*.85, _xSpeed*.85, _rot*.85);
+    mecanumDriveTrain.driveCartesian(_ySpeed, _xSpeed, _rot);
   }
 
   public static void zero() {
