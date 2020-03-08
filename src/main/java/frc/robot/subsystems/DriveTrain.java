@@ -110,7 +110,5 @@ public class DriveTrain extends SubsystemBase {
       -rightFront.getSelectedSensorPosition()*Constants.kTicksToMetersConversion);
     position = getEncoderPosition();
     speed = leftFront.get();
-    SmartDashboard.putNumber("Drive Encoder", position);
-    SmartDashboard.putNumber("Speed", speed);
   }
 }

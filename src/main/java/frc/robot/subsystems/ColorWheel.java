@@ -101,8 +101,5 @@ public class ColorWheel extends SubsystemBase {
     } else {
       colorString = "Unknown???????";
     }
-    SmartDashboard.putNumber("Confidence", match.confidence);
-    SmartDashboard.putString("Detected Color", colorString);
-    SmartDashboard.putNumber("Encoder Value", colorWheelMotor.getSelectedSensorPosition());
   }
 }

@@ -4,6 +4,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -60,6 +61,7 @@ public class RobotContainer {
   NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
   NetworkTableEntry tx;
   double x;
+  double autoChoice;
 
   public RobotContainer() {
     // Configure the button bindings
@@ -81,8 +83,8 @@ public class RobotContainer {
     manipButtonX.whileHeld(new ShootCommand(m_Shooter, manipButtonX));
     manipButtonY.whileHeld(new IntakeCommand(m_Intake));
     driverButtonX.whenPressed(new LowerHangCommand(m_Hang, driverButtonRight));
-    driverButtonB.whenPressed(new ZeroRaiseCommand(m_Turret, m_Hang, driverButtonRight));
     driverButtonY.whileHeld(new LowerHangManualCommand(m_Hang, driverButtonRight));
+    driverButtonB.whenPressed(new ZeroRaiseCommand(m_Turret, m_Hang, driverButtonRight));
     manipButtonLeft.whenPressed(new PositionControl(m_ColorWheel));
     manipButtonRight.whenPressed(new RotationControl(m_ColorWheel));
   }
@@ -140,6 +142,11 @@ public class RobotContainer {
     //Run RamseteCommand, then stop turning the wheels.
     return ramseteCommand.andThen(() -> m_DriveTrain.tankDriveVolts(0, 0));
     */ 
-    return new RightSideAutoCommand(m_Turret, m_Shooter, m_DriveTrain, m_Intake, 0.3, driverButtonA);
+    autoChoice = SmartDashboard.getNumber("AutoChooser", 6);
+    if(autoChoice != 6){
+      return new ThreeBallAutoCommand(m_Turret, m_Shooter, m_DriveTrain, 0.3, driverButtonA);
+    } else{
+      return new RightSideAutoCommand(m_Turret, m_Shooter, m_DriveTrain, m_Intake, 0.3, driverButtonA);
+    }  
   }
 }

@@ -35,7 +35,6 @@ public class TurretPID extends PIDCommand {
     getController().enableContinuousInput(Constants.turretMinimumInput, Constants.turretMaximumInput);
     getController().setTolerance(Constants.turretPositionTolerance, Constants.turretVelocityTolerance);
     m_Button = _Buton;
-    //SmartDashboard.putNumber("Skew", x);
   }
   @Override
   public void initialize() {

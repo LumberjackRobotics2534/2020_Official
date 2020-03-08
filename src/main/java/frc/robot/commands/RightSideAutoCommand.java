@@ -31,7 +31,8 @@ public class RightSideAutoCommand extends SequentialCommandGroup {
     m_driveTrain = _driveTrain;
     m_Speed = _Speed;
     addCommands(
-      new NonProfiledAutoShootCommand(m_Turret, m_Shooter, 3, button),
+      //new NonProfiledAutoShootCommand(m_Turret, m_Shooter, 3, button),
+      new AutoShootCommand(m_Shooter, 3),
       new WaitCommand(.5),
       new IntakeDriveCommand(_driveTrain, _Intake, 1.1*_Speed),
       new DistanceDriveCommand(_driveTrain, -1.25*_Speed, Constants.rightSideTargetMoveBackDistance),

@@ -28,7 +28,8 @@ public class ThreeBallAutoCommand extends SequentialCommandGroup {
     m_driveTrain = _driveTrain;
     m_Speed = _Speed;
     addCommands(
-      new NonProfiledAutoShootCommand(m_Turret, m_Shooter, 3, button),
+      //new NonProfiledAutoShootCommand(m_Turret, m_Shooter, 3, button),
+      new AutoShootCommand(m_Shooter, 3),
       new WaitCommand(.5),
       new DistanceDriveCommand(m_driveTrain, m_Speed, 14000)
     );
