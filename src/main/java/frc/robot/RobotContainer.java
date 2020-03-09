@@ -144,11 +144,8 @@ public class RobotContainer {
     //Run RamseteCommand, then stop turning the wheels.
     return ramseteCommand.andThen(() -> m_DriveTrain.tankDriveVolts(0, 0));
     */ 
-    autoChoice = SmartDashboard.getNumber("AutoChooser", 6);
-    if(autoChoice != 6){
-      return new ThreeBallAutoCommand(m_Turret, m_Shooter, m_DriveTrain, 0.3, driverButtonA);
-    } else{
-      return new RightSideAutoCommand(m_Turret, m_Shooter, m_DriveTrain, m_Intake, 0.3, driverButtonA);
-    }  
+    //autoChoice = SmartDashboard.getNumber("AutoChooser", 3);
+    //return new ThreeBallAutoCommand(m_Turret, m_Shooter, m_DriveTrain, 0.3, driverButtonA);
+    return new RightSideAutoCommand(m_Turret, m_Shooter, m_DriveTrain, m_Intake, 0.3, driverButtonA);
   }
 }

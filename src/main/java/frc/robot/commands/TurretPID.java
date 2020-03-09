@@ -28,7 +28,7 @@ public class TurretPID extends PIDCommand {
 
   public TurretPID(double _targetAngle, Turret _Turret, JoystickButton _Buton) {
 
-    super(new PIDController(0.0105, 0.0001, 0.0001), // 0.0105, 0.0058, 0.0001 p-0.0436
+    super(new PIDController(0.012, 0.0006, 0.0001), // 0.0105, 0.0058, 0.0001 
       _Turret::getX,
       _targetAngle,
       output -> {

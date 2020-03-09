@@ -29,10 +29,10 @@ public class ThreeBallAutoCommand extends SequentialCommandGroup {
     m_Speed = _Speed;
     addCommands(
       //new NonProfiledAutoShootCommand(m_Turret, m_Shooter, 3, button),
-      new WaitCommand(5), //TODO Remove later
+      new WaitCommand(5), //TODO: Remove later
       new AutoShootCommand(m_Shooter, 3),
       new WaitCommand(.5),
-      new DistanceDriveCommand(m_driveTrain, m_Speed, 14000)
+      new DistanceDriveCommand(m_driveTrain, m_Speed, 14000) //TODO: Make robot do 180 turn when finished?
     );
   }
 }

@@ -99,7 +99,7 @@ public final class Constants {
     //-------------------COLOR WHEEL------------------//
     public static final int colorWheelMotor = 6;
     public static final double quadrativeEncoderRotation = 4096*(32/4/*Reduction from Motor to WOF*/);
-    public static final double completedRotationNumber = 3.1;
+    public static final double completedRotationNumber = 3.5;
     public static final double colorWheelPositionSpeed = 0.5; //Two different speeds for rotation control and position control
     public static final double colorWheelRotationSpeed = 1.0;
     //----------------------HANG----------------------//

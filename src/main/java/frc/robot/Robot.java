@@ -36,7 +36,7 @@ public class Robot extends TimedRobot {
     // and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    SmartDashboard.putNumber("AutoChooeser", 6);
+    //SmartDashboard.putNumber("AutoChooeser", 6);
     RobotContainer.m_Hang.resetEncoder();
     Hang.enableCompressor(true);
 
@@ -82,7 +82,6 @@ public class Robot extends TimedRobot {
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     if(m_autonomousCommand != null){
       m_autonomousCommand.schedule();
-      
     }
   }
 
