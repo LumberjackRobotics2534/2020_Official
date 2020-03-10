@@ -19,8 +19,8 @@ import frc.robot.subsystems.Turret;
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class TurretPID extends PIDCommand {
-  Turret m_Turret;
-  boolean finished = false;
+  private Turret m_Turret;
+  private boolean finished = false;
   private JoystickButton m_Button;
   /*private static double P = 0.0;
   private static double I = 0.0;
@@ -28,7 +28,7 @@ public class TurretPID extends PIDCommand {
 
   public TurretPID(double _targetAngle, Turret _Turret, JoystickButton _Buton) {
 
-    super(new PIDController(0.012, 0.0006, 0.0001), // 0.0105, 0.0058, 0.0001 
+    super(new PIDController(0.0105, 0.0058, 0.0001), // 0.0105, 0.0058, 0.0001 //0.012, 0.0006, 0.0001, 0
       _Turret::getX,
       _targetAngle,
       output -> {
@@ -38,7 +38,7 @@ public class TurretPID extends PIDCommand {
     m_Turret = _Turret;
     // Configure additional PID options by calling `getController` here.
     getController().enableContinuousInput(Constants.turretMinimumInput, Constants.turretMaximumInput);
-    getController().setTolerance(Constants.turretPositionTolerance, Constants.turretVelocityTolerance);
+    getController().setTolerance(Constants.PIDTurretPositionTolerance, Constants.turretVelocityTolerance);
     m_Button = _Buton;
   }
   @Override
@@ -61,15 +61,13 @@ public class TurretPID extends PIDCommand {
   @Override
   public boolean isFinished() {
     finished = false;
-    if (!m_Button.get()){
-      if(Math.abs(m_Turret.getX()) <= Constants.turretPositionTolerance && Math.abs(m_Turret.getX()) != 0.0){
-        finished = true;
-      } else{
-        finished = false;
-      }
-    }else{
+    if(Math.abs(m_Turret.getX()) <= Constants.PIDTurretPositionTolerance && Math.abs(m_Turret.getX()) != 0.0){
+      finished = true;
+    } else{
       finished = false;
     }
+    System.out.println("PID");
     return finished;
   }
+  
 }

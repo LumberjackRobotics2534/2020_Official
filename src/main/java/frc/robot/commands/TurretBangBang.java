@@ -8,12 +8,18 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.Constants;
 import frc.robot.subsystems.Turret;
 
-public class ZeroTurretCommand extends CommandBase {
-  Turret m_Turret;
-  public ZeroTurretCommand(Turret _Turret) {
+public class TurretBangBang extends CommandBase {
+  private Turret m_Turret;
+  private boolean finished;
+  private double targetAngle;
+
+  public TurretBangBang(double _targetAngle, Turret _Turret) {
     m_Turret = _Turret;
+    targetAngle = _targetAngle;
     addRequirements(m_Turret);
   }
 
@@ -25,12 +31,10 @@ public class ZeroTurretCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(m_Turret.turretZeroSensor.get()){ //false when zeroed
-      if(-100 >= m_Turret.getPosition()){
-        m_Turret.spinTurret(0.3);
-      } else if(m_Turret.getPosition() >= 100){
-       m_Turret.spinTurret(-0.3);
-      }
+    if (m_Turret.getX() > 0 && m_Turret.getX() > Constants.BBTurretPositionTolerance){
+      m_Turret.spinTurret(-Constants.BBTurretSpinSpeed); //TODO: Check that motor inversions for this method are correct
+    } else if (m_Turret.getX() < 0 && m_Turret.getX() < Constants.BBTurretPositionTolerance){
+      m_Turret.spinTurret(Constants.BBTurretSpinSpeed);
     }
   }
 
@@ -43,11 +47,11 @@ public class ZeroTurretCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(!m_Turret.turretZeroSensor.get()){
+    if (Math.abs(m_Turret.getX()) < Constants.BBTurretPositionTolerance){
+      System.out.println("BB FINISHED");
       return true;
-    }else if(-100 <= m_Turret.getPosition() && m_Turret.getPosition() <= 100){
-      return true;
-    } else{
+    } else {
+      System.out.println("BANG BANG");
       return false;
     }
   }

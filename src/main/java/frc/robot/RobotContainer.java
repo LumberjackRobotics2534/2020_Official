@@ -8,31 +8,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.HoodDistanceCommand;
-import frc.robot.commands.IndexCommand;
-import frc.robot.commands.IntakeCommand;
-import frc.robot.commands.IntakeReverseCommand;
-import frc.robot.commands.JoyDriveCommand;
-import frc.robot.commands.LEDCommand;
-import frc.robot.commands.LowerHangCommand;
-import frc.robot.commands.LowerHangManualCommand;
-import frc.robot.commands.PositionControl;
-import frc.robot.commands.RightSideAutoCommand;
-import frc.robot.commands.RotationControl;
-import frc.robot.commands.ShootCommand;
-import frc.robot.commands.ThreeBallAutoCommand;
-import frc.robot.commands.TurretCommand;
-import frc.robot.commands.TurretPID;
-import frc.robot.commands.ZeroRaiseCommand;
-import frc.robot.subsystems.ColorWheel;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Elevator;
-import frc.robot.subsystems.Hang;
-import frc.robot.subsystems.Hood;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.RGBstrip;
-import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Turret;
+import frc.robot.commands.*;
+import frc.robot.subsystems.*;
+
 
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
@@ -79,7 +57,7 @@ public class RobotContainer {
     
 
   private void configureButtonBindings() {
-    manipButtonA.whileHeld(new TurretPID(Constants.turretTargetAngle, m_Turret, manipButtonA));
+    manipButtonA.whileHeld(new AimTurretGroup(Constants.turretTargetAngle, m_Turret, manipButtonA));
     //manipButtonB.whileHeld(new IndexCommand(m_Elevator));
     manipButtonX.whileHeld(new ShootCommand(m_Shooter, manipButtonX));
     manipButtonY.whileHeld(new IntakeCommand(m_Intake));

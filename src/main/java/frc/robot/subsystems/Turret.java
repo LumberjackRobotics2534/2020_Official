@@ -41,11 +41,11 @@ public class Turret extends SubsystemBase {
     turretMotor.setNeutralMode(NeutralMode.Brake);
 
     turretMotor.setInverted(true);
-    
+
     zero = false;
   }
 
-  public void spinTurret(double _speed) {
+  public void spinTurret(double _speed) { //POS value is LEFT
     turretMotor.set(_speed);
   }
 
@@ -61,7 +61,7 @@ public class Turret extends SubsystemBase {
 
   public void zeroEncoder() {
     zero = turretZeroSensor.get();
-    //System.out.println(zero);
+    // System.out.println(zero);
     if (zero == false) {
       turretMotor.setSelectedSensorPosition(0);
     }
@@ -78,7 +78,6 @@ public class Turret extends SubsystemBase {
   public double getX() {
     tx = table.getEntry("tx");
     x = tx.getDouble(0.0);
-    System.out.println(x);
     return x;
   }
 
