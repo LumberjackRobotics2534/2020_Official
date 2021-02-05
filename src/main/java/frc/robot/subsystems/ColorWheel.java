@@ -7,21 +7,16 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.revrobotics.ColorMatch;
-import com.revrobotics.ColorMatchResult;
-import com.revrobotics.ColorSensorV3;
+
 import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class ColorWheel extends SubsystemBase {
   public static WPI_TalonSRX colorWheelMotor = new WPI_TalonSRX(Constants.colorWheelMotor);
   private final I2C.Port i2cPort = I2C.Port.kOnboard;
-  private final ColorSensorV3 colorSensor = new ColorSensorV3(i2cPort);
+  /*private final ColorSensorV3 colorSensor = new ColorSensorV3(i2cPort);
   private final ColorMatch m_colorMatcher = new ColorMatch();
   private final Color kBlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
   private final Color kGreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
@@ -29,14 +24,14 @@ public class ColorWheel extends SubsystemBase {
   private final Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
   private Color detectedColor;
   private String colorString;
-  private ColorMatchResult match;
+  private ColorMatchResult match;*/
   private static double position;
 
   public ColorWheel() {
     /*-------------------------------------------------------------------------*/
     /* Color Sensor WILL NOT WORK if you do not re-deploy code on robot startup */
     /*-------------------------------------------------------------------------*/
-
+    /*
     colorWheelMotor.configFactoryDefault();
 
     colorWheelMotor.setNeutralMode(NeutralMode.Brake);
@@ -47,7 +42,7 @@ public class ColorWheel extends SubsystemBase {
     m_colorMatcher.addColorMatch(kGreenTarget);
     m_colorMatcher.addColorMatch(kRedTarget);
     m_colorMatcher.addColorMatch(kYellowTarget);
-
+    */
   }
 
   public void spin(double _speed) {
@@ -65,7 +60,7 @@ public class ColorWheel extends SubsystemBase {
  
 
   public String getColor() {
-
+    /*
     detectedColor = colorSensor.getColor();
     match = m_colorMatcher.matchClosestColor(detectedColor);
 
@@ -82,11 +77,13 @@ public class ColorWheel extends SubsystemBase {
     }
 
     return colorString;
-
+    */
+    return null;
   }
 
   @Override
   public void periodic() {
+    /*
     detectedColor = colorSensor.getColor();
     match = m_colorMatcher.matchClosestColor(detectedColor);
 
@@ -101,5 +98,6 @@ public class ColorWheel extends SubsystemBase {
     } else {
       colorString = "Unknown???????";
     }
+    */
   }
 }

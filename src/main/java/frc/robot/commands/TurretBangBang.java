@@ -8,7 +8,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants;
 import frc.robot.subsystems.Turret;
 
@@ -42,12 +41,14 @@ public class TurretBangBang extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     m_Turret.spinTurret(0);
+    Turret.lightsEnabled(false);
+
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (Math.abs(m_Turret.getX()) < Constants.BBTurretPositionTolerance){
+    if (Math.abs(m_Turret.getX()) < Constants.BBTurretPositionTolerance && m_Turret.getX() != 0){
       System.out.println("BB FINISHED");
       return true;
     } else {

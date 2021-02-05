@@ -8,7 +8,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.controller.PIDController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants;
@@ -28,7 +27,7 @@ public class TurretPID extends PIDCommand {
 
   public TurretPID(double _targetAngle, Turret _Turret, JoystickButton _Buton) {
 
-    super(new PIDController(0.0105, 0.0058, 0.0001), // 0.0105, 0.0058, 0.0001 //0.012, 0.0006, 0.0001, 0
+    super(new PIDController(0.010, 0, 0), // 0.0105, 0.0058, 0.0001 //0.012, 0.0006, 0.0001, 0
       _Turret::getX,
       _targetAngle,
       output -> {
@@ -55,6 +54,7 @@ public class TurretPID extends PIDCommand {
   public void end(boolean finished){
     finished = false;
     Turret.lightsEnabled(false);
+
   }
   
   // Returns true when the command should end.

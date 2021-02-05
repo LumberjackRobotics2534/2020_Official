@@ -7,7 +7,6 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants;
@@ -63,15 +62,15 @@ public class ShootCommand extends CommandBase {
   public void getEquationVelocity() {
     distance = Turret.getDistance();
     if(distance >= 67 && distance <= 127){
-     equRpm = (0.0000422)*Math.pow(distance, 4)*-1 + 0.01756*Math.pow(distance, 3) + -2.706*Math.pow(distance, 2) + 183.9*Math.pow(distance, 1) - 2174;//was 2154
+     equRpm = /*(0.0000422)*Math.pow(distance, 4)*-1 + 0.01756*Math.pow(distance, 3) + -2.706*Math.pow(distance, 2) + 183.9*Math.pow(distance, 1)*/ 4900 ;//was 2154
     } else if(distance > 127 && distance < 169){
-     equRpm = ((Math.pow(distance - 127, 2))/12)+2547.728;
+     equRpm = ((Math.pow(distance - 127, 2))/12)+ 3547.728; // 2547.728
     } else if(distance >= 169 && distance <= 400){
      equRpm = (0.0000002801)*Math.pow(distance, 4) - 0.0002518*Math.pow(distance, 3) + 0.08358*Math.pow(distance, 2) - 12.15*Math.pow(distance, 1) + 5653;
     } else if(distance > 400 ){
      equRpm = 5600;
     } else{
-      equRpm = 0;
+     equRpm = 0;
     }
   }
 

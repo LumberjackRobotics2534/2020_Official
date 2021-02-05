@@ -42,7 +42,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public void shooterOff(){
-    shooterMotor.set(-0.5);
+    //shooterMotor.set(-0.5);
     ShootCommand.shooterReady = false;
   }
   

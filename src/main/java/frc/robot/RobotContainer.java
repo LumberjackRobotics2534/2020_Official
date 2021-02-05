@@ -4,12 +4,32 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.*;
-import frc.robot.subsystems.*;
+import frc.robot.commands.AimTurretGroup;
+import frc.robot.commands.HoodDistanceCommand;
+import frc.robot.commands.IndexCommand;
+import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.IntakeReverseCommand;
+import frc.robot.commands.JoyDriveCommand;
+import frc.robot.commands.LEDCommand;
+import frc.robot.commands.LowerHangCommand;
+import frc.robot.commands.LowerHangManualCommand;
+import frc.robot.commands.RightSideAutoCommand;
+import frc.robot.commands.RotationControl;
+import frc.robot.commands.ShootCommand;
+import frc.robot.commands.TurretCommand;
+import frc.robot.commands.ZeroRaiseCommand;
+import frc.robot.subsystems.ColorWheel;
+import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Hang;
+import frc.robot.subsystems.Hood;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.RGBstrip;
+import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Turret;
 
 
 public class RobotContainer {

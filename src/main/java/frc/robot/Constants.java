@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot;
 
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
@@ -78,7 +71,7 @@ public final class Constants {
     public static final int turretMotor = 7;
     public static final double PIDTurretPositionTolerance = 5; //TODO: Adjust tolerances for PID and BB
     public static final double BBTurretPositionTolerance = 0.5; 
-    public static final double BBTurretSpinSpeed = 0.05; //TODO: Adjust Bang Bang speed
+    public static final double BBTurretSpinSpeed = 0.055; //TODO: Adjust Bang Bang speed
     public static final double turretVelocityTolerance = 0;
     public static final double turretMinimumInput = -29.8;
     public static final double turretMaximumInput = 29.8;
@@ -89,7 +82,8 @@ public final class Constants {
     public static final double zeroTurretMaximumInput = 0;
     public static final double zeroTurretPositionTolerance = 100;
     public static final double maxRightTurretPosition = 0;
-	public static final double maxLeftTurretPosition = 0;
+    public static final double maxLeftTurretPosition = 0;
+    public static final int flashlightRelay = 3;
     //---------------------SHOOTER--------------------//
     public static final int shooterMotor = 5;
     public static final int upHood = 2;

@@ -14,6 +14,9 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.Relay.Direction;
+import edu.wpi.first.wpilibj.Relay.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Other.SampleSmoother;
@@ -34,6 +37,7 @@ public class Turret extends SubsystemBase {
   private double turretPosition;
   private static int lightCode = 1;
   static SampleSmoother distanceSmoother = new SampleSmoother(10);
+  private static Relay flashlight = new Relay(Constants.flashlightRelay);
 
   public Turret() {
     turretMotor.configFactoryDefault();
@@ -45,7 +49,7 @@ public class Turret extends SubsystemBase {
     zero = false;
   }
 
-  public void spinTurret(double _speed) { //POS value is LEFT
+  public void spinTurret(double _speed) { // POS value is LEFT
     turretMotor.set(_speed);
   }
 
@@ -92,18 +96,23 @@ public class Turret extends SubsystemBase {
   public static void lightsEnabled(boolean enabled) {
     if (enabled) {
       lightCode = 3; // On
+      flashlight.set(Value.kForward);
     } else {
       lightCode = 1; //Off
+      flashlight.set(Value.kReverse);
     }
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(lightCode);
   }
 
   @Override
   public void periodic() {
-    this.stopTurret();
+    stopTurret();
     getPosition();
     zeroEncoder();
+    System.out.println(getDistance());
+    flashlight.get();
     //System.out.println(turretPosition);
     //System.out.println(zero);
+    lightsEnabled(true);
   }
 }
