@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AimTurretGroup;
 import frc.robot.commands.HoodDistanceCommand;
+import frc.robot.commands.ElevatorManualControl;
 import frc.robot.commands.IndexCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.IntakeReverseCommand;
@@ -78,10 +79,10 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     manipButtonA.whileHeld(new AimTurretGroup(Constants.turretTargetAngle, m_Turret, manipButtonA));
-    //manipButtonB.whileHeld(new IndexCommand(m_Elevator));
+    manipButtonB.whileHeld(new ElevatorManualControl(m_Elevator));
     manipButtonX.whileHeld(new ShootCommand(m_Shooter, manipButtonX));
     manipButtonY.whileHeld(new IntakeCommand(m_Intake));
-    manipButtonB.whileHeld(new IntakeReverseCommand(m_Intake));
+    //manipButtonB.whileHeld(new IntakeReverseCommand(m_Intake));
     driverButtonX.whenPressed(new LowerHangCommand(m_Hang, driverButtonRight));
     driverButtonY.whileHeld(new LowerHangManualCommand(m_Hang, driverButtonRight));
     driverButtonB.whenPressed(new ZeroRaiseCommand(m_Turret, m_Hang, driverButtonRight));
