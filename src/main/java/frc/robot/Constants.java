@@ -45,7 +45,7 @@ public final class Constants {
     public static final int buttonLeft = 5;
     public static final int buttonRight = 6;
     //Deadzone
-    public static final double deadzone = 0.15;
+    public static final double deadzone = 0.25;
     //---------------------INTAKE---------------------//
     public static final int intakeMotorDrive = 8;
     public static final double SpinSpeed = 0.8;
