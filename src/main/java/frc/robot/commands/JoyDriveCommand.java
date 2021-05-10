@@ -40,6 +40,15 @@ public class JoyDriveCommand extends CommandBase {
     leftY = m_leftY.getAsDouble();
     leftX = m_leftX.getAsDouble();
     rightX = m_rightX.getAsDouble();
+    if (leftY < 0.25) {
+      leftY = 0;
+    }
+    if (leftX < 0.25) {
+      leftX = 0;
+    }
+    if (rightX < 0.25) {
+      rightX = 0;
+    }
     m_DriveTrain.drive(leftY, -leftX, rightX);
   }
 
