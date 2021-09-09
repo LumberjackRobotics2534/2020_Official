@@ -79,7 +79,8 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     manipButtonA.whileHeld(new AimTurretGroup(Constants.turretTargetAngle, m_Turret, manipButtonA));
-    manipButtonB.whileHeld(new ElevatorManualControl(m_Elevator));
+    manipButtonB.whileHeld(new ElevatorManualControl(m_Elevator, false));
+    manipButtonLeft.whileHeld(new ElevatorManualControl(m_Elevator, true)); //True for reverse feed, false for normal forward feed
     manipButtonX.whileHeld(new ShootCommand(m_Shooter, manipButtonX));
     manipButtonY.whileHeld(new IntakeCommand(m_Intake));
     //manipButtonB.whileHeld(new IntakeReverseCommand(m_Intake));

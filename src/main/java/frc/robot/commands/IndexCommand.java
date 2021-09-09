@@ -29,9 +29,9 @@ public class IndexCommand extends CommandBase {
   @Override
   public void execute() {
     if (AutoShootCommand.shooterReady) {
-      m_Elevator.feed();
+      m_Elevator.feed(false);
     } else if(ShootCommand.shooterReady){
-      m_Elevator.feed();
+      m_Elevator.feed(false);
     } else if (Elevator.topBallPresence()) {
       m_Elevator.stopAll();
     } else if (m_Elevator.bottomBallPresence()) {

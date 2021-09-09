@@ -109,7 +109,7 @@ public class Turret extends SubsystemBase {
     stopTurret();
     getPosition();
     zeroEncoder();
-    System.out.println(getDistance());
+    //System.out.println(getDistance());
     flashlight.get();
     //System.out.println(turretPosition);
     //System.out.println(zero);

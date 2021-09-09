@@ -52,9 +52,14 @@ public class Elevator extends SubsystemBase {
     bottomElevatorMotor.set(Constants.bottomLiftSpeed);
   }
 
-  public void feed() {
-    topElevatorMotor.set(Constants.topFeedSpeed);
-    bottomElevatorMotor.set(Constants.bottomFeedSpeed);
+  public void feed(boolean _reverse) {
+    if (_reverse){
+      topElevatorMotor.set(-Constants.topFeedSpeed);
+      bottomElevatorMotor.set(-Constants.bottomFeedSpeed);
+    }else{
+      topElevatorMotor.set(Constants.topFeedSpeed);
+      bottomElevatorMotor.set(Constants.bottomFeedSpeed);
+    }
   }
 
   public void stopAll() {

@@ -15,10 +15,15 @@ public class TurretBangBang extends CommandBase {
   private Turret m_Turret;
   private boolean finished;
   private double targetAngle;
+  private double speed;
+  private double tolerance;
 
-  public TurretBangBang(double _targetAngle, Turret _Turret) {
+  public TurretBangBang(double _targetAngle, Turret _Turret, double _Speed, double _Tolerance) {
     m_Turret = _Turret;
     targetAngle = _targetAngle;
+    speed = _Speed;
+    tolerance = _Tolerance;
+
     addRequirements(m_Turret);
   }
 
@@ -30,10 +35,10 @@ public class TurretBangBang extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (m_Turret.getX() > 0 && m_Turret.getX() > Constants.BBTurretPositionTolerance){
-      m_Turret.spinTurret(-Constants.BBTurretSpinSpeed); //TODO: Check that motor inversions for this method are correct
-    } else if (m_Turret.getX() < 0 && m_Turret.getX() < Constants.BBTurretPositionTolerance){
-      m_Turret.spinTurret(Constants.BBTurretSpinSpeed);
+    if (m_Turret.getX() > 0 && m_Turret.getX() > tolerance){
+      m_Turret.spinTurret(-speed); //TODO: Check that motor inversions for this method are correct
+    } else if (m_Turret.getX() < 0 && m_Turret.getX() < tolerance){
+      m_Turret.spinTurret(speed);
     }
   }
 

@@ -71,7 +71,7 @@ public final class Constants {
     public static final int turretMotor = 7;
     public static final double PIDTurretPositionTolerance = 5; //TODO: Adjust tolerances for PID and BB
     public static final double BBTurretPositionTolerance = 0.5; 
-    public static final double BBTurretSpinSpeed = 0.055; //TODO: Adjust Bang Bang speed
+    public static final double BBTurretSpinSpeed = 0.1; //TODO: Adjust Bang Bang speed
     public static final double turretVelocityTolerance = 0;
     public static final double turretMinimumInput = -29.8;
     public static final double turretMaximumInput = 29.8;

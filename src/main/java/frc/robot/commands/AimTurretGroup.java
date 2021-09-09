@@ -7,9 +7,11 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.Constants;
 import frc.robot.subsystems.Turret;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -24,8 +26,9 @@ public class AimTurretGroup extends SequentialCommandGroup {
     // super(new FooCommand(), new BarCommand());
     super(
       new WaitCommand(0.001),
-      new TurretPID(_targetAngle, _Turret, _Buton),
-      new TurretBangBang(_targetAngle, _Turret)
+      //new TurretPID(_targetAngle, _Turret, _Buton),
+      //new TurretBangBang(_targetAngle, _Turret, Constants.BBTurretSpinSpeed * 3, Constants.BBTurretPositionTolerance * 10),
+      new TurretBangBang(_targetAngle, _Turret, Constants.BBTurretSpinSpeed, Constants.BBTurretPositionTolerance)
     );
   }
 }

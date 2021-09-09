@@ -12,8 +12,10 @@ import frc.robot.subsystems.Elevator;
 
 public class ElevatorManualControl extends CommandBase {
   Elevator m_elevator;
-  public ElevatorManualControl(Elevator _elevator) {
+  boolean reverse;
+  public ElevatorManualControl(Elevator _elevator, boolean _reverse) {
     m_elevator = _elevator;
+    reverse = _reverse;
     addRequirements(m_elevator);
   }
 
@@ -25,7 +27,7 @@ public class ElevatorManualControl extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_elevator.feed();
+    m_elevator.feed(reverse);
   }
 
   // Called once the command ends or is interrupted.
