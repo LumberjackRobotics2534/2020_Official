@@ -83,6 +83,7 @@ public class Elevator extends SubsystemBase {
 
   public void reset(){
     bottomElevatorMotor.setSelectedSensorPosition(0);
+    distance = 0;
   }
 
   public boolean bottomBallPresence() {
@@ -96,6 +97,8 @@ public class Elevator extends SubsystemBase {
       bottomPresenceTicks = 0;
       bottomPresence = false;
     }
+
+    
     return(bottomPresence);
   }
 

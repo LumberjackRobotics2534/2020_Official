@@ -50,9 +50,9 @@ public class JoyDriveCommand extends CommandBase {
       rightX = 0;
     }
     m_DriveTrain.drive(leftY, -leftX, rightX);
-    System.out.print(leftY);
+    /*System.out.print(leftY);
     System.out.print(-leftX);
-    System.out.println(rightX);
+    System.out.println(rightX);*/
   }
 
   // Called once the command ends or is interrupted.

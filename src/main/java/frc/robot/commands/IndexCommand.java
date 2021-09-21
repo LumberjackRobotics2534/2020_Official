@@ -30,20 +30,26 @@ public class IndexCommand extends CommandBase {
   public void execute() {
     if (AutoShootCommand.shooterReady) {
       m_Elevator.feed(false);
+      System.out.println("auto shoot");
     } else if(ShootCommand.shooterReady){
       m_Elevator.feed(false);
+      System.out.println("manual shoot");
     } else if (Elevator.topBallPresence()) {
       m_Elevator.stopAll();
+      System.out.println("Top ball");
     } else if (m_Elevator.bottomBallPresence()) {
       m_Elevator.lift();
       m_Elevator.reset();
       wasFeeding = true;
+      System.out.println("bottom ball");
     } else {
       if (wasFeeding){
         m_Elevator.lift();
         if (m_Elevator.getDistance() > Constants.extraFeedDistance){
           m_Elevator.stopAll();
           wasFeeding = false;
+          System.out.println(m_Elevator.getDistance());
+          System.out.println("auto lifting into position");
         }
       }else{
         m_Elevator.stopAll();

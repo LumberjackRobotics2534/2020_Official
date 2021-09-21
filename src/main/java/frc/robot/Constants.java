@@ -59,14 +59,14 @@ public final class Constants {
     public static final int irSensorTop = 2;
     public static final int irSensorBottom = 1;
     public static final double minTopPresenceVoltage = 1.5;
-    public static final double minBottomPresenceVoltage = 1.4;
-    public static final double maxBottomPresenceVoltage = 2.2;
+    public static final double minBottomPresenceVoltage = 1.5;
+    public static final double maxBottomPresenceVoltage = 2.3;
     public static final double topLiftSpeed = 0.4;
     public static final double bottomLiftSpeed = 0.3;
     public static final double topFeedSpeed = 0.6;
     public static final double bottomFeedSpeed = 0.5;
     public static final int minPresenceTicks = 15;
-    public static final double extraFeedDistance = 1024;
+    public static final double extraFeedDistance = 50*1024;
     //---------------------TURRET---------------------//
     public static final int turretMotor = 7;
     public static final double PIDTurretPositionTolerance = 5; //TODO: Adjust tolerances for PID and BB
