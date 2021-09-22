@@ -65,7 +65,7 @@ public final class Constants {
     public static final double bottomLiftSpeed = 0.3;
     public static final double topFeedSpeed = 0.6;
     public static final double bottomFeedSpeed = 0.5;
-    public static final int minPresenceTicks = 15;
+    public static final int minPresenceTicks = 30;
     public static final double extraFeedDistance = 50*1024;
     //---------------------TURRET---------------------//
     public static final int turretMotor = 7;
