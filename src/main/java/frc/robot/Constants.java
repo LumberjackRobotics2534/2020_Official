@@ -10,6 +10,7 @@ public final class Constants {
 	public static final int leftFrontDrive = 1;
     public static final int leftBackDrive = 3;
     public static final int integratedEncoderTicksPerRot = 2048*(280/39);
+    public static final double driveSpeedScale = 0.7;
     //----- -----------MOTION PROFILING----------------//
     public static final double ksVolts = 0.247;
     public static final double kvVoltSecondsPerMeter = 1.64;

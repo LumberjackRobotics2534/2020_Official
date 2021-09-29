@@ -10,6 +10,7 @@ package frc.robot.commands;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 
 public class JoyDriveCommand extends CommandBase {
@@ -49,7 +50,7 @@ public class JoyDriveCommand extends CommandBase {
     if (Math.abs(rightX) < 0.25) {
       rightX = 0;
     }
-    m_DriveTrain.drive(leftY, -leftX, rightX);
+    m_DriveTrain.drive(leftY*Constants.driveSpeedScale, -leftX*Constants.driveSpeedScale, rightX*Constants.driveSpeedScale);
     /*System.out.print(leftY);
     System.out.print(-leftX);
     System.out.println(rightX);*/
