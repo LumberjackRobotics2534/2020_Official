@@ -37,10 +37,13 @@ public class RaiseHangCommand extends CommandBase {
   public void execute() {
     if (m_Button.get()){
       m_Hang.raise();
-    }
-    
-    if (m_Hang.getWinchPosition() < Constants.winchRaiseDistance){
       m_Hang.winch();
+      
+    }
+    System.out.println(m_Hang.getWinchPosition());
+    if (m_Hang.getWinchPosition() < Constants.winchRaiseDistance){
+      
+    
     } else {
       m_Hang.stopWinch();
       finished = true;
