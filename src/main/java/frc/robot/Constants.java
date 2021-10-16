@@ -103,8 +103,8 @@ public final class Constants {
     public static final int climbMotor = 11;
     public static final int endGameUp = 4;
     public static final int endGameDown = 5;
-    public static final double winchRaiseDistance = 47200;
-    public static final double winchLowerDistance = 83867;//73200
+    public static final double winchRaiseDistance = 45200;
+    public static final double winchLowerDistance = 82000;//73200
     //-------------------PNEUMATICS-------------------//
     public static final int pressureSensor = 0;
     public static final int pcm = 19;

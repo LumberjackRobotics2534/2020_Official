@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants;
@@ -39,8 +40,12 @@ public class RaiseHangCommand extends CommandBase {
       m_Hang.raise();
       m_Hang.winch();
       
+    }else{
+      m_Hang.stopWinch();
+      finished = true;
     }
     System.out.println(m_Hang.getWinchPosition());
+    SmartDashboard.putNumber("Encoder", m_Hang.getWinchPosition());
     if (m_Hang.getWinchPosition() < Constants.winchRaiseDistance){
       
     
